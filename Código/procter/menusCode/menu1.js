@@ -1,0 +1,20 @@
+stm_bm(["menu0b0f",900,"","blank.gif",0,"","",0,0,250,0,1000,1,0,0,"","",0,0,1,2,"hand","hand","",1,25],this);
+stm_bp("p0",[0,4,0,0,0,0,0,7,100,"",-2,"",-2,50,0,0,"#999999","#FFFFF7","",3,1,1,"#CCCCCC"]);
+stm_ai("p0i0",[0,"Reporte","","",-1,-1,0,"reportes.php","_self","","","","",0,0,0,"","",0,0,0,1,1,"#0A479C",0,"#FFFFFF",0,"","",3,3,0,0,"#CCCCCC","#CCCCCC","#FFFFFF","#3C1400","bold 9pt Arial","bold 9pt Arial",0,0,"","","","",0,0,0],150,25);
+stm_ai("p0i1",[6,1,"#CCCCCC","",-1,-1,0]);
+stm_aix("p0i2","p0i0",[0,"Cambios","","",-1,-1,0,"","_self","","","","",0,0,0,"arrow_r.gif","arrow_r.gif",7,7],150,25);
+stm_bpx("p1","p0",[1,4,0,0,0,0,0,0]);
+stm_aix("p1i0","p0i0",[0,"Agregar Cambio","","",-1,-1,0,"agregarCambio.php","_self","","","","",0,0,0,"","",0,0,0,1,1,"#0A479C",0,"#FFFFFF",0,"","",3,3,0,0,"#FFFFF7","#000000","#FFFFFF","#3C1400","9pt Arial"],150,25);
+stm_aix("p1i2","p1i0",[0,"Opciones Cambio","","",-1,-1,0,"opcionesCambio.php"],150,25);
+stm_ep();
+stm_aix("p0i3","p0i1",[]);
+stm_aix("p0i4","p0i0",[0,"Lista","","",-1,-1,0,"lista.php","_self","","","","",0,0,0,"","",0,0,0,1,1,"#0A479C",0,"#FFFFFF",0,"","",3,3,0,0,"#FFFFF7","#000000"],150,25);
+stm_aix("p0i5","p0i1",[]);
+stm_aix("p0i6","p0i4",[0,"Usuarios","","",-1,-1,0,"#","_self","","","","",0,0,0,"arrow_r.gif","arrow_r.gif",7,7],150,25);
+stm_bpx("p2","p1",[]);
+stm_aix("p2i0","p1i2",[0,"Agregar Usuario","","",-1,-1,0,"agregarUsuario.php"],150,25);
+stm_aix("p2i1","p1i2",[0,"Opciones Usuario","","",-1,-1,0,"opcionesUsuario.php"],150,25);
+stm_ep();
+stm_ep();
+stm_em();
+
