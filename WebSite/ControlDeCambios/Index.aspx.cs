@@ -16,7 +16,6 @@ public partial class _Default : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-    
         
         thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
         thisConnection.Open();
@@ -73,7 +72,7 @@ public partial class _Default : System.Web.UI.Page
                     case "n0":
                         Session["user"] = usuario;
                         Session["perfil"] = perfil;
-                        Response.Redirect("nivel0.aspx");
+                        Response.Redirect("nivel0/nivel0.aspx");
                     break;
 
                     case "n1hse":
