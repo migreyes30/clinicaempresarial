@@ -153,7 +153,15 @@
                                                 Font-Names="Arial" Font-Size="Small"></asp:Label>
                                         </td>
                                         <td align="left">
-                                            <asp:TextBox ID="TextBox2" runat="server" Width="200px"></asp:TextBox>
+                                        
+                                            <asp:TextBox ID="TextBox2" runat="server" Width="200px" Text="MM/DD/YYYY"/>
+                                            <asp:RangeValidator id="valRange" runat="server"
+                                            ControlToValidate="TextBox2"
+                                            MaximumValue="31/12/2015"
+                                            MinimumValue="1/1/1998"
+                                            Type="Date"
+                                            ErrorMessage="* La fecha de Recepci&oacute;n es requerida en el formato MM/DD/YYYY" 
+                                            Display="dynamic">*</asp:RangeValidator>
                                         </td>
                                     </tr>
                                     <tr>
@@ -211,7 +219,7 @@
                                 <asp:DropDownList ID="DropDownList5" runat="server" AutoPostBack="True" 
                                                 DataSourceID="SqlDataSource2" DataTextField="NOMBRE_AREA" 
                                                 DataValueField="AREA_ID" 
-                                                onselectedindexchanged="DropDownList5_SelectedIndexChanged">
+                                                >
                                 </asp:DropDownList>
                                             <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
                                                 ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
@@ -238,15 +246,18 @@
                                         <td align="left">
                                             
                                             <asp:Button ID="Button7" runat="server" onclick="Button7_Click" 
-                                                Text="Aceptar" />
+                                                Text="Aceptar" CausesValidation="true" />
                                             <br />
                                             <br />
                                             <br />
                                             <asp:Label ID="Label24" runat="server"></asp:Label>
+                                            <asp:ValidationSummary id="valSummary" runat="server"
+                                            HeaderText="Errors:"
+                                            ShowSummary="true" DisplayMode="List" />
                                         </td>
                                     </tr>
                                 </table>
-<br />
+                                <br />
                             </td>
                         </tr>
                         <tr>

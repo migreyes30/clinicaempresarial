@@ -39,7 +39,7 @@ public partial class cambios : System.Web.UI.Page
 
         thisReader.Close();
 
-        //thisConnection.Close();
+        thisConnection.Close();
 
     }
     protected void Button1_Click(object sender, EventArgs e)
@@ -83,14 +83,16 @@ public partial class cambios : System.Web.UI.Page
     {        
         try
         {
-            SqlCommand insertando = new SqlCommand("INSERT INTO CAMBIO  (CAMBIO_ID, NOMBRE_CAMBIO, TIPO_CAMBIO, AREA_ID, FECHA_RECEPCION, FECHA_APROBACION, FECHA_REALIZACION, ESTADO_CAMBIO, ARCHIVO)" +
-            "VALUES ('"+(folio)+"', '" + TextBox1.Text + "', '" + DropDownList1.SelectedItem + "', '" + DropDownList5.SelectedValue + "', '" + TextBox2.Text + "', '" + TextBox3.Text + "', '" + TextBox4.Text + "', 'Pendiente', '" + FileUpload1 + "')", thisConnection);
-            insertando.ExecuteNonQuery();
+            //SqlCommand insertando = new SqlCommand("INSERT INTO CAMBIO  (CAMBIO_ID, NOMBRE_CAMBIO, TIPO_CAMBIO, AREA_ID, FECHA_RECEPCION, FECHA_APROBACION, FECHA_REALIZACION, ESTADO_CAMBIO, ARCHIVO)" +
+            //"VALUES ('"+(folio)+"', '" + TextBox1.Text + "', '" + DropDownList1.SelectedItem + "', '" + DropDownList5.SelectedValue + "', '" + TextBox2.Text + "', '" + TextBox3.Text + "', '" + TextBox4.Text + "', 'Pendiente', '" + FileUpload1 + "')", thisConnection);
+            //insertando.ExecuteNonQuery();
+            ManejadorCambio miManejador = new ManejadorCambio();
+            miManejador.pasarNCero(folio, TextBox1.Text, DropDownList1.SelectedItem.Value, DropDownList5.SelectedValue, TextBox2.Text, TextBox3.Text, TextBox4.Text, FileUpload1.FileName);
             Label24.Text = "Dato Insertado!!!";
 
         }catch(SqlException){
 
-            //Response.Redirect("cambios.aspx");
+            Response.Redirect("cambios.aspx");
             Label24.Text = "Error con la base de datos";
 
         }
