@@ -12,9 +12,12 @@ public partial class nivel0 : System.Web.UI.Page
 
         if (Session["user"] == null)
         {
+
             Response.Redirect("index.aspx");
         }
         usuarioSesion.Text = Session["user"].ToString();
+
+        
 
     }
     protected void Button1_Click(object sender, EventArgs e)
@@ -22,5 +25,15 @@ public partial class nivel0 : System.Web.UI.Page
         Session["user"] = null;
         Session["perfil"] = null;
         Response.Redirect("index.aspx");
+    }
+    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+    protected void GridView1_SelectedIndexChanged1(object sender, EventArgs e)
+    {
+        Session["cambioID"] = ((System.Web.UI.WebControls.GridView)sender).SelectedValue;
+        int folio = (int)Session["cambioID"];
+        Response.Redirect("cambios.aspx");
     }
 }

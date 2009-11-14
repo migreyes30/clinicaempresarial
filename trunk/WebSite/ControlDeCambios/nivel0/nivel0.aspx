@@ -104,7 +104,59 @@
                     
                     style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0">
                     <br />
+                    <asp:GridView ID="GridListaNivelCero" runat="server" AllowPaging="True" 
+                        AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
+                        DataSourceID="NivelCeroDataSource" 
+                        EmptyDataText="There are no data records to display." 
+                        onselectedindexchanged="GridView1_SelectedIndexChanged1">
+                        <Columns>
+                            <asp:CommandField ShowSelectButton="True" />
+                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" ReadOnly="True" 
+                                SortExpression="CAMBIO_ID" Visible="False" />
+                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
+                                SortExpression="NOMBRE_AREA" />
+                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE_CAMBIO" 
+                                SortExpression="NOMBRE_CAMBIO" />
+                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
+                                SortExpression="TIPO_CAMBIO" />
+                            <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="FECHA_RECEPCION" 
+                                SortExpression="FECHA_RECEPCION" />
+                        </Columns>
+                    </asp:GridView>
                     <br />
+                    <asp:SqlDataSource ID="NivelCeroDataSource" runat="server" 
+                        ConnectionString="<%$ ConnectionStrings:ControlCambiosConnectionString1 %>" 
+                        DeleteCommand="DELETE FROM [NIVEL0] WHERE [NIVEL0_ID] = @NIVEL0_ID" 
+                        InsertCommand="INSERT INTO [NIVEL0] ([STATUS], [AREA_ID], [FECHA_ASIGNACION], [FECHA_APROBACION], [COMENTARIOS], [CAMBIO_ID]) VALUES (@STATUS, @AREA_ID, @FECHA_ASIGNACION, @FECHA_APROBACION, @COMENTARIOS, @CAMBIO_ID)" 
+                        ProviderName="<%$ ConnectionStrings:ControlCambiosConnectionString1.ProviderName %>" SelectCommand="select CAMBIO_ID, AREA.NOMBRE_AREA, NOMBRE_CAMBIO, TIPO_CAMBIO, FECHA_RECEPCION from CAMBIO, AREA where CAMBIO.AREA_ID in (
+select AREA.AREA_ID from USUARIO, AREA, DEPARTAMENTO where NOMBRE_USUARIO = @user and DEPARTAMENTO.REPONSABLE_ID = USUARIO.USUARIO_ID 
+	and DEPARTAMENTO.DEPTO_ID = AREA.DEPTO_ID
+	) and AREA.AREA_ID = CAMBIO.AREA_ID;" 
+                        UpdateCommand="UPDATE [NIVEL0] SET [STATUS] = @STATUS, [AREA_ID] = @AREA_ID, [FECHA_ASIGNACION] = @FECHA_ASIGNACION, [FECHA_APROBACION] = @FECHA_APROBACION, [COMENTARIOS] = @COMENTARIOS, [CAMBIO_ID] = @CAMBIO_ID WHERE [NIVEL0_ID] = @NIVEL0_ID">
+                        <SelectParameters>
+                            <asp:SessionParameter DbType="String" Name="user" SessionField="user" />
+                        </SelectParameters>
+                        <DeleteParameters>
+                            <asp:Parameter Name="NIVEL0_ID" Type="Int32" />
+                        </DeleteParameters>
+                        <InsertParameters>
+                            <asp:Parameter Name="STATUS" Type="String" />
+                            <asp:Parameter Name="AREA_ID" Type="Int32" />
+                            <asp:Parameter Name="FECHA_ASIGNACION" Type="DateTime" />
+                            <asp:Parameter Name="FECHA_APROBACION" Type="DateTime" />
+                            <asp:Parameter Name="COMENTARIOS" Type="String" />
+                            <asp:Parameter Name="CAMBIO_ID" Type="Int32" />
+                        </InsertParameters>
+                        <UpdateParameters>
+                            <asp:Parameter Name="STATUS" Type="String" />
+                            <asp:Parameter Name="AREA_ID" Type="Int32" />
+                            <asp:Parameter Name="FECHA_ASIGNACION" Type="DateTime" />
+                            <asp:Parameter Name="FECHA_APROBACION" Type="DateTime" />
+                            <asp:Parameter Name="COMENTARIOS" Type="String" />
+                            <asp:Parameter Name="CAMBIO_ID" Type="Int32" />
+                            <asp:Parameter Name="NIVEL0_ID" Type="Int32" />
+                        </UpdateParameters>
+                    </asp:SqlDataSource>
                     <br />
                     <br />
     
