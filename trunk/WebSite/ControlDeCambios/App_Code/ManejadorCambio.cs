@@ -20,18 +20,26 @@ public class ManejadorCambio
 
     public void pasarNCero(int folio , String nombreCambio, String tipoCambio, String areaID, String fechaRecepcion, String fechaAprobacion, String fechaRealizacion, String fileUpload1)
     {
-       /* SqlCommand insertando = new SqlCommand("INSERT INTO CAMBIO  (CAMBIO_ID, NOMBRE_CAMBIO, TIPO_CAMBIO, AREA_ID, FECHA_RECEPCION, FECHA_APROBACION, FECHA_REALIZACION, ESTADO_CAMBIO, ARCHIVO)" +
+        SqlCommand insertando = new SqlCommand("INSERT INTO CAMBIO  (CAMBIO_ID, NOMBRE_CAMBIO, TIPO_CAMBIO, AREA_ID, FECHA_RECEPCION, FECHA_APROBACION, FECHA_REALIZACION, ESTADO_CAMBIO, ARCHIVO)" +
             "VALUES ('" + (folio) + "', '" + nombreCambio + "', '" + tipoCambio + "', '" + areaID + "', '" + fechaRecepcion + "', '" + fechaAprobacion + "', '" + fechaRealizacion + "', 'Pendiente', '" + fileUpload1 + "')", thisConnection);
         insertando.ExecuteNonQuery();
 
         SqlCommand insertadoNCero = new SqlCommand("INSERT INTO NIVEL0 (CAMBIO_ID, STATUS, AREA_ID, FECHA_ASIGNACION)" +
             " VALUES ('" + (folio) + "', 'Pendiente', '" + areaID + "', '" + fechaRecepcion + "')", thisConnection);
         insertadoNCero.ExecuteNonQuery();
-        */
+        
         //mandarCorreo("jessyc48@yahoo.com", "jessyc48@yahoo.com", "mi prueba", "prueba");
 
 
 
+    }
+
+    public void pasarNUno(String comentarios, int cambioID)
+    {
+          SqlCommand insertando = new SqlCommand("UPDATE NIVEL0 set FECHA_APROBACION = CURRENT_TIMESTAMP," 
+              + " COMENTARIOS = '"+ comentarios +"' WHERE CAMBIO_ID = '" +cambioID + "'", thisConnection);
+          insertando.ExecuteNonQuery();
+        //insertando = new SqlCommand("",thisConnection);
     }
 
     protected void mandarCorreo(String sender, String receiver, String bodyMail, String asunto )

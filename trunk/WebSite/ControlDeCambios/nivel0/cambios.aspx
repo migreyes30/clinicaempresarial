@@ -147,7 +147,11 @@
                                 <table cellpadding="4" style="width:100%;">
                                     <tr>
                                         <td class="style14" align="left" bgcolor="#F9F9F7">
-                                            <asp:FormView ID="FormView1" runat="server" DataSourceID="SqlDataSource1">
+                                            <asp:FormView ID="FormView1" runat="server" DataSourceID="SqlDataSource1" 
+                                                BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" 
+                                                CellPadding="3" GridLines="Vertical">
+                                                <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
+                                                <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
                                                 <EditItemTemplate>
                                                     NOMBRE_CAMBIO:
                                                     <asp:TextBox ID="NOMBRE_CAMBIOTextBox" runat="server" 
@@ -164,10 +168,6 @@
                                                     FECHA_ASIGNACION:
                                                     <asp:TextBox ID="FECHA_ASIGNACIONTextBox" runat="server" 
                                                         Text='<%# Bind("FECHA_ASIGNACION") %>' />
-                                                    <br />
-                                                    COMENTARIOS:
-                                                    <asp:TextBox ID="COMENTARIOSTextBox" runat="server" 
-                                                        Text='<%# Bind("COMENTARIOS") %>' />
                                                     <br />
                                                     <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" 
                                                         CommandName="Update" Text="Update" />
@@ -191,10 +191,6 @@
                                                     <asp:TextBox ID="FECHA_ASIGNACIONTextBox" runat="server" 
                                                         Text='<%# Bind("FECHA_ASIGNACION") %>' />
                                                     <br />
-                                                    COMENTARIOS:
-                                                    <asp:TextBox ID="COMENTARIOSTextBox" runat="server" 
-                                                        Text='<%# Bind("COMENTARIOS") %>' />
-                                                    <br />
                                                     <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" 
                                                         CommandName="Insert" Text="Insert" />
                                                     &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" 
@@ -217,19 +213,34 @@
                                                     <asp:Label ID="FECHA_ASIGNACIONLabel" runat="server" 
                                                         Text='<%# Bind("FECHA_ASIGNACION") %>' />
                                                     <br />
-                                                    COMENTARIOS:
-                                                    <asp:Label ID="COMENTARIOSLabel" runat="server" 
-                                                        Text='<%# Bind("COMENTARIOS") %>' />
-                                                    <br />
                                                 </ItemTemplate>
+                                                            
+                                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
+                                                <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
+                                                <EditRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
+                                                            
                                             </asp:FormView>
                                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
                                                 ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" SelectCommand="
-select NOMBRE_CAMBIO, TIPO_CAMBIO, AREA.NOMBRE_AREA, NIVEL0.FECHA_ASIGNACION, NIVEL0.COMENTARIOS  from CAMBIO, NIVEL0,  AREA
- where CAMBIO.CAMBIO_ID IN (@Label25) and CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID and AREA.AREA_ID = CAMBIO.AREA_ID;">
+                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
+                                                SelectCommand="select NOMBRE_CAMBIO, TIPO_CAMBIO, AREA.NOMBRE_AREA, NIVEL0.FECHA_ASIGNACION  from CAMBIO, NIVEL0,  AREA
+ where CAMBIO.CAMBIO_ID = ? and CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID and AREA.AREA_ID = CAMBIO.AREA_ID;">
+                                                <SelectParameters>
+                                                    <asp:ControlParameter ControlID="Label25" Name="CAMBIO_ID" 
+                                                        PropertyName="Text" Type="Int32" />
+                                                </SelectParameters>
+                        
                                             </asp:SqlDataSource>
+                                            
+                                            <!--SelectParameters>
+                                                    <asp:ControlParameter ControlID="Label25" Name="AREA_ID" 
+                                                        PropertyName="Text" Type="Int32" />
+                                                </SelectParameters-->
+                                            <asp:TextBox ID="TextBoxComentario" Width="523px" Rows="4" runat="server" 
+                                                Height="95px" ></asp:TextBox>
+                                            <br />
                                         </td>
+
                                         <td class="style2" align="left">
                                             &nbsp;</td>
                                         <td class="style15" align="left" bgcolor="#F9F9F7">
@@ -240,7 +251,7 @@ select NOMBRE_CAMBIO, TIPO_CAMBIO, AREA.NOMBRE_AREA, NIVEL0.FECHA_ASIGNACION, NI
                                     </tr>
                                     <tr>
                                         <td class="style14" align="left" bgcolor="#F9F9F7">
-                                            <textarea id="TextArea1" name="S1"></textarea></td>
+                                          
                                         <td class="style2" align="left">
                                             &nbsp;</td>
                                         <td class="style15" align="left" bgcolor="#F9F9F7">
@@ -277,8 +288,8 @@ select NOMBRE_CAMBIO, TIPO_CAMBIO, AREA.NOMBRE_AREA, NIVEL0.FECHA_ASIGNACION, NI
                                                 Text="Aceptar" CausesValidation="true" />
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                             
-                                            <asp:Button ID="Button8" runat="server" onclick="Button7_Click" 
-                                                Text="Aceptar" CausesValidation="true" />
+                                            <asp:Button ID="Button8" runat="server" 
+                                                Text="Rechazar" CausesValidation="true" />
                                             <br />
                                             <br />
                                             <br />
