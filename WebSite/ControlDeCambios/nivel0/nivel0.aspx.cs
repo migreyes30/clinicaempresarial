@@ -33,7 +33,7 @@ public partial class nivel0 : System.Web.UI.Page
     protected void GridView1_SelectedIndexChanged1(object sender, EventArgs e)
     {
         Session["cambioID"] = ((System.Web.UI.WebControls.GridView)sender).SelectedValue;
-        int folio = (int)Session["cambioID"];
-        Response.Redirect("cambios.aspx");
+        //int folio = (int)Session["cambioID"];
+        Response.Redirect("cambios.aspx?cambioID=" + ((System.Web.UI.WebControls.GridView)sender).SelectedValue);
     }
 }
