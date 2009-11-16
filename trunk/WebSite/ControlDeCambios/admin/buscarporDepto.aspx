@@ -1,5 +1,42 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<%@ Page Language="C#"%>
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<script runat="server">
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("cambios.aspx");
+    }
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("cambios.aspx");       
+    }
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Lista.aspx");
+    }
+
+    protected void Button4_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("cambios.aspx");
+    }
+    protected void Button5_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("LocalizarUsuario.aspx");
+    }
+    protected void Button6_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Reporte.aspx");
+    }
+    protected void Button7_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("cambios.aspx");
+    }
+    protected void Menu1_MenuItemClick(Object sender, EventArgs e)
+    {
+
+    }
+</script>
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head id="Head1" runat="server">
     <title></title>
@@ -74,35 +111,55 @@
                     <asp:Button ID="Button6" runat="server" Text="Reporte" BackColor="#0B479D" 
                         BorderColor="White" BorderStyle="Solid" ForeColor="White" Width="180px" 
                         BorderWidth="1px" Font-Overline="False" Font-Strikeout="False" 
-                        Font-Underline="False" Height="25px"/>
+                        Font-Underline="False" Height="25px" onclick="Button6_Click"/>
                 </td>
                 <td align="center" 
                     
                     style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0">
                     <asp:Button ID="Button2" runat="server" Text="Cambios" BackColor="#0B479D" 
                         BorderColor="White" BorderStyle="Solid" ForeColor="White" Width="180px" 
-                        BorderWidth="1px" Height="25px"/>
+                        BorderWidth="1px" Height="25px" onclick="Button2_Click"/>
                 </td>
                 <td colspan="2" align="center" 
                     
                     style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0">
                     <asp:Button ID="Button3" runat="server" Text="Lista" BackColor="#0B479D" 
                         BorderColor="White" BorderStyle="Solid" ForeColor="White" Width="180px" 
-                        BorderWidth="1px" Height="25px" />
+                        BorderWidth="1px" Height="25px" onclick="Button3_Click" />
                 </td>
                 <td align="center" 
                     
                     style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0">
                     <asp:Button ID="Button4" runat="server" Text="Incidentes" BackColor="#0B479D" 
                         BorderColor="White" BorderStyle="Solid" ForeColor="White" Width="180px" 
-                        BorderWidth="1px" Height="25px" />
+                        BorderWidth="1px" Height="25px" onclick="Button4_Click" />
                 </td>
                  <td align="center" 
                     
                     style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0">
-                    <asp:Button ID="Button5" runat="server" Text="Usuarios" BackColor="White" 
-                        BorderColor="White" BorderStyle="Solid" ForeColor="Black" Width="180px" 
-                        BorderWidth="1px" Height="25px" />
+                     <asp:Menu ID="Menu1" runat="server" BackColor="#B5C7DE" CssClass="nuevoEstilo3" 
+                         DynamicVerticalOffset="2" Font-Names="Arial" Font-Size="0.9em" 
+                         ForeColor="#284E98" Height="25px" onmenuitemclick="Menu1_MenuItemClick" 
+                         StaticSubMenuIndent="10px" Width="180px">
+                         <StaticSelectedStyle BackColor="#B5C7DE" ForeColor="White" />
+                         <StaticMenuItemStyle BackColor="#0B479D" ForeColor="White" 
+                             HorizontalPadding="5px" VerticalPadding="2px" />
+                         <DynamicHoverStyle BackColor="#0B479D" BorderColor="#0B479D" 
+                             BorderStyle="Dashed" ForeColor="White" />
+                         <DynamicMenuStyle BackColor="#0B479D" />
+                         <DynamicSelectedStyle BackColor="#B5C7DE" />
+                         <DynamicMenuItemStyle BackColor="#0B479D" BorderColor="#0B479D" 
+                             ForeColor="White" HorizontalPadding="5px" VerticalPadding="2px" />
+                         <StaticHoverStyle BackColor="#0B479D" ForeColor="White" />
+                         <Items>
+                             <asp:MenuItem Text="Usuario" Value="Usuario">
+                                 <asp:MenuItem NavigateUrl="~/ejem01/crearUsuario.aspx" Text="Crear Usuario" 
+                                     Value="Crear Usuario"></asp:MenuItem>
+                                 <asp:MenuItem NavigateUrl="~/ejem01/LocalizarUsuario.aspx" Selected="True" 
+                                     Text="Buscar Usuario" Value="Buscar Usuario"></asp:MenuItem>
+                             </asp:MenuItem>
+                         </Items>
+                     </asp:Menu>
                 </td>
             </tr> 
                     </table>
@@ -125,9 +182,6 @@
                                     </tr>
                                 </table>
                             </td>
-                        </tr>
-                        <tr>
-                            
                         </tr>
                         
                         <tr>

@@ -1,9 +1,45 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="lista.aspx.cs" Inherits="lista" %>
+﻿<%@ Page Language="C#"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+<script runat="server">
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("cambios.aspx");
+    }
+    protected void Button2_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("cambios.aspx");       
+    }
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Lista.aspx");
+    }
+
+    protected void Button4_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("cambios.aspx");
+    }
+    protected void Button5_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("cambios.aspx");
+    }
+    protected void Button6_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("Reporte.aspx");
+    }
+    protected void Button7_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("cambios.aspx");
+    }
+    protected void Menu1_MenuItemClick(Object sender, EventArgs e)
+    {
+
+    }
+</script>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <title></title>
     <style type="text/css">
 
@@ -103,9 +139,31 @@
                 <td align="center" 
                     
                     style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0">
-                    <asp:Button ID="Button5" runat="server" Text="Usuarios" BackColor="#0B479D" 
-                        BorderColor="White" BorderStyle="Solid" ForeColor="White" Width="180px" 
-                        BorderWidth="1px" Height="25px" onclick="Button5_Click" />
+                    
+                     <asp:Menu ID="Menu1" runat="server" BackColor="#B5C7DE" ForeColor="#284E98" 
+                         Width="180px" Height="25px" 
+                         onmenuitemclick="Menu1_MenuItemClick" DynamicVerticalOffset="2" 
+                         Font-Names="Arial" Font-Size="0.9em" StaticSubMenuIndent="10px" 
+                         CssClass="nuevoEstilo3">
+                         <StaticSelectedStyle BackColor="#B5C7DE" ForeColor="White" />
+                         <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" 
+                             BackColor="#0B479D" ForeColor="White" />
+                         <DynamicHoverStyle BackColor="#0B479D" ForeColor="White" BorderColor="#0B479D" 
+                             BorderStyle="Dashed" />
+                         <DynamicMenuStyle BackColor="#0B479D" />
+                         <DynamicSelectedStyle BackColor="#B5C7DE" />
+                         <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" 
+                             BackColor="#0B479D" BorderColor="#0B479D" ForeColor="White" />
+                         <StaticHoverStyle BackColor="#0B479D" ForeColor="White" />
+                         <Items>
+                             <asp:MenuItem Text="Usuario" Value="Usuario">
+                                 <asp:MenuItem Text="Crear Usuario" Value="Crear Usuario" 
+                                     NavigateUrl="~/ejem01/crearUsuario.aspx" ></asp:MenuItem>
+                                 <asp:MenuItem Text="Buscar Usuario" Value="Buscar Usuario" 
+                                     NavigateUrl="~/ejem01/LocalizarUsuario.aspx" Selected="True"></asp:MenuItem>
+                             </asp:MenuItem>
+                         </Items>
+                     </asp:Menu>
                 </td>
             </tr>
             <tr>
@@ -217,3 +275,4 @@
     </form>
 </body>
 </html>
+
