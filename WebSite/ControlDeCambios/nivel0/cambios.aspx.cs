@@ -76,7 +76,7 @@ public partial class cambios : System.Web.UI.Page
             //"VALUES ('"+(folio)+"', '" + TextBox1.Text + "', '" + DropDownList1.SelectedItem + "', '" + DropDownList5.SelectedValue + "', '" + TextBox2.Text + "', '" + TextBox3.Text + "', '" + TextBox4.Text + "', 'Pendiente', '" + FileUpload1 + "')", thisConnection);
             //insertando.ExecuteNonQuery();
             ManejadorCambio miManejador = new ManejadorCambio();
-            miManejador.pasarNUno(TextBoxComentario.Text, Int32.Parse(Label25.Text));
+            //miManejador.pasarN2(TextBoxComentario.Text, Int32.Parse(Label25.Text));
             Label24.Text = "Dato Insertado!!!";
 
         }catch(SqlException){
