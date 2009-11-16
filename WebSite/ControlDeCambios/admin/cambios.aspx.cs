@@ -12,7 +12,7 @@ public partial class cambios : System.Web.UI.Page
 
     SqlConnection thisConnection;
     SqlCommand thisCommand;
-    int folio;
+    Int32 folio;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -20,26 +20,14 @@ public partial class cambios : System.Web.UI.Page
         {
             Response.Redirect("../index.aspx");
         }
-        usuarioSesion.Text = Session["user"].ToString();        
+        usuarioSesion.Text = Session["user"].ToString();
 
 
-        thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
-        thisConnection.Open();
+        Label25.Text = Request.QueryString["cambioID"];
+        
 
+            //Int32.Parse(Session["cambioID"].ToString());
 
-        thisCommand = thisConnection.CreateCommand();
-        thisCommand.CommandText = "select max(CAMBIO_ID) as Last from CAMBIO";
-        SqlDataReader thisReader = thisCommand.ExecuteReader();
-
-        if (thisReader.Read())
-        {
-            folio = (int)thisReader["Last"]+1;
-            Label22.Text = "0000"+folio.ToString();
-        }
-
-        thisReader.Close();
-
-        thisConnection.Close();
 
     }
     protected void Button1_Click(object sender, EventArgs e)
@@ -83,11 +71,12 @@ public partial class cambios : System.Web.UI.Page
     {        
         try
         {
+           
             //SqlCommand insertando = new SqlCommand("INSERT INTO CAMBIO  (CAMBIO_ID, NOMBRE_CAMBIO, TIPO_CAMBIO, AREA_ID, FECHA_RECEPCION, FECHA_APROBACION, FECHA_REALIZACION, ESTADO_CAMBIO, ARCHIVO)" +
             //"VALUES ('"+(folio)+"', '" + TextBox1.Text + "', '" + DropDownList1.SelectedItem + "', '" + DropDownList5.SelectedValue + "', '" + TextBox2.Text + "', '" + TextBox3.Text + "', '" + TextBox4.Text + "', 'Pendiente', '" + FileUpload1 + "')", thisConnection);
             //insertando.ExecuteNonQuery();
             ManejadorCambio miManejador = new ManejadorCambio();
-            miManejador.pasarNCero(folio, TextBox1.Text, DropDownList1.SelectedItem.Value, DropDownList5.SelectedValue, TextBox2.Text, TextBox3.Text, TextBox4.Text, FileUpload1.FileName);
+            miManejador.pasarNUno(TextBoxComentario.Text, Int32.Parse(Label25.Text));
             Label24.Text = "Dato Insertado!!!";
 
         }catch(SqlException){
@@ -105,10 +94,7 @@ public partial class cambios : System.Web.UI.Page
     }
     protected void SqlDataSource3_Selecting(object sender, SqlDataSourceSelectingEventArgs e)
     {
-
+     
     }
-    protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-    }
+ 
 }
