@@ -237,7 +237,7 @@
                                                         PropertyName="Text" Type="Int32" />
                                                 </SelectParameters-->
                                             <asp:TextBox ID="TextBoxComentario" Width="523px" Rows="4" runat="server" 
-                                                Height="95px" ></asp:TextBox>
+                                                Height="95px" TextMode="MultiLine"></asp:TextBox>
                                             <br />
                                         </td>
 

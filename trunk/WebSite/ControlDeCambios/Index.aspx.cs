@@ -78,13 +78,13 @@ public partial class _Default : System.Web.UI.Page
                     case "n1hse":
                         Session["user"] = usuario;
                         Session["perfil"] = perfil;
-                        Response.Redirect("nivel1hse.aspx");
+                        Response.Redirect("nivel1hse/nivel1hse.aspx");
                     break;
 
                     case "n1qa":
                         Session["user"] = usuario;
                         Session["perfil"] = perfil;
-                        Response.Redirect("nivel1qa.aspx");
+                        Response.Redirect("nivelqa/nivel1qa.aspx");
                     break;
 
                     case "n2":

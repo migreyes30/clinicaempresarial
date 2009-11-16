@@ -66,7 +66,7 @@
                     
                     style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0" 
                     width="160">
-                    <asp:Button ID="Button6" runat="server" Text="Reporte" BackColor="#0B479D" 
+                    <asp:Button ID="Button6" runat="server" Text="Cambios" BackColor="#0B479D" 
                         BorderColor="White" BorderStyle="Solid" ForeColor="White" Width="160px" 
                         BorderWidth="1px" Font-Overline="False" Font-Strikeout="False" 
                         Font-Underline="False" Height="25px" />
@@ -76,7 +76,7 @@
                     
                     style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0" 
                     width="160">
-                    <asp:Button ID="Button2" runat="server" Text="Cambios" BackColor="#0B479D" 
+                    <asp:Button ID="Button2" runat="server" Text="Historial" BackColor="#0B479D" 
                         BorderColor="White" BorderStyle="Solid" ForeColor="White" Width="160px" 
                         BorderWidth="1px" Height="25px" />
                 </td>
@@ -104,8 +104,38 @@
                     
                     style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0">
                     <br />
+                    <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
+                        AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
+                        DataSourceID="SqlDataSourceQA" 
+                        onselectedindexchanged="GridView1_SelectedIndexChanged">
+                        <Columns>
+                            <asp:CommandField ShowSelectButton="True" />
+                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" ReadOnly="True" 
+                                SortExpression="CAMBIO_ID" />
+                            <asp:BoundField DataField="NOMBRE_DEPTO" HeaderText="NOMBRE_DEPTO" 
+                                SortExpression="NOMBRE_DEPTO" />
+                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
+                                SortExpression="NOMBRE_AREA" />
+                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE_CAMBIO" 
+                                SortExpression="NOMBRE_CAMBIO" />
+                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
+                                SortExpression="TIPO_CAMBIO" />
+                            <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="FECHA_RECEPCION" 
+                                SortExpression="FECHA_RECEPCION" />
+                        </Columns>
+                    </asp:GridView>
                     <br />
                     <br />
+                    <asp:SqlDataSource ID="SqlDataSourceQA" runat="server" 
+                        ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
+                        ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
+                        
+                        SelectCommand="SELECT CAMBIO.CAMBIO_ID, DEPARTAMENTO.NOMBRE_DEPTO, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, 
+CAMBIO.TIPO_CAMBIO, CAMBIO.FECHA_RECEPCION FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID 
+INNER JOIN NIVEL1_QA ON CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID INNER JOIN DEPARTAMENTO ON 
+DEPARTAMENTO.DEPTO_ID = AREA.DEPTO_ID 
+where CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID and AREA.AREA_ID = NIVEL1_QA.AREA_ID and AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID and NIVEL1_QA.FECHA_APROBACION IS NULL;">
+                    </asp:SqlDataSource>
                     <br />
     
                     <br />
