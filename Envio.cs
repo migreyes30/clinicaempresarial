@@ -15,7 +15,7 @@ namespace WebService2.ejem01
         public Envio()
         {
             thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
-//            thisConnection.Open();
+            thisConnection.Open();
 
         }
         public void mandarCorreo(String sender, String receiver, String bodyMail, String asunto)
