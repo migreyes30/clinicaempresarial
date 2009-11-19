@@ -24,7 +24,7 @@ namespace WebService2.ejem01
 
             if (!(d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Sunday))
             {
-                SqlComand checkArea = new SqlCommand("SELECT USUARIO.CORREO_USUARIO, USUARIO.NOMBRE_USUARIO, NIVEL0.FECHA_ASIGNACION FROM NIVEL0, " 
+                SqlCommand checkArea = new SqlCommand("SELECT USUARIO.CORREO_USUARIO, USUARIO.NOMBRE_USUARIO, NIVEL0.FECHA_ASIGNACION FROM NIVEL0, " 
                     + "AREA, DEPARTAMENTO, USUARIO WHERE NIVEL0.AREA_ID = AREA.AREA_ID ANDAREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID "
                     + "AND DEPARTAMENTO.RESPONSABLE_ID = USUARIO.USUARIO_ID AND NIVEL0.STATUS = 'Pendiente';", thisConnection);
                 SqlDataReader myReader = checkArea.ExecuteReader();
@@ -39,7 +39,7 @@ namespace WebService2.ejem01
                 finally
                 {
                     myReader.Close();
-                    myConnection.Close();
+                    thisConnection.Close();
                 }
 
             }
