@@ -14,6 +14,7 @@ public partial class cambios : System.Web.UI.Page
     SqlCommand thisCommand;
     Int32 folio;
     Int32[] areasSoporte = new Int32[6];
+    String[] datos;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -23,8 +24,26 @@ public partial class cambios : System.Web.UI.Page
         }
         usuarioSesion.Text = Session["user"].ToString();
 
-
         Label25.Text = Request.QueryString["cambioID"];
+
+
+        try
+        {
+            ManejadorCambio miManejador = new ManejadorCambio();
+            datos = miManejador.cambiosHSE(Int32.Parse(Label25.Text));
+            
+            TextBox1.Text = datos[0];
+            TextBox2.Text = datos[1];
+            TextBox3.Text = datos[2];
+            TextBox4.Text = datos[3];
+            Label33.Text  = datos[4];
+            TextBox5.Text = datos[5];
+        }
+        catch (SqlException)
+        {
+            Label26.Text = "ERROR";
+        }
+
 
     }
     protected void Button1_Click(object sender, EventArgs e)

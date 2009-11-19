@@ -39,6 +39,56 @@ public class ManejadorCambio
         return campos;
     }
 
+
+    public String[] listaCambiosAdmin(int cambioID)
+    {
+        String[] campos = new String[9];
+
+        SqlCommand thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = "SELECT     CAMBIO.NOMBRE_CAMBIO, CAMBIO.ESTADO_CAMBIO, CAMBIO.TIPO_CAMBIO, DEPARTAMENTO.NOMBRE_DEPTO, AREA.NOMBRE_AREA, CAMBIO.FECHA_APROBACION, CAMBIO.FECHA_RECEPCION, CAMBIO.FECHA_REALIZACION, CAMBIO.ARCHIVO, CAMBIO.CAMBIO_ID FROM         AREA INNER JOIN CAMBIO ON AREA.AREA_ID = CAMBIO.AREA_ID INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE     (CAMBIO.CAMBIO_ID = '"+ cambioID +"')";
+        SqlDataReader thisReader = thisCommand.ExecuteReader();
+
+        if (thisReader.Read())
+        {
+            campos[0] = thisReader["NOMBRE_CAMBIO"].ToString();
+            campos[1] = thisReader["ESTADO_CAMBIO"].ToString();
+            campos[2] = thisReader["TIPO_CAMBIO"].ToString();
+            campos[3] = thisReader["NOMBRE_DEPTO"].ToString();
+            campos[4] = thisReader["NOMBRE_AREA"].ToString();
+            campos[5] = thisReader["FECHA_APROBACION"].ToString();
+            campos[6] = thisReader["FECHA_RECEPCION"].ToString();
+            campos[7] = thisReader["FECHA_REALIZACION"].ToString();
+            campos[8] = thisReader["ARCHIVO"].ToString();
+            
+        }
+
+        return campos;
+    }
+
+
+    public String[] cambiosHSE(int cambioID)
+    {
+        String[] campos = new String[6];
+
+        SqlCommand thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = "SELECT     CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, DEPARTAMENTO.NOMBRE_DEPTO, AREA.NOMBRE_AREA, CAMBIO.ARCHIVO, CAMBIO.CAMBIO_ID, NIVEL1_HSE.FECHA_ASIGNACION FROM         AREA INNER JOIN CAMBIO ON AREA.AREA_ID = CAMBIO.AREA_ID INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID INNER JOIN NIVEL1_HSE ON AREA.AREA_ID = NIVEL1_HSE.AREA_ID AND CAMBIO.CAMBIO_ID = NIVEL1_HSE.CAMBIO_ID WHERE     (CAMBIO.CAMBIO_ID = '"+ cambioID +"')";
+        SqlDataReader thisReader = thisCommand.ExecuteReader();
+
+        if (thisReader.Read())
+        {
+            campos[0] = thisReader["NOMBRE_CAMBIO"].ToString();
+            campos[1] = thisReader["TIPO_CAMBIO"].ToString();
+            campos[2] = thisReader["NOMBRE_DEPTO"].ToString();
+            campos[3] = thisReader["NOMBRE_AREA"].ToString();
+            campos[4] = thisReader["ARCHIVO"].ToString();
+            campos[5] = thisReader["FECHA_ASIGNACION"].ToString();            
+        }
+
+        return campos;
+    }
+
+
+
     public void pasarNCero(int folio , String nombreCambio, String tipoCambio, String areaID, String fechaRealizacion, String fileUpload1)
     {
         SqlCommand insertando = new SqlCommand("INSERT INTO CAMBIO  (CAMBIO_ID, NOMBRE_CAMBIO, TIPO_CAMBIO, AREA_ID, FECHA_RECEPCION, FECHA_REALIZACION, ESTADO_CAMBIO, ARCHIVO)" +
@@ -52,12 +102,12 @@ public class ManejadorCambio
 
         /********/
 
-        insertando = new SqlCommand("INSERT INTO NIVEL1_HSE (CAMBIO_ID, STATUS, AREA_ID, NIVEL2, N1HSE_ACEPTADO)" +
-            " VALUES ('" + (folio) + "', 'Pendiente', '" + areaID + "', 'False', 'False')", thisConnection);
+        insertando = new SqlCommand("INSERT INTO NIVEL1_HSE (CAMBIO_ID, STATUS, AREA_ID, NIVEL2, N1HSE_ACEPTADO, LIBERAR_CAMBIO)" +
+            " VALUES ('" + (folio) + "', 'Pendiente', '" + areaID + "', 'False', 'False', 'False')", thisConnection);
         insertando.ExecuteNonQuery();
 
-        insertando = new SqlCommand("INSERT INTO NIVEL1_QA (CAMBIO_ID, STATUS, AREA_ID, NIVEL2, N1QA_ACEPTADO)" +
-            " VALUES ('" + (folio) + "', 'Pendiente', '" + areaID + "', 'False', 'False')", thisConnection);
+        insertando = new SqlCommand("INSERT INTO NIVEL1_QA (CAMBIO_ID, STATUS, AREA_ID, NIVEL2, N1QA_ACEPTADO, LIBERAR_CAMBIO)" +
+            " VALUES ('" + (folio) + "', 'Pendiente', '" + areaID + "', 'False', 'False', 'False')", thisConnection);
         insertando.ExecuteNonQuery();
 
 
@@ -108,16 +158,23 @@ public class ManejadorCambio
 
     public void pasarQANDos(String comentarios, int cambioID, Int32[] areas)
     {
+
+        //if()
+        SqlCommand insertandoLiberado;
         SqlCommand insertando = new SqlCommand("UPDATE NIVEL1_QA set STATUS = 'Autorizado', FECHA_APROBACION = CURRENT_TIMESTAMP, " +
             " COMENTARIOS = '" + comentarios + "', NIVEL2 = 'True'  where CAMBIO_ID = '" + cambioID + "'", thisConnection);
         insertando.ExecuteNonQuery();
         SqlCommand insertAreas;
-        SqlCommand checkArea;
+        SqlCommand checkArea, checkHSE;
+        SqlDataReader areaexist, hseLibera;
+        bool libera = true;
+
+
             foreach(Int32 areaSopID in areas){
                 if (areaSopID != 0){
                 
                 checkArea = new SqlCommand("SELECT CASE COUNT(*) WHEN NULL THEN 0 ELSE COUNT(*) END AS CUENTA FROM NIVEL2 where AREA_SOPORTE_ID = '" + areaSopID + "' and CAMBIO_ID = '" + cambioID + "';", thisConnection);
-                SqlDataReader areaexist = checkArea.ExecuteReader();
+                areaexist = checkArea.ExecuteReader();
 
                 if (areaexist.Read())
                 {
@@ -128,6 +185,8 @@ public class ManejadorCambio
                             " ('Pendiente', CURRENT_TIMESTAMP, '" + cambioID + "', '" + areaSopID + "');", thisConnection);
                         checkArea.ExecuteNonQuery();
 
+                        libera = false;
+
                     }
                 }
                 areaexist.Close();
@@ -135,6 +194,39 @@ public class ManejadorCambio
             }                     
 
         }
+
+
+            if (libera)
+            {
+
+                insertando = new SqlCommand("UPDATE NIVEL1_QA set LIBERAR_CAMBIO = 'True' WHERE CAMBIO_ID = '" + cambioID + "'", thisConnection);
+                insertando.ExecuteNonQuery();
+
+                checkHSE = new SqlCommand("SELECT LIBERAR_CAMBIO FROM NIVEL1_HSE WHERE CAMBIO_ID = '" + cambioID + "'", thisConnection);
+                hseLibera = checkHSE.ExecuteReader();
+                
+
+                if (hseLibera.Read())
+                {                    
+
+                    if (hseLibera["LIBERAR_CAMBIO"].ToString().Equals("True"))                    
+                    {
+                        hseLibera.Close();
+                        insertandoLiberado = new SqlCommand("UPDATE CAMBIO set ESTADO_CAMBIO = 'Autorizado', FECHA_APROBACION = CURRENT_TIMESTAMP WHERE CAMBIO_ID = '" + cambioID + "'", thisConnection);
+                        insertandoLiberado.ExecuteNonQuery();
+
+
+                        insertandoLiberado = new SqlCommand("UPDATE NIVEL2_STATUS set STATUS = '---------' WHERE CAMBIO_ID = '" + cambioID + "'", thisConnection);
+                        insertandoLiberado.ExecuteNonQuery();
+
+                    }
+
+                }
+
+                hseLibera.Close();
+            }
+
+
        
     }
 
@@ -144,15 +236,19 @@ public class ManejadorCambio
         SqlCommand insertando = new SqlCommand("UPDATE NIVEL1_HSE set STATUS = 'Autorizado', FECHA_APROBACION = CURRENT_TIMESTAMP, " +
             " COMENTARIOS = '" + comentarios + "', NIVEL2 = 'True' where CAMBIO_ID = '" + cambioID + "'", thisConnection);
         insertando.ExecuteNonQuery();
-        SqlCommand insertAreas;
-        SqlCommand checkArea;
+
+        SqlCommand checkArea, checkQA;
+        SqlDataReader areaexist, qaLibera;
+        bool libera = true;
+
+
         foreach (Int32 areaSopID in areas)
         {
             if (areaSopID != 0)
             {
 
                 checkArea = new SqlCommand("SELECT CASE COUNT(*) WHEN NULL THEN 0 ELSE COUNT(*) END AS CUENTA FROM NIVEL2 where AREA_SOPORTE_ID = '" + areaSopID + "' and CAMBIO_ID = '" + cambioID + "';", thisConnection);
-                SqlDataReader areaexist = checkArea.ExecuteReader();
+                areaexist = checkArea.ExecuteReader();
 
                 if (areaexist.Read())
                 {
@@ -162,12 +258,44 @@ public class ManejadorCambio
                         checkArea = new SqlCommand("INSERT INTO NIVEL2 (STATUS, FECHA_ASIGNACION, CAMBIO_ID, AREA_SOPORTE_ID) VALUES " +
                             " ('Pendiente', CURRENT_TIMESTAMP, '" + cambioID + "', '" + areaSopID + "');", thisConnection);
                         checkArea.ExecuteNonQuery();
+
+                        libera = false;
+
                     }
                 }
                 areaexist.Close();
 
             }
 
+        }
+
+        if (libera)
+        {
+
+            insertando = new SqlCommand("UPDATE NIVEL1_HSE set LIBERAR_CAMBIO = 'True' WHERE CAMBIO_ID = '" + cambioID + "'", thisConnection);
+            insertando.ExecuteNonQuery();
+
+            checkQA = new SqlCommand("SELECT LIBERAR_CAMBIO FROM NIVEL1_QA WHERE CAMBIO_ID = '" + cambioID + "'", thisConnection);
+            qaLibera = checkQA.ExecuteReader();
+
+            if (qaLibera.Read())
+            {
+                if (qaLibera["LIBERAR_CAMBIO"].ToString().Equals("True"))
+                {
+                    qaLibera.Close();
+                    insertando = new SqlCommand("UPDATE CAMBIO set ESTADO_CAMBIO = 'Autorizado', FECHA_APROBACION = CURRENT_TIMESTAMP WHERE CAMBIO_ID = '" + cambioID + "'", thisConnection);
+                    insertando.ExecuteNonQuery();
+
+
+                    insertando = new SqlCommand("UPDATE NIVEL2_STATUS set STATUS = '---------' WHERE CAMBIO_ID = '" + cambioID + "'", thisConnection);
+                    insertando.ExecuteNonQuery();
+
+
+                }
+                
+            }
+
+            qaLibera.Close();
         }
 
     }

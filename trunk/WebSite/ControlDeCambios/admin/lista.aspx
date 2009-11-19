@@ -178,19 +178,21 @@
                                 <br />
                                 <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
                                     AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
-                                    DataSourceID="SqlDataSource1" Width="880px" CellPadding="4" CellSpacing="2" 
+                                    DataSourceID="SqlDataSource1" Width="880px" CellPadding="4" 
                                     Font-Names="Arial Narrow" Font-Size="Medium" HorizontalAlign="Left" 
-                                    PageSize="20" onselectedindexchanged="GridView1_SelectedIndexChanged">
+                                    PageSize="30" onselectedindexchanged="GridView1_SelectedIndexChanged" 
+                                    ForeColor="#333333" GridLines="None">
+                                    <RowStyle BackColor="#EFF3FB" />
                                     <Columns>
                                         
-                                        <asp:CommandField ShowSelectButton="True" />
-                                        <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" ReadOnly="True" 
+                                        <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
+                                        <asp:BoundField DataField="CAMBIO_ID" HeaderText="FOLIO" ReadOnly="True" 
                                             SortExpression="CAMBIO_ID" />
-                                        <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE_CAMBIO" 
+                                        <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE DE CAMBIO" 
                                             SortExpression="NOMBRE_CAMBIO" />
-                                        <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
+                                        <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO DE CAMBIO" 
                                             SortExpression="TIPO_CAMBIO" />
-                                        <asp:BoundField DataField="ESTADO_CAMBIO" HeaderText="ESTADO_CAMBIO" 
+                                        <asp:BoundField DataField="ESTADO_CAMBIO" HeaderText="ESTADO" 
                                             SortExpression="ESTADO_CAMBIO" />
                                         <asp:BoundField DataField="NIVEL0" HeaderText="NIVEL0" 
                                             SortExpression="NIVEL0" />
@@ -198,6 +200,12 @@
                                         <asp:BoundField HeaderText="QA" DataField="QA" SortExpression="QA"/>
                                         <asp:BoundField HeaderText="NIVEL2" DataField="NIVEL2" SortExpression="NIVEL2"/>
                                     </Columns>
+                                    <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                    <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                    <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                    <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                    <EditRowStyle BackColor="#2461BF" />
+                                    <AlternatingRowStyle BackColor="White" />
                                 </asp:GridView>
                                 <br />
                             </td>

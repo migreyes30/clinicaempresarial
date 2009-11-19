@@ -127,7 +127,7 @@
                                 <table style="width:100%;">
                                     <tr>
                                         <td>
-                                            Fecha</td>
+                                            &nbsp;</td>
                                     </tr>
                                     <tr>
                                         <td align="center">
@@ -136,27 +136,44 @@
                         DataSourceID="NivelCeroDataSource" 
                         EmptyDataText="There are no data records to display." 
                         onselectedindexchanged="GridView1_SelectedIndexChanged1" CellPadding="4" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium" Width="880px">
+                                                Font-Size="Medium" Width="880px" ForeColor="#333333" GridLines="None" 
+                                                PageSize="30">
+                        <RowStyle BackColor="#EFF3FB" />
                         <Columns>
-                            <asp:CommandField ShowSelectButton="True" />
-                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" 
-                                SortExpression="CAMBIO_ID" />
-                            <asp:BoundField DataField="ESTADO_CAMBIO" HeaderText="ESTADO_CAMBIO" 
+                            <asp:CommandField ShowSelectButton="True" >
+                            <HeaderStyle BackColor="#F9F8F4" />
+                            </asp:CommandField>
+                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="FOLIO" 
+                                SortExpression="CAMBIO_ID" >
+                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="ESTADO_CAMBIO" HeaderText="ESTADO" 
                                 SortExpression="ESTADO_CAMBIO" >
+                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
+                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="ÁREA" 
                                 SortExpression="NOMBRE_AREA" >
+                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE_CAMBIO" 
+                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE DEL CAMBIO" 
                                 SortExpression="NOMBRE_CAMBIO" >
+                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
+                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO" 
                                 SortExpression="TIPO_CAMBIO" >
+                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="FECHA_APROBACION" HeaderText="FECHA_APROBACION" 
+                            <asp:BoundField DataField="FECHA_APROBACION" HeaderText="FECHA" 
                                 SortExpression="FECHA_APROBACION" >
+                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
                             </asp:BoundField>
                         </Columns>
+                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <EditRowStyle BackColor="#2461BF" />
+                        <AlternatingRowStyle BackColor="White" />
                     </asp:GridView>
                                         </td>
                                     </tr>
