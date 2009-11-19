@@ -21,6 +21,29 @@ namespace WebService2.ejem01
         public void mandarCorreo(String sender, String receiver, String bodyMail, String asunto)
         {
             DateTime d = DateTime.Now.ToUniversalTime();
+
+            if (!(d.DayOfWeek == DayOfWeek.Saturday || d.DayOfWeek == DayOfWeek.Sunday))
+            {
+                SqlComand checkArea = new SqlCommand("SELECT USUARIO.CORREO_USUARIO, USUARIO.NOMBRE_USUARIO, NIVEL0.FECHA_ASIGNACION FROM NIVEL0, " 
+                    + "AREA, DEPARTAMENTO, USUARIO WHERE NIVEL0.AREA_ID = AREA.AREA_ID ANDAREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID "
+                    + "AND DEPARTAMENTO.RESPONSABLE_ID = USUARIO.USUARIO_ID AND NIVEL0.STATUS = 'Pendiente';", thisConnection);
+                SqlDataReader myReader = checkArea.ExecuteReader();
+                try
+                {
+                    while (myReader.Read())
+                    {
+                        Console.WriteLine(myReader.GetString(0) + " " + myReader.GetString(1) + " " + myReader.GetString(2));
+                       // myReader.GetString(0);
+                    }
+                }
+                finally
+                {
+                    myReader.Close();
+                    myConnection.Close();
+                }
+
+            }
+
             while(DateTime.Now.ToUniversalTime()<d.AddMinutes(1)) 
                 //DateTime.Now.ToUniversalTime().ToString("dd/MM/yyyy HH:mm:ss").Equals("19/11/2009 06:03:49")==false )
             {
