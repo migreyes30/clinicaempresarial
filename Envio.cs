@@ -32,7 +32,7 @@ namespace WebService2.ejem01
                 {
                     while (myReader.Read())
                     {
-                        Console.WriteLine(myReader.GetString(0) + " " + myReader.GetString(1) + " " + myReader.GetString(2));
+                        Console.WriteLine(myReader["CORREO_USUARIO"].ToString() + " " + myReader["FECHA_ASIGNACION"].ToString());
                        // myReader.GetString(0);
                     }
                 }
@@ -40,6 +40,8 @@ namespace WebService2.ejem01
                 {
                     myReader.Close();
                     thisConnection.Close();
+
+                    
                 }
 
             }
