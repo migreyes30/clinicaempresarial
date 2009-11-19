@@ -180,7 +180,7 @@
                                     AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
                                     DataSourceID="SqlDataSource1" Width="880px" CellPadding="4" CellSpacing="2" 
                                     Font-Names="Arial Narrow" Font-Size="Medium" HorizontalAlign="Left" 
-                                    PageSize="20">
+                                    PageSize="20" onselectedindexchanged="GridView1_SelectedIndexChanged">
                                     <Columns>
                                         
                                         <asp:CommandField ShowSelectButton="True" />
