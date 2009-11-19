@@ -133,7 +133,7 @@
                         DataSourceID="NivelCeroDataSource" 
                         EmptyDataText="There are no data records to display." 
                         onselectedindexchanged="GridView1_SelectedIndexChanged1" CellPadding="4" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium" Width="880px">
+                                                Font-Size="Medium" Width="880px" PageSize="30">
                         <Columns>
                             <asp:CommandField ShowSelectButton="True" />
                             <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" ReadOnly="True" 

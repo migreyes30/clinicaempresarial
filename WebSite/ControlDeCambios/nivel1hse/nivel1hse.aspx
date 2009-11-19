@@ -101,22 +101,44 @@
                         AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
                         DataSourceID="SqlDataSource1" 
                         onselectedindexchanged="GridView1_SelectedIndexChanged" CellPadding="4" 
-                        Font-Names="Arial Narrow" Font-Size="Medium" Width="880px">
+                        Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" 
+                        ForeColor="#333333" GridLines="None" PageSize="30">
+                        <RowStyle BackColor="#EFF3FB" />
                         <Columns>
-                            <asp:CommandField ShowSelectButton="True" />
-                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" ReadOnly="True" 
-                                SortExpression="CAMBIO_ID" />
-                            <asp:BoundField DataField="NOMBRE_DEPTO" HeaderText="NOMBRE_DEPTO" 
-                                SortExpression="NOMBRE_DEPTO" />
-                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
-                                SortExpression="NOMBRE_AREA" />
-                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE_CAMBIO" 
-                                SortExpression="NOMBRE_CAMBIO" />
-                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
-                                SortExpression="TIPO_CAMBIO" />
-                            <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="FECHA_RECEPCION" 
-                                SortExpression="FECHA_RECEPCION" />
+                            <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" >
+                            <HeaderStyle BackColor="#F9F8F4" />
+                            </asp:CommandField>
+                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="FOLIO" ReadOnly="True" 
+                                SortExpression="CAMBIO_ID" >
+                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="NOMBRE_DEPTO" HeaderText="DEPARTAMENTO" 
+                                SortExpression="NOMBRE_DEPTO" >
+                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="ÁREA" 
+                                SortExpression="NOMBRE_AREA" >
+                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE DEL CAMBIO" 
+                                SortExpression="NOMBRE_CAMBIO" >
+                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO" 
+                                SortExpression="TIPO_CAMBIO" >
+                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="FECHA" 
+                                SortExpression="FECHA_RECEPCION" >
+                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
+                            </asp:BoundField>
                         </Columns>
+                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <EditRowStyle BackColor="#2461BF" />
+                        <AlternatingRowStyle BackColor="White" />
                     </asp:GridView>
                     <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
                         ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
