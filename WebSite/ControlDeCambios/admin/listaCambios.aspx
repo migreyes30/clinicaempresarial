@@ -211,7 +211,7 @@
                                                         </table>
                                                     </td>
                                                     <td align="center">
-                                                        <asp:Label ID="Label39" runat="server"></asp:Label>
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" onclick="LinkButton1_Click"><asp:Label ID="Label39" runat="server"></asp:Label></asp:LinkButton>
                                                     </td>
                                                 </tr>
                                             </table>
