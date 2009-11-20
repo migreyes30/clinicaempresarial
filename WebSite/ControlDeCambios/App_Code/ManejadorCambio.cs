@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Web;
 using System.Data.SqlClient;
+using System.Data;
 
 /// <summary>
 /// Summary description for ManejadorCambio
@@ -173,10 +174,14 @@ public class ManejadorCambio
 
 
 
-    public void pasarNCero(int folio , String nombreCambio, String tipoCambio, String areaID, String fechaRealizacion, String fileUpload1)
-    {
-        SqlCommand insertando = new SqlCommand("INSERT INTO CAMBIO  (CAMBIO_ID, NOMBRE_CAMBIO, TIPO_CAMBIO, AREA_ID, FECHA_RECEPCION, FECHA_REALIZACION, ESTADO_CAMBIO, ARCHIVO)" +
-            "VALUES ('" + (folio) + "', '" + nombreCambio + "', '" + tipoCambio + "', '" + areaID + "', CURRENT_TIMESTAMP, '" + fechaRealizacion + "', 'Pendiente', '" + fileUpload1 + "')", thisConnection);
+      public void pasarNCero(int folio, String nombreCambio, String tipoCambio, String areaID, String fechaRealizacion, String fileUpload1, byte[] imageFile)
+      {
+        SqlCommand insertando = new SqlCommand("INSERT INTO CAMBIO  (CAMBIO_ID, NOMBRE_CAMBIO, TIPO_CAMBIO, AREA_ID, FECHA_RECEPCION, FECHA_REALIZACION, ESTADO_CAMBIO, ARCHIVO, ARCHIVO_CONTENT)" +
+            "VALUES ('" + (folio) + "', '" + nombreCambio + "', '" + tipoCambio + "', '" + areaID + "', CURRENT_TIMESTAMP, '" + fechaRealizacion + "', 'Pendiente', '" + fileUpload1 + "',@Image)", thisConnection);
+
+        SqlParameter UploadedImage = new SqlParameter("@Image", SqlDbType.Image, imageFile.Length);
+        UploadedImage.Value = imageFile;
+        insertando.Parameters.Add(UploadedImage);
         insertando.ExecuteNonQuery();
 
         insertando = new SqlCommand("INSERT INTO NIVEL0 (CAMBIO_ID, STATUS, AREA_ID, FECHA_ASIGNACION)" +
@@ -539,6 +544,28 @@ public class ManejadorCambio
         {
             //LabelError.Text = "ERROR: " + ex.Message;
         }
+    }
+
+    public byte[] imageToShow(string ID)
+    {
+
+        byte[] imageResult = null;
+        thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = "Select ARCHIVO_CONTENT from CAMBIO where CAMBIO_ID =@ID";
+        thisCommand.CommandType = CommandType.Text;
+
+        SqlParameter ImageID = new SqlParameter("@ID", System.Data.SqlDbType.Int);
+        ImageID.Value = ID;
+        thisCommand.Parameters.Add(ImageID);
+
+        SqlDataReader thisReader = thisCommand.ExecuteReader();
+        if (thisReader.Read())
+        {
+            imageResult = (byte[])thisReader["ARCHIVO_CONTENT"];
+        }
+        thisReader.Close();
+        return imageResult;
+
     }
 
 }
