@@ -62,6 +62,7 @@ public partial class admin : System.Web.UI.Page
     }
     protected void Button5_Click(object sender, EventArgs e)
     {
+        Response.Redirect("usuarios.aspx");
         thisConnection.Close();
     }
 

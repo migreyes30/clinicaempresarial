@@ -23,7 +23,7 @@ public partial class nivel0_cambioHistorial : System.Web.UI.Page
         }
         usuarioSesion.Text = Session["user"].ToString();
         Label25.Text = Request.QueryString["cambioID"];
-
+        
         try
         {
             ManejadorCambio miManejador = new ManejadorCambio();
@@ -45,7 +45,7 @@ public partial class nivel0_cambioHistorial : System.Web.UI.Page
             Label26.Text = "ERROR";
         }
 
-
+        
 
 
     }

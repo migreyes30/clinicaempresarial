@@ -9,7 +9,9 @@ using System.Data.SqlClient;
 
 public partial class cambios : System.Web.UI.Page
 {
-    public String[] aaaaa;
+    public String[] datos;
+    public String deptoId;
+    public String cambioNombre;
 
     public void Page_Load(object sender, EventArgs e)
     {
@@ -32,18 +34,22 @@ public partial class cambios : System.Web.UI.Page
 
 
 
-            aaaaa = miManejador.cambiosDatos(Int32.Parse(Label25.Text));
+            datos = miManejador.cambiosDatos(Int32.Parse(Label25.Text));
 
-            Label26.Text = aaaaa[0];
-            Label27.Text = aaaaa[1];
-            Label28.Text = aaaaa[2];
-            Label29.Text = aaaaa[3];
-            Label30.Text = aaaaa[4];
+            
 
-            //Image2.ImageUrl = "C:\\cambios_file\\" + aaaaa[4];
+            cambioNombre = datos[0];
 
 
-            //Label24.Text = "Dato Insertado!!!";
+            TextBox1.Text = datos[0];
+            TextBox2.Text = datos[1];
+            TextBox3.Text = datos[2];
+            TextBox4.Text = datos[3];
+
+            Label35.Text = datos[4];
+
+            deptoId = datos[4];
+
 
         }catch(SqlException){
 
@@ -101,9 +107,15 @@ public partial class cambios : System.Web.UI.Page
             miManejador.pasarNUno(TextBoxComentario.Text, Int32.Parse(Label25.Text));
             Label24.Text = "Dato Insertado!!!";
 
+            SendEmail correo = new SendEmail();
+
+            correo.NuevoCambio(miManejador.getMailQA(), cambioNombre);
+
+            correo.NuevoCambio(miManejador.getMailHSE(), cambioNombre);
+
         }catch(SqlException){
 
-         //   Response.Redirect("cambios.aspx");
+         
             Label24.Text = "Error con la base de datos";
 
         }
@@ -127,6 +139,8 @@ public partial class cambios : System.Web.UI.Page
             ManejadorCambio miManejador = new ManejadorCambio();
             miManejador.rechazarNCero(TextBoxComentario.Text, Int32.Parse(Label25.Text));
             Label24.Text = "Se ha rechazado correctamente";
+
+            miManejador.mailRechazar();
 
         }
         catch (SqlException)

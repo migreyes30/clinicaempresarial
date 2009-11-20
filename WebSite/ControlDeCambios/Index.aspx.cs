@@ -38,8 +38,6 @@ public partial class _Default : System.Web.UI.Page
 
         try
         {
-//            SqlConnection thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
-//            thisConnection.Open();
 
             SqlCommand thisCommand = thisConnection.CreateCommand();
             thisCommand.CommandText = "select nombre_usuario, correo_usuario, contrasena_usuario, perfil_usuario from usuario where correo_usuario = '" + user + "'";

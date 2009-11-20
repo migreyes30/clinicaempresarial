@@ -231,22 +231,22 @@
                                         <td class="style14" bgcolor="White" align="center">
                                             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
                                                 DataSourceID="SqlDataSource2" Font-Names="Arial Narrow" Font-Size="Medium" 
-                                                Width="850px">
+                                                Width="880px" CellPadding="4">
                                                 <Columns>
-                                                    <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
+                                                    <asp:BoundField DataField="NOMBRE_AREA" HeaderText="ÁREA" 
                                                         SortExpression="NOMBRE_AREA" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="STATUS" HeaderText="STATUS" 
+                                                    <asp:BoundField DataField="USUARIO" HeaderText="RESPONSABLE" 
+                                                        SortExpression="USUARIO" ReadOnly="True" >
+                                                    </asp:BoundField>
+                                                    <asp:BoundField DataField="STATUS" HeaderText="ESTADO" 
                                                         SortExpression="STATUS" >
                                                     </asp:BoundField>
-                                                    <asp:BoundField DataField="FECHA_APROBACION" HeaderText="FECHA_APROBACION" 
+                                                    <asp:BoundField DataField="FECHA_APROBACION" HeaderText="FECHA" 
                                                         SortExpression="FECHA_APROBACION" >
                                                     </asp:BoundField>
                                                     <asp:BoundField DataField="COMENTARIOS" HeaderText="COMENTARIOS" 
                                                         SortExpression="COMENTARIOS" >
-                                                    </asp:BoundField>
-                                                    <asp:BoundField DataField="USUARIO" HeaderText="USUARIO" 
-                                                        SortExpression="USUARIO" ReadOnly="True" >
                                                     </asp:BoundField>
                                                 </Columns>
                                             </asp:GridView>
@@ -277,16 +277,17 @@ WHERE     (NIVEL0.CAMBIO_ID = ?)">
                                     <tr>
                                         <td class="style14" bgcolor="White" align="center">
                                             <asp:GridView ID="GridView2" runat="server" DataSourceID="SqlDataSource3" 
-                                                AutoGenerateColumns="False" Width="850px">
+                                                AutoGenerateColumns="False" Width="880px" CellPadding="4" 
+                                                Font-Names="Arial Narrow">
                                                 <Columns>
-                                                    <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
+                                                    <asp:BoundField DataField="NOMBRE_AREA" HeaderText="ÁREA" 
                                                         SortExpression="NOMBRE_AREA" />
-                                                    <asp:BoundField DataField="USUARIO" HeaderText="USUARIO" ReadOnly="True" 
+                                                    <asp:BoundField DataField="USUARIO" HeaderText="RESPONSABLE" ReadOnly="True" 
                                                         SortExpression="USUARIO" />
-                                                    <asp:BoundField DataField="STATUS" HeaderText="STATUS" 
+                                                    <asp:BoundField DataField="STATUS" HeaderText="ESTADO" 
                                                         SortExpression="STATUS" />
                                                     <asp:BoundField DataField="FECHA" HeaderText="FECHA" SortExpression="FECHA" />
-                                                    <asp:BoundField DataField="COMMENTS" HeaderText="COMMENTS" 
+                                                    <asp:BoundField DataField="COMMENTS" HeaderText="COMENTARIOS" 
                                                         SortExpression="COMMENTS" />
                                                 </Columns>
                                             </asp:GridView>
@@ -319,16 +320,17 @@ WHERE     (NIVEL1_HSE.CAMBIO_ID = ?)">
                                     <tr>
                                         <td class="style14" bgcolor="White" align="center">
                                             <asp:GridView ID="GridView3" runat="server" DataSourceID="SqlDataSource4" 
-                                                AutoGenerateColumns="False" Width="850px">
+                                                AutoGenerateColumns="False" Width="880px" CellPadding="4" 
+                                                Font-Names="Arial Narrow">
                                                 <Columns>
-                                                    <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
+                                                    <asp:BoundField DataField="NOMBRE_AREA" HeaderText="ÁREA" 
                                                         SortExpression="NOMBRE_AREA" />
-                                                    <asp:BoundField DataField="USUARIO" HeaderText="USUARIO" ReadOnly="True" 
+                                                    <asp:BoundField DataField="USUARIO" HeaderText="RESPONSABLE" ReadOnly="True" 
                                                         SortExpression="USUARIO" />
-                                                    <asp:BoundField DataField="STATUS" HeaderText="STATUS" 
+                                                    <asp:BoundField DataField="STATUS" HeaderText="ESTADO" 
                                                         SortExpression="STATUS" />
                                                     <asp:BoundField DataField="FECHA" HeaderText="FECHA" SortExpression="FECHA" />
-                                                    <asp:BoundField DataField="COMMENTS" HeaderText="COMMENTS" 
+                                                    <asp:BoundField DataField="COMMENTS" HeaderText="COMENTARIOS" 
                                                         SortExpression="COMMENTS" />
                                                 </Columns>
                                             </asp:GridView>
@@ -361,15 +363,16 @@ WHERE     (NIVEL1_QA.CAMBIO_ID = ?)">
                                     <tr>
                                         <td class="style14" bgcolor="White" align="center">
                                             <asp:GridView ID="GridView4" runat="server" DataSourceID="SqlDataSource5" 
-                                                AutoGenerateColumns="False" Width="850px">
+                                                AutoGenerateColumns="False" Width="880px" CellPadding="4" 
+                                                Font-Names="Arial Narrow">
                                                 <Columns>
-                                                    <asp:BoundField DataField="NOMBRE_AREA_SOPORTE" HeaderText="AreaSoporte" 
+                                                    <asp:BoundField DataField="NOMBRE_AREA_SOPORTE" HeaderText="ÁREA" 
                                                         SortExpression="NOMBRE_AREA_SOPORTE" />
-                                                    <asp:BoundField DataField="USUARIO" HeaderText="USUARIO" ReadOnly="True" 
+                                                    <asp:BoundField DataField="USUARIO" HeaderText="RESPONSABLE" ReadOnly="True" 
                                                         SortExpression="USUARIO" />
-                                                    <asp:BoundField DataField="STATUS" HeaderText="STATUS" 
+                                                    <asp:BoundField DataField="STATUS" HeaderText="ESTADO" 
                                                         SortExpression="STATUS" />
-                                                    <asp:BoundField DataField="FECHA_APROBACION" HeaderText="FECHA_APROBACION" 
+                                                    <asp:BoundField DataField="FECHA_APROBACION" HeaderText="FECHA" 
                                                         SortExpression="FECHA_APROBACION" />
                                                     <asp:BoundField DataField="COMENTARIOS" HeaderText="COMENTARIOS" 
                                                         SortExpression="COMENTARIOS" />

@@ -110,6 +110,19 @@ public partial class cambios : System.Web.UI.Page
                 Label24.Text = "Dato Insertado!!!";
 
 
+                /*********    ENVIANDO EMAIL    *************/
+
+                String email;
+
+                email = miManejador.getMailUser(DropDownList4.SelectedValue);
+
+                SendEmail correo = new SendEmail();
+
+                correo.NuevoCambio(email,TextBox1.Text);                
+
+                /*********************/
+
+
                 // Asignar color al mensaje de exito
                 Label24.ForeColor = System.Drawing.Color.Blue;
             }
