@@ -21,6 +21,8 @@ public partial class nivel0_cambioHistorial : System.Web.UI.Page
         }
         usuarioSesion.Text = Session["user"].ToString();
         Label25.Text = Request.QueryString["cambioID"];
+        Label31.Text = Request.QueryString["cambioID"];
+        Session["cambioID"] = Request.QueryString["cambioID"];
 
         thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
         thisConnection.Open();
@@ -55,5 +57,9 @@ public partial class nivel0_cambioHistorial : System.Web.UI.Page
     protected void Button7_Click(object sender, EventArgs e)
     {
 
+    }
+    protected void LinkButton1_Click(object sender, EventArgs e)
+    {
+        Response.Write("<script type='text/javascript'>window.open('imagenCambioN0.aspx?cambioID=" + Session["cambioID"] + "','_blank');</script>");
     }
 }
