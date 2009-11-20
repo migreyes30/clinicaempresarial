@@ -22,7 +22,7 @@ using System.IO;
             String body = bodyMail;
             correo.Body = body;
             correo.IsBodyHtml = false;
-            Console.WriteLine("hola");
+            //Console.WriteLine("hola");
 
             correo.Priority = System.Net.Mail.MailPriority.Normal;
             //
