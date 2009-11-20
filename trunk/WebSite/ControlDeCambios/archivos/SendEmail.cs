@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Web;
+using System.IO;
 
 //namespace LodelCorreo.Ejemplo
 //{
     public class SendEmail
     {
-
+        public SendEmail()
+        {
+        }
         public void Correo(String sender, String receiver, String bodyMail, String asunto, String cambioNombre)
         {
             System.Net.Mail.MailMessage correo = new System.Net.Mail.MailMessage();
@@ -20,6 +22,7 @@ using System.Web;
             String body = bodyMail;
             correo.Body = body;
             correo.IsBodyHtml = false;
+            Console.WriteLine("hola");
 
             correo.Priority = System.Net.Mail.MailPriority.Normal;
             //
