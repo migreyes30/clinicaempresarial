@@ -7,6 +7,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 
+
 public partial class cambios : System.Web.UI.Page
 {
 
@@ -34,7 +35,8 @@ public partial class cambios : System.Web.UI.Page
         if (thisReader.Read())
         {
             folio = (int)thisReader["Last"]+1;
-            Label22.Text = "0000"+folio.ToString();
+            Label22.Text = folio.ToString();
+            Session["folio"] = folio;
         }
 
         thisReader.Close();
@@ -85,46 +87,42 @@ public partial class cambios : System.Web.UI.Page
 
     }
     protected void Button7_Click(object sender, EventArgs e)
-    {        
+    {
         /****/
-        try{
+        try
+        {
 
             // validar que sea una imagen el archivo seleccionado
             if (FileUpload1.PostedFile.ContentType.StartsWith("image"))
             {
                 // Obtener el nombre de la Imagen enviada para observar el detalle del cambio
-                string root_path_cambios = "C:\\cambios_file\\";
-                if (!System.IO.Directory.Exists("C:\\cambios_file\\"))
-                {
-                    System.IO.Directory.CreateDirectory("C:\\cambios_file\\");
-                }
+
+                byte[] imageSize = new byte[FileUpload1.PostedFile.ContentLength];
+                HttpPostedFile uploadedImage = FileUpload1.PostedFile;
+                uploadedImage.InputStream.Read(imageSize, 0, (int)FileUpload1.PostedFile.ContentLength);
+
                 string extension_file = FileUpload1.FileName.Split('.').GetValue(1).ToString();
                 string file_system_name = folio + "." + extension_file;
 
                 ManejadorCambio miManejador = new ManejadorCambio();
-                miManejador.pasarNCero(folio, TextBox1.Text, DropDownList1.SelectedItem.Value, DropDownList5.SelectedValue, TextBox4.Text, file_system_name);
-
-                // Imagen enviada para observar el detalle del cambio
-                FileUpload1.PostedFile.SaveAs(root_path_cambios + file_system_name);
+                miManejador.pasarNCero(folio, TextBox1.Text, DropDownList1.SelectedItem.Value, DropDownList5.SelectedValue, TextBox4.Text, file_system_name, imageSize);
 
                 Label24.Text = "Dato Insertado!!!";
-
-
-                /*********    ENVIANDO EMAIL    *************/
-
-                String email;
-
-                email = miManejador.getMailUser(DropDownList4.SelectedValue);
-
-                SendEmail correo = new SendEmail();
-
-                correo.NuevoCambio(email,TextBox1.Text);                
-
-                /*********************/
-
-
                 // Asignar color al mensaje de exito
                 Label24.ForeColor = System.Drawing.Color.Blue;
+
+                /*********    ENVIANDO EMAIL    *************
+
+                    String email;
+
+                    email = miManejador.getMailUser(DropDownList4.SelectedValue);
+
+                    SendEmail correo = new SendEmail();
+
+                    correo.NuevoCambio(email,TextBox1.Text);                
+
+                *********************/
+
             }
             else
             {
@@ -152,13 +150,13 @@ public partial class cambios : System.Web.UI.Page
             Label24.ForeColor = System.Drawing.Color.Red;
 
         }
-        catch (Exception) {
+        catch (Exception)
+        {
             // Asignar mensaje de error
             Label24.Text = "* Error al guardar archivo ene l servidor";
             // Asignar color al mensaje de error
             Label24.ForeColor = System.Drawing.Color.Red;
         }
-
 
         /****/
     }
