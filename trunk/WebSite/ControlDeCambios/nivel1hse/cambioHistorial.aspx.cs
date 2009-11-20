@@ -21,7 +21,7 @@ public partial class nivel0_cambioHistorial : System.Web.UI.Page
         }
         usuarioSesion.Text = Session["user"].ToString();
         Label25.Text = Request.QueryString["cambioID"];
-
+        /*
         thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
         thisConnection.Open();
 
@@ -33,7 +33,7 @@ public partial class nivel0_cambioHistorial : System.Web.UI.Page
         {
             Label26.Text = thisReader["estado_cambio"].ToString();
         }
-
+        */
 
 
     }

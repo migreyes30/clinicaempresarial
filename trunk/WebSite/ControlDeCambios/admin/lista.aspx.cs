@@ -47,6 +47,7 @@ public partial class lista : System.Web.UI.Page
         Session["cambioID"] = ((System.Web.UI.WebControls.GridView)sender).SelectedValue;
 
         Response.Write("<script type='text/javascript'>window.open('listaCambios.aspx?cambioID=" + ((System.Web.UI.WebControls.GridView)sender).SelectedValue + "','_blank');</script>");
+        //Response.Write("<script type='text/javascript'>window.open('prueba.aspx?cambioID=" + ((System.Web.UI.WebControls.GridView)sender).SelectedValue + "','_blank');</script>");
 
 //        Response.Redirect("listaCambios.aspx?cambioID=" + ((System.Web.UI.WebControls.GridView)sender).SelectedValue);
     }

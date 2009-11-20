@@ -10,6 +10,7 @@ public class ManejadorCambio
 {
     SqlConnection thisConnection;
     SqlCommand thisCommand;
+    String mail;
 
 	public ManejadorCambio()
 	{
@@ -18,13 +19,89 @@ public class ManejadorCambio
 
 	}
 
+    public void mailRechazar()
+    {
+
+    }
+
+    public String getMailNivel2(String area_soporte)
+    {
+
+        SqlCommand thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = "SELECT (SELECT CORREO_USUARIO FROM USUARIO WHERE USUARIO_ID = REPONSABLE_ID) AS CORREO FROM AREAS_SOPORTE WHERE AREA_SOPORTE_ID = '"+area_soporte+"'";
+        SqlDataReader thisReader = thisCommand.ExecuteReader();
+
+        thisReader.Read();
+
+        mail = thisReader["CORREO"].ToString();
+
+        thisReader.Close();
+
+        return mail;
+    }
+
+
+    public String getMailQA()
+    {
+
+        SqlCommand thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = "SELECT CORREO_USUARIO FROM USUARIO WHERE PERFIL_USUARIO = 'n1qa' and PRINCIPAL = 'True'";
+        SqlDataReader thisReader = thisCommand.ExecuteReader();
+
+        thisReader.Read();
+
+        mail = thisReader["CORREO_USUARIO"].ToString();
+
+        thisReader.Close();
+
+        return mail;
+
+    }
+
+
+    public String getMailHSE()
+    {
+
+        SqlCommand thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = "SELECT CORREO_USUARIO FROM USUARIO WHERE PERFIL_USUARIO = 'n1hse' and PRINCIPAL = 'True'";
+        SqlDataReader thisReader = thisCommand.ExecuteReader();
+
+        thisReader.Read();
+
+        mail = thisReader["CORREO_USUARIO"].ToString();
+
+        thisReader.Close();
+
+        return mail;
+        
+    }
+
+
+    public String getMailUser(String depto)
+    {
+
+        SqlCommand thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = "SELECT (SELECT CORREO_USUARIO FROM USUARIO WHERE USUARIO_ID = RESPONSABLE_ID) AS CORREO FROM DEPARTAMENTO WHERE DEPTO_ID = '" + depto + "'";
+        SqlDataReader thisReader = thisCommand.ExecuteReader();
+
+        thisReader.Read();
+
+        mail = thisReader["CORREO"].ToString();
+
+        thisReader.Close();
+
+        return mail;
+
+
+    }
 
     public String[] cambiosDatos(int cambioID)
     {
-        String []campos = new String[5];
+        String []campos = new String[6];
 
         SqlCommand thisCommand = thisConnection.CreateCommand();
-        thisCommand.CommandText = "select NOMBRE_CAMBIO, TIPO_CAMBIO, AREA.NOMBRE_AREA, NIVEL0.FECHA_ASIGNACION, ARCHIVO  from CAMBIO, NIVEL0,  AREA where CAMBIO.CAMBIO_ID = '" + cambioID + "' and CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID and AREA.AREA_ID = CAMBIO.AREA_ID;";
+        //thisCommand.CommandText = "select NOMBRE_CAMBIO, TIPO_CAMBIO, AREA.NOMBRE_AREA, NIVEL0.FECHA_ASIGNACION, ARCHIVO  from CAMBIO, NIVEL0,  AREA where CAMBIO.CAMBIO_ID = '" + cambioID + "' and CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID and AREA.AREA_ID = CAMBIO.AREA_ID;";
+        thisCommand.CommandText = "SELECT     CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, AREA.NOMBRE_AREA, NIVEL0.FECHA_ASIGNACION, CAMBIO.ARCHIVO, AREA.DEPTO_ID FROM         CAMBIO INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID WHERE     (CAMBIO.CAMBIO_ID = '"+cambioID+"')";
         SqlDataReader thisReader = thisCommand.ExecuteReader();
 
         if(thisReader.Read())
@@ -34,7 +111,10 @@ public class ManejadorCambio
             campos[2] = thisReader["NOMBRE_AREA"].ToString();
             campos[3] = thisReader["FECHA_ASIGNACION"].ToString();
             campos[4] = thisReader["ARCHIVO"].ToString();
+            campos[5] = thisReader["DEPTO_ID"].ToString();
         }
+
+        thisReader.Close();
 
         return campos;
     }
@@ -62,6 +142,8 @@ public class ManejadorCambio
             
         }
 
+        thisReader.Close();
+
         return campos;
     }
 
@@ -83,6 +165,8 @@ public class ManejadorCambio
             campos[4] = thisReader["ARCHIVO"].ToString();
             campos[5] = thisReader["FECHA_ASIGNACION"].ToString();            
         }
+
+        thisReader.Close();
 
         return campos;
     }
@@ -187,6 +271,10 @@ public class ManejadorCambio
 
                         libera = false;
 
+                        SendEmail correo = new SendEmail();
+
+                        correo.NuevoCambio(getMailNivel2(areaSopID.ToString()), "CAMBIO");
+
                     }
                 }
                 areaexist.Close();
@@ -260,6 +348,10 @@ public class ManejadorCambio
                         checkArea.ExecuteNonQuery();
 
                         libera = false;
+
+                        SendEmail correo = new SendEmail();
+
+                        correo.NuevoCambio(getMailNivel2(areaSopID.ToString()),"CAMBIO");
 
                     }
                 }

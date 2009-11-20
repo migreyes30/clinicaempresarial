@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+//using System.Linq;
 using System.Web;
 
 //namespace LodelCorreo.Ejemplo
@@ -27,7 +27,7 @@ using System.Web;
             smtp.Host = "smtp.mail.yahoo.com";
             //crenedenciales si es necesario
 
-            smtp.Credentials = new System.Net.NetworkCredential("jessyc48@yahoo.com", "probando");
+            smtp.Credentials = new System.Net.NetworkCredential("control_de_cambios@yahoo.com", "sistema");
             try
             {
                 smtp.Send(correo);
@@ -46,7 +46,7 @@ using System.Web;
 
         public void MandarCancelado(String receiver, String cambioNombre)
         {
-            String sender = "jessyc48@yahoo.com";
+            String sender = "control_de_cambios@yahoo.com";
             String body = "El cambio \"" + cambioNombre + "\" ha sido cancelado \n cualquier duda favor de consultarlo con el administrador de Sistemas de Cambio\n Gracias. \nAtte. Servicio de Cambios";
             String asunto = "Cambio cancelado";
             Correo(sender, receiver, body, asunto, cambioNombre);
@@ -54,7 +54,7 @@ using System.Web;
 
         public void MandarAceptado(String receiver, String cambioNombre)
         {
-            String sender = "jessyc48@yahoo.com";
+            String sender = "control_de_cambios@yahoo.com";
             String body = "El cambio \"" + cambioNombre + "\" ha sido aceptado \n cualquier duda favor de consultarlo con el administrador de Sistemas de Cambios.\n Gracias. \nAtte. Servicio de Cambios";
             String asunto = "Cambio Aceptado";
             Correo(sender, receiver, body, asunto, cambioNombre);
@@ -62,7 +62,7 @@ using System.Web;
 
         public void NuevoCambio(String receiver, String cambioNombre)
         {
-            String sender = "jessyc48@yahoo.com";
+            String sender = "control_de_cambios@yahoo.com";
             String body = "Un nuevo cambio llamado \""+cambioNombre + "\" se encuentra en espera para su aprobación, favor de entrar al sistema de cambios. \n Atte. Servicio de Cambios";
             String asunto = "Nuevo Cambio";
             Correo(sender, receiver, body, asunto, cambioNombre);
