@@ -250,6 +250,11 @@
                                 </table>
                                 <table style="width:100%;" cellpadding="4">
                                     <tr>
+                                        <td>
+                                            <img id="imagen_cambio1" alt="" src="imageHandler.ashx?ID=<% Response.Write(Session["folio"]); %>" />
+                                        </td>
+                                    </tr>
+                                    <tr>
                                         <td align="left">
                                             
                                             <asp:Button ID="Button7" runat="server" onclick="Button7_Click" 
