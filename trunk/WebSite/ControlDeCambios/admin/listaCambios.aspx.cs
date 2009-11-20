@@ -23,6 +23,7 @@ public partial class nivel0_cambioHistorial : System.Web.UI.Page
         }
         usuarioSesion.Text = Session["user"].ToString();
         Label25.Text = Request.QueryString["cambioID"];
+        Session["cambioID"] = Request.QueryString["cambioID"];
         
         try
         {
@@ -67,5 +68,9 @@ public partial class nivel0_cambioHistorial : System.Web.UI.Page
     protected void Button7_Click(object sender, EventArgs e)
     {
 
+    }
+    protected void LinkButton1_Click(object sender, EventArgs e)
+    {
+        Response.Write("<script type='text/javascript'>window.open('imagenCambio.aspx?cambioID=" + Session["cambioID"] + "','_blank');</script>");
     }
 }
