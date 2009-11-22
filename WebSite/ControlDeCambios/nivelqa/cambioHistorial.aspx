@@ -224,6 +224,9 @@
                                         <td class="style14" bgcolor="#F9F9F7" align="center">
                                             <asp:Label ID="Label26" runat="server" Font-Bold="True" 
                                                 Font-Names="Arial Narrow" Font-Size="Large"></asp:Label>
+&nbsp;
+&nbsp;&nbsp;
+                                            <asp:LinkButton ID="LinkButton1" runat="server" onclick="LinkButton1_Click"><asp:Label ID="Label50" runat="server" Text="Label"></asp:Label></asp:LinkButton>
                                         </td>
                                     </tr>
                                     <tr>

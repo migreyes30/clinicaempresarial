@@ -181,7 +181,7 @@
                                         </td>
                                         <td align="left">
                                         
-                                                                                    <asp:RequiredFieldValidator 
+                                             <asp:RequiredFieldValidator 
                                                      id="valFile" 
                                                      ControlToValidate="FileUpload1" 
                                                      InitialValue=""

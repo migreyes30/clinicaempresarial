@@ -25,6 +25,7 @@ public partial class cambios : System.Web.UI.Page
         usuarioSesion.Text = Session["user"].ToString();
 
         Label25.Text = Request.QueryString["cambioID"];
+        Session["cambioID"] = Request.QueryString["cambioID"];
 
 
         try
@@ -125,5 +126,9 @@ public partial class cambios : System.Web.UI.Page
 
         }
 
+    }
+    protected void LinkButton1_Click(object sender, EventArgs e)
+    {
+        Response.Write("<script type='text/javascript'>window.open('imagenCambioN1_HSE.aspx?cambioID=" + Session["cambioID"] + "','_blank');</script>");
     }
 }

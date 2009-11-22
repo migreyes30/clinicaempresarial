@@ -276,9 +276,9 @@ public class ManejadorCambio
 
                         libera = false;
 
-                        SendEmail correo = new SendEmail();
+                        //SendEmail correo = new SendEmail();
 
-                        correo.NuevoCambio(getMailNivel2(areaSopID.ToString()), "CAMBIO");
+                        //correo.NuevoCambio(getMailNivel2(areaSopID.ToString()), "CAMBIO");
 
                     }
                 }
@@ -354,9 +354,9 @@ public class ManejadorCambio
 
                         libera = false;
 
-                        SendEmail correo = new SendEmail();
+                        //SendEmail correo = new SendEmail();
 
-                        correo.NuevoCambio(getMailNivel2(areaSopID.ToString()),"CAMBIO");
+                        //correo.NuevoCambio(getMailNivel2(areaSopID.ToString()),"CAMBIO");
 
                     }
                 }
