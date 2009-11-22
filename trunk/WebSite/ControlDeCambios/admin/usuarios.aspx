@@ -142,6 +142,19 @@
                                     </tr>
                                     <tr>
                                         <td align="left" class="style2" width="150">
+                                            <asp:Label ID="Label20" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium" Text="Seleccione Tipo"></asp:Label>
+                                        </td>
+                                        <td align="left">
+                                            <asp:DropDownList ID="DropDownList5" runat="server" AutoPostBack="True" 
+                                                Enabled="False" onselectedindexchanged="DropDownList5_SelectedIndexChanged">
+                                                <asp:ListItem Value="1">HSE</asp:ListItem>
+                                                <asp:ListItem Value="2">QA</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left" class="style2" width="150">
                                             <asp:Label ID="Label7" runat="server" Font-Names="Arial Narrow" 
                                                 Font-Size="Medium" Text="Selecciona Departamento"></asp:Label>
                                         </td>
@@ -195,7 +208,8 @@
                                                     Font-Names="Arial Narrow" Font-Size="Medium" Text="Usuario Principal"></asp:Label>
                                             </td>
                                             <td align="left">
-                                                <asp:TextBox ID="TextBox8" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="TextBox8" runat="server" BorderStyle="None" ForeColor="White" 
+                                                    ReadOnly="True"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -234,7 +248,8 @@
                                                     Font-Names="Arial Narrow" Font-Size="Medium" Text="Usuario BackUp"></asp:Label>
                                             </td>
                                             <td align="left">
-                                                <asp:TextBox ID="TextBox9" runat="server"></asp:TextBox>
+                                                <asp:TextBox ID="TextBox9" runat="server" BorderStyle="None" ForeColor="White" 
+                                                    ReadOnly="True"></asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -273,7 +288,6 @@
                                             <td align="left">
                                                 <asp:Button ID="Button7" runat="server" Text="Modificar" 
                                                     onclick="Button7_Click" UseSubmitBehavior="False" />
-                                                &nbsp;
                                             </td>
                                         </tr>
                                     </table>
@@ -281,18 +295,13 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center">
-                                <asp:Label ID="Label19" runat="server"></asp:Label>
+                            <td align="left">
+                                <asp:Label ID="Label19" runat="server" Font-Bold="True" 
+                                    Font-Names="Arial Narrow"></asp:Label>
                             </td>
                         </tr>
-                        <tr>
-                            <td align="center">
-                                <br />
-                            </td>
-                        </tr>
-                    </table>
+                        </table>
         
-                    <br />
                 </td>
             </tr>
         </table>

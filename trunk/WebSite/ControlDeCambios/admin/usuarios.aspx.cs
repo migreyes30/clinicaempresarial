@@ -65,6 +65,7 @@ public partial class admin_usuarios : System.Web.UI.Page
             Label12.Text = "Usuario BackUp";
             DropDownList2.Enabled = false;
             DropDownList3.Enabled = false;
+            DropDownList5.Enabled = false;
             
             administradores();
             
@@ -75,19 +76,21 @@ public partial class admin_usuarios : System.Web.UI.Page
                 Label12.Text = "Usuario BackUp";
                 DropDownList3.Enabled = false;                
                 DropDownList2.Enabled = true;
+                DropDownList5.Enabled = false;
 
                 nivel0();
                 
             }else
                 if (DropDownList4.SelectedValue.Equals("2"))
                 {
-                    Label11.Text = "QA";
-                    Label12.Text = "HSE";
-                    
+
+                    Label11.Text = "Usuario Principal";
+                    Label12.Text = "Usuario BackUp";               
+                    DropDownList5.Enabled = true;                    
                     DropDownList2.Enabled = false;
                     DropDownList3.Enabled = false;
 
-                    nivel1();
+                    nivel1HSE();                    
 
                 }
                 else
@@ -97,6 +100,7 @@ public partial class admin_usuarios : System.Web.UI.Page
                         Label12.Text = "Usuario BackUp";
                         DropDownList2.Enabled = false;
                         DropDownList3.Enabled = true;
+                        DropDownList5.Enabled = false;
                         nivel2a();
 
                     }
@@ -114,6 +118,7 @@ public partial class admin_usuarios : System.Web.UI.Page
 
                         DropDownList2.Enabled = false;
                         DropDownList3.Enabled = false;
+                        DropDownList5.Enabled = false;
                     }
         
     }
@@ -183,10 +188,10 @@ public partial class admin_usuarios : System.Web.UI.Page
 
     }
 
-    public void nivel1()
+    public void nivel1HSE()
     {
         SqlCommand thisCommand = thisConnection.CreateCommand();
-        thisCommand.CommandText = "SELECT USUARIO_ID, NOMBRE_USUARIO, CORREO_USUARIO, CONTRASENA_USUARIO FROM USUARIO WHERE PERFIL_USUARIO = 'n1qa'";
+        thisCommand.CommandText = "SELECT USUARIO_ID, NOMBRE_USUARIO, CORREO_USUARIO, CONTRASENA_USUARIO FROM USUARIO WHERE PERFIL_USUARIO = 'n1hse' and PRINCIPAL = 'True'";
         SqlDataReader thisReader = thisCommand.ExecuteReader();
 
         if (thisReader.Read())
@@ -198,13 +203,16 @@ public partial class admin_usuarios : System.Web.UI.Page
         }
         else
         {
-            TextBox8.Text = "No hay usuario";
+            TextBox8.Text = "";
+            TextBox2.Text = "No hay usuario";
+            TextBox3.Text = "";
+            TextBox4.Text = "";
         }
         
         thisReader.Close();
 
         thisCommand = thisConnection.CreateCommand();
-        thisCommand.CommandText = "SELECT USUARIO_ID, NOMBRE_USUARIO, CORREO_USUARIO, CONTRASENA_USUARIO FROM USUARIO WHERE PERFIL_USUARIO = 'n1hse'";
+        thisCommand.CommandText = "SELECT USUARIO_ID, NOMBRE_USUARIO, CORREO_USUARIO, CONTRASENA_USUARIO FROM USUARIO WHERE PERFIL_USUARIO = 'n1hse' and PRINCIPAL = 'False'";
         thisReader = thisCommand.ExecuteReader();
 
         if (thisReader.Read())
@@ -216,13 +224,64 @@ public partial class admin_usuarios : System.Web.UI.Page
         }
         else
         {
-            TextBox8.Text = "No hay usuario";
+            TextBox9.Text = "";
+            TextBox5.Text = "No hay usuario";
+            TextBox6.Text = "";
+            TextBox7.Text = "";
         }
 
-           
+        thisReader.Close();           
 
     }
 
+
+    public void nivel1QA()
+    {
+        SqlCommand thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = "SELECT USUARIO_ID, NOMBRE_USUARIO, CORREO_USUARIO, CONTRASENA_USUARIO FROM USUARIO WHERE PERFIL_USUARIO = 'n1qa' and PRINCIPAL = 'True'";
+        SqlDataReader thisReader = thisCommand.ExecuteReader();
+
+        if (thisReader.Read())
+        {
+            TextBox8.Text = thisReader["USUARIO_ID"].ToString();
+            TextBox2.Text = thisReader["NOMBRE_USUARIO"].ToString();
+            TextBox3.Text = thisReader["CORREO_USUARIO"].ToString();
+            TextBox4.Text = thisReader["CONTRASENA_USUARIO"].ToString();
+        }
+        else
+        {
+            TextBox8.Text = "";
+            TextBox2.Text = "No hay usuario";
+            TextBox3.Text = "";
+            TextBox4.Text = "";
+        }
+
+        thisReader.Close();
+
+        thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = "SELECT USUARIO_ID, NOMBRE_USUARIO, CORREO_USUARIO, CONTRASENA_USUARIO FROM USUARIO WHERE PERFIL_USUARIO = 'n1qa' and PRINCIPAL = 'False'";
+        thisReader = thisCommand.ExecuteReader();
+
+        if (thisReader.Read())
+        {
+            TextBox9.Text = thisReader["USUARIO_ID"].ToString();
+            TextBox5.Text = thisReader["NOMBRE_USUARIO"].ToString();
+            TextBox6.Text = thisReader["CORREO_USUARIO"].ToString();
+            TextBox7.Text = thisReader["CONTRASENA_USUARIO"].ToString();
+        }
+        else
+        {
+            TextBox9.Text = "";
+            TextBox5.Text = "No hay usuario";
+            TextBox6.Text = "";
+            TextBox7.Text = "";
+        }
+
+        thisReader.Close();
+
+    }
+    
+    
     public void nivel2()
     {
         SqlCommand thisCommand = thisConnection.CreateCommand();
@@ -272,7 +331,10 @@ public partial class admin_usuarios : System.Web.UI.Page
         }
         else
         {
+            TextBox8.Text = "";
             TextBox2.Text = "No hay usuario";
+            TextBox3.Text = "";
+            TextBox4.Text = "";
         }
 
         if (thisReader.Read())
@@ -284,7 +346,10 @@ public partial class admin_usuarios : System.Web.UI.Page
         }
         else
         {
+            TextBox9.Text = "";
             TextBox5.Text = "No hay usario";
+            TextBox6.Text = "";
+            TextBox7.Text = "";
         }
 
         thisReader.Close();        
@@ -344,7 +409,10 @@ public partial class admin_usuarios : System.Web.UI.Page
             }
             else
             {
+                TextBox8.Text = "";
                 TextBox2.Text = "No hay usuario";
+                TextBox3.Text = "";
+                TextBox4.Text = "";
             }
 
         }
@@ -366,7 +434,10 @@ public partial class admin_usuarios : System.Web.UI.Page
             }
             else
             {
-                TextBox5.Text = "No hay usuario";
+                TextBox9.Text = "";
+                TextBox5.Text = "No hay usario";
+                TextBox6.Text = "";
+                TextBox7.Text = "";
             }
 
         }
@@ -377,12 +448,31 @@ public partial class admin_usuarios : System.Web.UI.Page
     }
     protected void Button7_Click(object sender, EventArgs e)
     {
-        SqlCommand updateUser = new SqlCommand("UPDATE USUARIO set NOMBRE_USUARIO = '"+ TextBox2.Text +"', CORREO_USUARIO = '" + TextBox3.Text + "', CONTRASENA_USUARIO = '" + TextBox4.Text + "'  WHERE USUARIO_ID = '" + Int32.Parse(TextBox8.Text) + "'", thisConnection);
-        updateUser.ExecuteNonQuery();
+        SqlCommand updateUser;
 
-        updateUser = new SqlCommand("UPDATE USUARIO set NOMBRE_USUARIO = '" + TextBox5.Text + "', CORREO_USUARIO = '" + TextBox6.Text + "', CONTRASENA_USUARIO = '" + TextBox7.Text + "'  WHERE USUARIO_ID = '" + Int32.Parse(TextBox9.Text) + "'", thisConnection);
-        updateUser.ExecuteNonQuery();
+        if(!TextBox8.Text.Equals(""))
+        {
+            updateUser = new SqlCommand("UPDATE USUARIO set NOMBRE_USUARIO = '" + TextBox2.Text + "', CORREO_USUARIO = '" + TextBox3.Text + "', CONTRASENA_USUARIO = '" + TextBox4.Text + "'  WHERE USUARIO_ID = '" + Int32.Parse(TextBox8.Text) + "'", thisConnection);
+            updateUser.ExecuteNonQuery();
+        }
+
+        if (!TextBox9.Text.Equals(""))
+        {
+            updateUser = new SqlCommand("UPDATE USUARIO set NOMBRE_USUARIO = '" + TextBox5.Text + "', CORREO_USUARIO = '" + TextBox6.Text + "', CONTRASENA_USUARIO = '" + TextBox7.Text + "'  WHERE USUARIO_ID = '" + Int32.Parse(TextBox9.Text) + "'", thisConnection);
+            updateUser.ExecuteNonQuery();
+        }
 
         Label19.Text = "Datos Actualizados";
+    }
+    protected void DropDownList5_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        if (DropDownList5.SelectedValue.Equals("1"))
+        {
+            nivel1HSE();
+        }
+        else
+        {
+            nivel1QA();
+        }
     }
 }
