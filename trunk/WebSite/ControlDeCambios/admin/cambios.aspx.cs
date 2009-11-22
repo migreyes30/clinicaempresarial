@@ -111,6 +111,8 @@ public partial class cambios : System.Web.UI.Page
                 // Asignar color al mensaje de exito
                 Label24.ForeColor = System.Drawing.Color.Blue;
 
+                
+
                 /*********    ENVIANDO EMAIL    *************
 
                     String email;

@@ -108,12 +108,11 @@ public partial class cambios : System.Web.UI.Page
             miManejador.pasarNUno(TextBoxComentario.Text, Int32.Parse(Label25.Text));
             Label24.Text = "Dato Insertado!!!";
 
-            SendEmail correo = new SendEmail();
+            /*SendEmail correo = new SendEmail();
 
             correo.NuevoCambio(miManejador.getMailQA(), cambioNombre);
 
-            correo.NuevoCambio(miManejador.getMailHSE(), cambioNombre);
-
+            correo.NuevoCambio(miManejador.getMailHSE(), cambioNombre);*/
         }catch(SqlException){
 
          
