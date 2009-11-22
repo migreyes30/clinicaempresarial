@@ -332,7 +332,7 @@ WHERE     (NIVEL0.CAMBIO_ID = ?)">
                                                 SelectCommand="SELECT     NIVEL1_HSE.STATUS, NIVEL1_HSE.FECHA_APROBACION AS FECHA, NIVEL1_HSE.COMENTARIOS AS COMMENTS, AREA.NOMBRE_AREA,
                           (SELECT     NOMBRE_USUARIO
                             FROM          USUARIO
-                            WHERE      (PERFIL_USUARIO = 'n1hse')) AS USUARIO, NIVEL1_HSE.CAMBIO_ID
+                            WHERE      (PERFIL_USUARIO = 'n1hse') and USUARIO.PRINCIPAL = 'true') AS USUARIO, NIVEL1_HSE.CAMBIO_ID
 FROM         NIVEL1_HSE INNER JOIN
                       AREA ON NIVEL1_HSE.AREA_ID = AREA.AREA_ID INNER JOIN
                       DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID
@@ -394,7 +394,7 @@ WHERE     (NIVEL1_HSE.CAMBIO_ID = ?)">
                                                 SelectCommand="SELECT     NIVEL1_QA.STATUS, NIVEL1_QA.FECHA_APROBACION AS FECHA, NIVEL1_QA.COMENTARIOS AS COMMENTS, AREA.NOMBRE_AREA,
                           (SELECT     NOMBRE_USUARIO
                             FROM          USUARIO
-                            WHERE      (PERFIL_USUARIO = 'n1qa')) AS USUARIO, NIVEL1_QA.CAMBIO_ID
+                            WHERE      (PERFIL_USUARIO = 'n1qa') and USUARIO.PRINCIPAL = 'true') AS USUARIO, NIVEL1_QA.CAMBIO_ID
 FROM         NIVEL1_QA INNER JOIN
                       AREA ON NIVEL1_QA.AREA_ID = AREA.AREA_ID INNER JOIN
                       DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID
