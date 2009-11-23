@@ -572,4 +572,93 @@ public class ManejadorCambio
 
     }
 
+    public String getDepto(string mail) {
+
+        String depto = "";
+        thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = "select departamento.nombre_depto as DEPTO from usuario left outer join departamento on (departamento.responsable_id = usuario.usuario_id or departamento.backup_id = usuario.usuario_id) where correo_usuario = @mail";
+        thisCommand.CommandType = CommandType.Text;
+
+        SqlParameter mailUser = new SqlParameter("@mail", System.Data.SqlDbType.VarChar);
+        mailUser.Value = mail;
+        thisCommand.Parameters.Add(mailUser);
+
+        SqlDataReader thisReader = thisCommand.ExecuteReader();
+        if (thisReader.Read())
+        {
+            depto = thisReader["DEPTO"].ToString();
+        }
+        thisReader.Close();
+        return depto;
+
+    }
+
+    public SqlDataReader getCambiosPendientesBack(String querie, String mail)
+    {
+        SqlDataReader resultBackUp = null;
+
+            List<string> idCambiosBack = new List<string>();
+            String sqlPrefix = "CAMBIO.CAMBIO_ID = ";
+
+
+            thisCommand = thisConnection.CreateCommand();
+            thisCommand.CommandText = querie;
+            thisCommand.CommandType = CommandType.Text;
+
+            SqlParameter mailUser = new SqlParameter("@correo", System.Data.SqlDbType.VarChar);
+            mailUser.Value = mail;
+            thisCommand.Parameters.Add(mailUser);
+
+            SqlDataReader result = thisCommand.ExecuteReader();
+               
+            while (result.Read())
+            {
+                DateTime fechaAsignacion = DateTime.Parse(result["FECHA_ASIGNACION"].ToString());
+                DateTime fechaCur = fechaAsignacion;
+                int daysOff = 0;
+                while (fechaCur <= DateTime.Now.ToUniversalTime())
+                {
+                    if (!(fechaCur.DayOfWeek == DayOfWeek.Saturday || fechaCur.DayOfWeek == DayOfWeek.Sunday))
+                    {
+                        daysOff += 1;
+                    }
+                    fechaCur = fechaCur.AddDays(1);
+                }
+                if (daysOff > 2)
+                {
+
+                    idCambiosBack.Add(sqlPrefix + result["CAMBIO_ID"].ToString());
+
+                }
+            }
+            result.Close();
+            if (idCambiosBack.Count > 0) { 
+                string cum = "";
+                foreach(string temp in idCambiosBack){
+                    cum += temp + " or ";
+                }
+                cum = cum.Substring(0,cum.LastIndexOf(" or "));
+                
+                String querieSQLBack = "SELECT CAMBIO.CAMBIO_ID, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, NIVEL0.FECHA_ASIGNACION FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID WHERE (CAMBIO.AREA_ID IN (SELECT AREA_1.AREA_ID FROM USUARIO INNER JOIN DEPARTAMENTO ON USUARIO.USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID OR USUARIO.USUARIO_ID = DEPARTAMENTO.BACKUP_ID INNER JOIN AREA AS AREA_1 ON DEPARTAMENTO.DEPTO_ID = AREA_1.DEPTO_ID WHERE (USUARIO.CORREO_USUARIO = @correo))) AND (NIVEL0.STATUS = 'Pendiente') AND (@idBack)";
+
+                thisCommand = thisConnection.CreateCommand();
+                thisCommand.CommandText = querieSQLBack;
+                thisCommand.CommandType = CommandType.Text;
+
+                SqlParameter mailUser_second = new SqlParameter("@correo", System.Data.SqlDbType.VarChar);
+                mailUser_second.Value = mail;
+                thisCommand.Parameters.Add(mailUser_second);
+
+                SqlParameter idBackUp = new SqlParameter("@idBack", System.Data.SqlDbType.VarChar);
+                idBackUp.Value = cum;
+                thisCommand.Parameters.Add(idBackUp);
+
+                resultBackUp = thisCommand.ExecuteReader();
+               
+            }
+            
+            return resultBackUp;
+
+    }
+
 }
