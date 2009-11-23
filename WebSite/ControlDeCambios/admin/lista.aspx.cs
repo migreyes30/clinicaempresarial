@@ -28,6 +28,7 @@ public partial class lista : System.Web.UI.Page
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
+        Session["cambioAceptado"] = true;
         Response.Redirect("cambios.aspx");
     }
     protected void Button3_Click(object sender, EventArgs e)
@@ -36,6 +37,7 @@ public partial class lista : System.Web.UI.Page
     }
     protected void Button4_Click(object sender, EventArgs e)
     {
+        Session["cambioAceptado"] = true;
         Response.Redirect("incidentes.aspx");
     }
     protected void Button5_Click(object sender, EventArgs e)

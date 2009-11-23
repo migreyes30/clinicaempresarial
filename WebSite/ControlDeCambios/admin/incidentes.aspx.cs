@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Globalization;
 
 public partial class admin_incidentes : System.Web.UI.Page
 {
@@ -21,6 +22,12 @@ public partial class admin_incidentes : System.Web.UI.Page
         thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
         thisConnection.Open();
 
+        if (Session["cambioAceptado"].Equals(false))
+        {
+            Button7.Visible = false;
+            Button8.Visible = true;
+        }
+
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
@@ -37,6 +44,7 @@ public partial class admin_incidentes : System.Web.UI.Page
     protected void Button2_Click(object sender, EventArgs e)
     {
         thisConnection.Close();
+        Session["cambioAceptado"] = true;
         Response.Redirect("cambios.aspx");
     }
     protected void Button3_Click(object sender, EventArgs e)
@@ -47,6 +55,7 @@ public partial class admin_incidentes : System.Web.UI.Page
     protected void Button4_Click(object sender, EventArgs e)
     {
         thisConnection.Close();
+        Session["cambioAceptado"] = true;
         Response.Redirect("incidentes.aspx");        
     }
     protected void Button5_Click(object sender, EventArgs e)
@@ -59,12 +68,25 @@ public partial class admin_incidentes : System.Web.UI.Page
 
         try
         {
-            SqlCommand insertando = new SqlCommand("INSERT INTO INCIDENTES  (NOMBRE_INCIDENTE, DESCRIPCION_INCIDENTE, FECHA_INCIDENTE, AREA_ID)" +
-            "VALUES ('"+TextBox1.Text+"', '"+TextBox3.Text+"', '"+TextBox2.Text+"', '" + DropDownList2.SelectedValue + "')", thisConnection);
-            //"VALUES ('aaa','bbb','12/12/09','6')", thisConnection);
-            insertando.ExecuteNonQuery();
-            Label11.Text = "Dato Insertado!!!";
-            thisConnection.Close();
+            if (Session["cambioAceptado"].Equals(true))
+            {
+                CultureInfo MyCultureInfo = new CultureInfo("es-MX");
+                DateTime MyDateTime = DateTime.Parse(TextBox2.Text, MyCultureInfo);
+                CultureInfo culture = new CultureInfo("en-US");
+                SqlCommand insertando = new SqlCommand("INSERT INTO INCIDENTES  (NOMBRE_INCIDENTE, DESCRIPCION_INCIDENTE, FECHA_INCIDENTE, AREA_ID)" +
+                "VALUES ('" + TextBox1.Text + "', '" + TextBox3.Text + "', '" + MyDateTime.ToString("d", culture) + "', '" + DropDownList2.SelectedValue + "')", thisConnection);
+                
+                insertando.ExecuteNonQuery();
+                Label11.Text = "Dato Insertado!!!";
+                thisConnection.Close();
+                Session["cambioAceptado"] = false;
+                Button7.Visible = false;
+                Button8.Visible = true;
+            }
+            else
+            {
+                throw new System.ArgumentException("* El incidente ya ha sido incertado");
+            }
         
         }
         catch (SqlException)
@@ -73,5 +95,18 @@ public partial class admin_incidentes : System.Web.UI.Page
             //Response.Redirect("cambios.aspx");
             Label11.Text = "Error con la base de datos";
         }
+        catch (Exception)
+        {
+            // Asignar mensaje de error
+            Label11.Text = "* El incidente ya ha sido incertado";
+            // Asignar color al mensaje de error
+            Label11.ForeColor = System.Drawing.Color.Red;
+        }
+    }
+    protected void Button8_Click(object sender, EventArgs e)
+    {
+        thisConnection.Close();
+        Session["cambioAceptado"] = true;
+        Response.Redirect("incidentes.aspx");
     }
 }

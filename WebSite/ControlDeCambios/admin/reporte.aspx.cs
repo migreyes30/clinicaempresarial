@@ -40,11 +40,13 @@ public partial class admin : System.Web.UI.Page
     protected void Button2_Click(object sender, EventArgs e)
     {
         thisConnection.Close();
+        Session["cambioAceptado"] = true;
         Response.Redirect("cambios.aspx");
     }
 
     protected void ligaAreas()
     {
+        Session["cambioAceptado"] = true;
         Response.Redirect("cambios.aspx");
     }
     protected void Button7_Click(object sender, EventArgs e)
@@ -59,6 +61,8 @@ public partial class admin : System.Web.UI.Page
     protected void Button4_Click(object sender, EventArgs e)
     {
         thisConnection.Close();
+        Session["cambioAceptado"] = true;
+        Response.Redirect("incidentes.aspx");  
     }
     protected void Button5_Click(object sender, EventArgs e)
     {
@@ -70,7 +74,7 @@ public partial class admin : System.Web.UI.Page
     {
 
         int totalCambios = 0;
-        int[] deptos = new int[9];
+        int[] deptos = new int[10];
 
         SqlCommand thisCommand;
         SqlDataReader thisReader;

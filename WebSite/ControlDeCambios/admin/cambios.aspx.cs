@@ -39,9 +39,17 @@ public partial class cambios : System.Web.UI.Page
             Session["folio"] = folio;
         }
 
+        if (Session["cambioAceptado"].Equals(false))
+        {
+            Button7.Visible = false;
+            Button8.Visible = true;
+        }
+
         thisReader.Close();
 
         thisConnection.Close();
+
+       
 
     }
     protected void Button1_Click(object sender, EventArgs e)
@@ -60,6 +68,7 @@ public partial class cambios : System.Web.UI.Page
     protected void Button2_Click(object sender, EventArgs e)
     {
         thisConnection.Close();
+        Session["cambioAceptado"] = true;
         Response.Redirect("cambios.aspx");        
     }
     protected void Button3_Click(object sender, EventArgs e)
@@ -70,6 +79,7 @@ public partial class cambios : System.Web.UI.Page
     protected void Button4_Click(object sender, EventArgs e)
     {
         thisConnection.Close();
+        Session["cambioAceptado"] = true;
         Response.Redirect("incidentes.aspx");        
     }
     protected void Button5_Click(object sender, EventArgs e)
@@ -93,45 +103,56 @@ public partial class cambios : System.Web.UI.Page
         {
 
             // validar que sea una imagen el archivo seleccionado
-            if (FileUpload1.PostedFile.ContentType.StartsWith("image"))
+            if (Session["cambioAceptado"].Equals(true))
             {
-                // Obtener el nombre de la Imagen enviada para observar el detalle del cambio
 
-                byte[] imageSize = new byte[FileUpload1.PostedFile.ContentLength];
-                HttpPostedFile uploadedImage = FileUpload1.PostedFile;
-                uploadedImage.InputStream.Read(imageSize, 0, (int)FileUpload1.PostedFile.ContentLength);
+                if (FileUpload1.PostedFile.ContentType.StartsWith("image"))
+                {
+                    // Obtener el nombre de la Imagen enviada para observar el detalle del cambio
 
-                string extension_file = FileUpload1.FileName.Split('.').GetValue(1).ToString();
-                string file_system_name = folio + "." + extension_file;
+                    byte[] imageSize = new byte[FileUpload1.PostedFile.ContentLength];
+                    HttpPostedFile uploadedImage = FileUpload1.PostedFile;
+                    uploadedImage.InputStream.Read(imageSize, 0, (int)FileUpload1.PostedFile.ContentLength);
 
-                ManejadorCambio miManejador = new ManejadorCambio();
-                miManejador.pasarNCero(folio, TextBox1.Text, DropDownList1.SelectedItem.Value, DropDownList5.SelectedValue, TextBox4.Text, file_system_name, imageSize);
+                    string extension_file = FileUpload1.FileName.Split('.').GetValue(1).ToString();
+                    string file_system_name = folio + "." + extension_file;
 
-                Label24.Text = "Dato Insertado!!!";
-                // Asignar color al mensaje de exito
-                Label24.ForeColor = System.Drawing.Color.Blue;
+                    ManejadorCambio miManejador = new ManejadorCambio();
+                    miManejador.pasarNCero(folio, TextBox1.Text, DropDownList1.SelectedItem.Value, DropDownList5.SelectedValue, TextBox4.Text, file_system_name, imageSize);
 
-                
+                    Label24.Text = "Dato Insertado!!!";
+                    // Asignar color al mensaje de exito
+                    Label24.ForeColor = System.Drawing.Color.Blue;
 
-                /*********    ENVIANDO EMAIL    *************
+                    Page.ClientScript.RegisterStartupScript(this.GetType(), "clientscript", "document.getElementById('imageDiv').style.visibility = 'visible';", true);
+                    //Page.ClientScript.RegisterStartupScript(this.GetType(), "clientscript", "document.getElementById('Button7').Enable = 'visible';", true);
+                    Button7.Visible = false;
+                    Button8.Visible = true;
+                    Session["cambioAceptado"] = false;
 
-                    String email;
+                    /*********    ENVIANDO EMAIL    *************
 
-                    email = miManejador.getMailUser(DropDownList4.SelectedValue);
+                        String email;
 
-                    SendEmail correo = new SendEmail();
+                        email = miManejador.getMailUser(DropDownList4.SelectedValue);
 
-                    correo.NuevoCambio(email,TextBox1.Text);                
+                        SendEmail correo = new SendEmail();
 
-                *********************/
+                        correo.NuevoCambio(email,TextBox1.Text);                
 
+                    *********************/
+
+                }
+                else
+                {
+                    // Exception lanzada por error en tipo de archivo
+                    throw new System.ArgumentException("* El Archivo enviado debe ser una imagen de la hoja del cambio");
+                }
             }
             else
             {
-                // Exception lanzada por error en tipo de archivo
-                throw new System.ArgumentException("* El Archivo enviado debe ser una imagen de la hoja del cambio");
+                throw new System.ArgumentException("* El cambio ya ha sido agregado");
             }
-
         }
         catch (SqlException ee)
         {
@@ -178,5 +199,11 @@ public partial class cambios : System.Web.UI.Page
     protected void TextBox2_TextChanged(object sender, EventArgs e)
     {
 
+    }
+    protected void Button8_Click(object sender, EventArgs e)
+    {
+        thisConnection.Close();
+        Session["cambioAceptado"] = true;
+        Response.Redirect("cambios.aspx");
     }
 }
