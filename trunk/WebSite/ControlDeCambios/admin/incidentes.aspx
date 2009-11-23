@@ -153,6 +153,13 @@
                                         </td>
                                         <td class="style5" align="left" valign="top">
                                             <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                                            <asp:RangeValidator id="valRange" runat="server"
+                                            ControlToValidate="TextBox2"
+                                            MaximumValue="31/12/2015"
+                                            MinimumValue="1/1/1998"
+                                            Type="Date"
+                                            ErrorMessage="* La fecha de Recepci&oacute;n es requerida en el formato DD/MM/YYYY" 
+                                            Display="dynamic">*</asp:RangeValidator>
                                         </td>
                                         <td align="left">
                                             &nbsp;</td>
@@ -217,7 +224,9 @@
                                         </td>
                                         <td class="style5" align="left">
                                             <asp:Button ID="Button7" runat="server" onclick="Button7_Click" 
-                                                Text="Aceptar" />
+                                                Text="Aceptar" CausesValidation="true"/>
+                                               <asp:Button ID="Button8" runat="server" onclick="Button8_Click" 
+                                                Text="Insertar otro incidente" CausesValidation="false" Visible="false"/>
                                         </td>
                                         <td align="left">
                                             &nbsp;</td>

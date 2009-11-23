@@ -156,10 +156,10 @@
                                         
                                         <asp:RangeValidator id="valRange" runat="server"
                                             ControlToValidate="TextBox4"
-                                            MaximumValue="12/12/2015"
+                                            MaximumValue="31/12/2015"
                                             MinimumValue="1/1/1998"
                                             Type="Date"
-                                            ErrorMessage="* La fecha de Recepci&oacute;n es requerida en el formato MM/DD/YYYY" 
+                                            ErrorMessage="* La fecha de Recepci&oacute;n es requerida en el formato DD/MM/YYYY" 
                                             Display="dynamic">*</asp:RangeValidator>
                                             <asp:TextBox ID="TextBox4" runat="server" Width="200px"></asp:TextBox>
                                         </td>
@@ -193,7 +193,7 @@
 
                                         
                                             <asp:FileUpload ID="FileUpload1" runat="server" style="margin-left: 0px" 
-                                                Width="200px" />
+                                                Width="200px"/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -251,14 +251,20 @@
                                 <table style="width:100%;" cellpadding="4">
                                     <tr>
                                         <td>
-                                            <img id="imagen_cambio1" alt="" src="imageHandler.ashx?ID=<% Response.Write(Session["folio"]); %>" />
+                                        <div id='imageDiv' style="visibility:hidden">
+                                        
+                                            <img id="imagen_cambio2" alt="" src="imageHandler.ashx?ID=<% Response.Write(Session["folio"]); %>" />
+                                            
+                                            </div>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td align="left">
                                             
                                             <asp:Button ID="Button7" runat="server" onclick="Button7_Click" 
-                                                Text="Aceptar" CausesValidation="true" />
+                                                Text="Aceptar" CausesValidation="true"/>
+                                                <asp:Button ID="Button8" runat="server" onclick="Button8_Click" 
+                                                Text="Insertar Otro Cambio" CausesValidation="false" Visible="false"/>
                                             <br />
                                             <br />
                                             <br />

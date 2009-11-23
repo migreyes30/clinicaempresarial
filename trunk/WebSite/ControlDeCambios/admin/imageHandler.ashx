@@ -5,6 +5,7 @@ using System.Web;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Data;
+using System.IO;
 
 public class Handler : IHttpHandler {
 
@@ -17,6 +18,10 @@ public class Handler : IHttpHandler {
         if (imageToShowInPage != null)
         {
             context.Response.BinaryWrite(imageToShowInPage);
+        }
+        else
+        {
+
         }
 
 

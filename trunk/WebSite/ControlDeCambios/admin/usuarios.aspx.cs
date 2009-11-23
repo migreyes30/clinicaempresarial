@@ -33,6 +33,7 @@ public partial class admin_usuarios : System.Web.UI.Page
     protected void Button2_Click(object sender, EventArgs e)
     {
         thisConnection.Close();
+        Session["cambioAceptado"] = true;
         Response.Redirect("cambios.aspx");
     }
     protected void Button3_Click(object sender, EventArgs e)
@@ -43,6 +44,7 @@ public partial class admin_usuarios : System.Web.UI.Page
     protected void Button4_Click(object sender, EventArgs e)
     {
         thisConnection.Close();
+        Session["cambioAceptado"] = true;
         Response.Redirect("incidentes.aspx");
     }
     protected void Button1_Click(object sender, EventArgs e)
