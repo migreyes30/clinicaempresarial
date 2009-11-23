@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Globalization;
 
 public partial class admin : System.Web.UI.Page
 {
@@ -23,7 +24,10 @@ public partial class admin : System.Web.UI.Page
         thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
         thisConnection.Open();
 
-        asignacionValores();
+        DateTime inicio = DateTime.Parse("01/11/2009");
+        DateTime fin = DateTime.Now.ToUniversalTime();
+
+        asignacionValores(inicio, fin);
                                    
     }
     protected void Button1_Click(object sender, EventArgs e)
@@ -51,7 +55,18 @@ public partial class admin : System.Web.UI.Page
     }
     protected void Button7_Click(object sender, EventArgs e)
     {
-        asignacionValores();
+        DateTime inicio = DateTime.Parse("01/11/2009");
+        DateTime fin = DateTime.Now.ToUniversalTime();
+        if (!(DropDownList1.SelectedValue.Equals("00") || DropDownList2.Equals("00") ||
+            DropDownList3.SelectedValue.Equals("00") || DropDownList4.Equals("00")))
+        {
+            inicio = DateTime.Parse("01/" + DropDownList1.SelectedValue + "/" + DropDownList2.SelectedValue);
+            Int32 monthEnd = Int32.Parse(DropDownList3.SelectedValue);
+            Int32 yearEnd = Int32.Parse(DropDownList4.SelectedValue);
+            fin = DateTime.Parse(DateTime.DaysInMonth(yearEnd, monthEnd) + "/" + monthEnd + "/" + yearEnd);
+        }
+        
+        asignacionValores(inicio, fin);
     }
     protected void Button3_Click(object sender, EventArgs e)
     {
@@ -70,7 +85,7 @@ public partial class admin : System.Web.UI.Page
         thisConnection.Close();
     }
 
-    public void asignacionValores()
+    public void asignacionValores(DateTime inicio, DateTime fin)
     {
 
         int totalCambios = 0;
@@ -92,141 +107,198 @@ public partial class admin : System.Web.UI.Page
             i++;
         }
         thisReader.Close();
+        CultureInfo culture = new CultureInfo("en-US");
+        String querie = construirQuierie(inicio.ToString("d", culture), fin.ToString("d", culture), "Totales", false);
+        SqlCommand checkArea = new SqlCommand(querie, thisConnection);
+        SqlDataReader myReader = checkArea.ExecuteReader();
 
-        thisCommand = thisConnection.CreateCommand();
-        thisCommand.CommandText = "SELECT COUNT(*) AS Tot, DEPARTAMENTO.DEPTO_ID FROM         AREA INNER JOIN CAMBIO ON AREA.AREA_ID = CAMBIO.AREA_ID INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE      (DEPARTAMENTO.DEPTO_ID = '" + deptos[0] + "') AND (CAMBIO.FECHA_RECEPCION >= CONVERT(DATETIME, '" + TextBox1.Text + "', 102)) AND (CAMBIO.FECHA_RECEPCION <= CONVERT(DATETIME, '" + TextBox2.Text + "', 102)) GROUP BY DEPARTAMENTO.DEPTO_ID";
-        thisReader = thisCommand.ExecuteReader();
-
-        if (thisReader.Read())
+        while (myReader.Read())
         {
-            totalCambios += (int)thisReader["Tot"];
-            Label30.Text = thisReader["Tot"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("1")) Label30.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("3")) Label31.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("4")) Label32.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("5")) Label33.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("6")) Label34.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("7")) Label35.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("8")) Label36.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("9")) Label37.Text = myReader["CUENTA"].ToString();
+        }
+        myReader.Close();
+
+        querie = construirQuierie(inicio.ToString("d", culture), fin.ToString("d", culture), "Pendiente", false);
+        checkArea = new SqlCommand(querie, thisConnection);
+        myReader = checkArea.ExecuteReader();
+        while (myReader.Read())
+        {
+            if (myReader["DEPTO_ID"].ToString().Equals("1")) Label25.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("3")) Label26.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("4")) Label27.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("5")) Label28.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("6")) Label29.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("7")) Label38.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("8")) Label39.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("9")) Label40.Text = myReader["CUENTA"].ToString();
+        }
+        myReader.Close();
+
+        querie = construirQuierie(inicio.ToString("d", culture), fin.ToString("d", culture), "Autorizado", false);
+        checkArea = new SqlCommand(querie, thisConnection);
+        myReader = checkArea.ExecuteReader();
+        while (myReader.Read())
+        {
+            if (myReader["DEPTO_ID"].ToString().Equals("1")) Label41.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("3")) Label42.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("4")) Label43.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("5")) Label44.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("6")) Label45.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("7")) Label46.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("8")) Label47.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("9")) Label48.Text = myReader["CUENTA"].ToString();
+        }
+        myReader.Close();
+
+        querie = construirQuierie(inicio.ToString("d", culture), fin.ToString("d", culture), "Rechazado", false);
+        checkArea = new SqlCommand(querie, thisConnection);
+        myReader = checkArea.ExecuteReader();
+        while (myReader.Read())
+        {
+            if (myReader["DEPTO_ID"].ToString().Equals("1")) Label49.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("3")) Label50.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("4")) Label51.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("5")) Label52.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("6")) Label53.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("7")) Label54.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("8")) Label55.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("9")) Label56.Text = myReader["CUENTA"].ToString();
+        }
+        myReader.Close();
+
+        querie = construirQuierie(inicio.ToString("d", culture), fin.ToString("d", culture), "Cerrado", false);
+        checkArea = new SqlCommand(querie, thisConnection);
+        myReader = checkArea.ExecuteReader();
+        while (myReader.Read())
+        {
+            if (myReader["DEPTO_ID"].ToString().Equals("1")) Label57.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("3")) Label58.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("4")) Label59.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("5")) Label60.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("6")) Label61.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("7")) Label62.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("8")) Label63.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("9")) Label64.Text = myReader["CUENTA"].ToString();
+        }
+        myReader.Close();
+
+
+        querie = "SELECT DEPARTAMENTO.DEPTO_ID, COUNT(INCIDENTE_ID) AS CUENTA FROM DEPARTAMENTO "
+            + "LEFT OUTER JOIN AREA ON  DEPARTAMENTO.DEPTO_ID = AREA.DEPTO_ID "
+            + "LEFT OUTER JOIN INCIDENTES ON AREA.AREA_ID = INCIDENTES.AREA_ID "
+            + "AND (INCIDENTES.FECHA_INCIDENTE >= CONVERT(DATETIME, '" + inicio.ToString("d", culture) + "', 102)) "
+            + "AND (INCIDENTES.FECHA_INCIDENTE <= CONVERT(DATETIME, '" + fin.ToString("d", culture) + "', 102)) " 
+            + "GROUP BY DEPARTAMENTO.DEPTO_ID;";
+        checkArea = new SqlCommand(querie, thisConnection);
+        myReader = checkArea.ExecuteReader();
+        while (myReader.Read())
+        {
+            if (myReader["DEPTO_ID"].ToString().Equals("1")) Label65.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("3")) Label66.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("4")) Label67.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("5")) Label68.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("6")) Label69.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("7")) Label70.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("8")) Label71.Text = myReader["CUENTA"].ToString();
+            if (myReader["DEPTO_ID"].ToString().Equals("9")) Label72.Text = myReader["CUENTA"].ToString();
+        }
+        myReader.Close();
+
+        querie = construirQuierie(inicio.ToString("d", culture), fin.ToString("d", culture), "Totales", true);
+        checkArea = new SqlCommand(querie, thisConnection);
+        myReader = checkArea.ExecuteReader();
+        if(myReader.Read()) Label73.Text = myReader["CUENTA"].ToString();
+        myReader.Close();
+
+        querie = construirQuierie(inicio.ToString("d", culture), fin.ToString("d", culture), "Pendiente", true);
+        checkArea = new SqlCommand(querie, thisConnection);
+        myReader = checkArea.ExecuteReader();
+        if (myReader.Read()) Label74.Text = myReader["CUENTA"].ToString();
+        myReader.Close();
+
+        querie = construirQuierie(inicio.ToString("d", culture), fin.ToString("d", culture), "Autorizado", true);
+        checkArea = new SqlCommand(querie, thisConnection);
+        myReader = checkArea.ExecuteReader();
+        if (myReader.Read()) Label75.Text = myReader["CUENTA"].ToString();
+        myReader.Close();
+
+        querie = construirQuierie(inicio.ToString("d", culture), fin.ToString("d", culture), "Rechazado", true);
+        checkArea = new SqlCommand(querie, thisConnection);
+        myReader = checkArea.ExecuteReader();
+        if (myReader.Read()) Label76.Text = myReader["CUENTA"].ToString();
+        myReader.Close();
+
+        querie = construirQuierie(inicio.ToString("d", culture), fin.ToString("d", culture), "Cerrado", true);
+        checkArea = new SqlCommand(querie, thisConnection);
+        myReader = checkArea.ExecuteReader();
+        if (myReader.Read()) Label77.Text = myReader["CUENTA"].ToString();
+        myReader.Close();
+
+        querie = "SELECT COUNT(INCIDENTE_ID) AS CUENTA FROM DEPARTAMENTO "
+            + "LEFT OUTER JOIN AREA ON  DEPARTAMENTO.DEPTO_ID = AREA.DEPTO_ID "
+            + "LEFT OUTER JOIN INCIDENTES ON AREA.AREA_ID = INCIDENTES.AREA_ID "
+            + "AND (INCIDENTES.FECHA_INCIDENTE >= CONVERT(DATETIME, '" + inicio.ToString("d", culture) + "', 102)) "
+            + "AND (INCIDENTES.FECHA_INCIDENTE <= CONVERT(DATETIME, '" + fin.ToString("d", culture) + "', 102));";
+            
+        checkArea = new SqlCommand(querie, thisConnection);
+        myReader = checkArea.ExecuteReader();
+        if (myReader.Read()) Label78.Text = myReader["CUENTA"].ToString();
+        myReader.Close();
+
+        thisReader.Close();
+
+    }
+
+    public string construirQuierie(String inicio, String fin, String status, bool totales)
+    {
+        //Status debe de estar entre Totales, Pendiente, Autorizado, Rechazado y Cerrado
+        String querie = "";
+        if (totales)
+        {
+            querie = "SELECT ";
         }
         else
         {
-            Label30.Text = "0";
-        }        
-        thisReader.Close();
+            querie = "SELECT DEPARTAMENTO.DEPTO_ID, ";
+        }
 
-        thisCommand = thisConnection.CreateCommand();
-        thisCommand.CommandText = "SELECT COUNT(*) AS Tot, DEPARTAMENTO.DEPTO_ID FROM         AREA INNER JOIN CAMBIO ON AREA.AREA_ID = CAMBIO.AREA_ID INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE      (DEPARTAMENTO.DEPTO_ID = '" + deptos[1] + "') AND (CAMBIO.FECHA_RECEPCION >= CONVERT(DATETIME, '" + TextBox1.Text + "', 102)) AND (CAMBIO.FECHA_RECEPCION <= CONVERT(DATETIME, '" + TextBox2.Text + "', 102)) GROUP BY DEPARTAMENTO.DEPTO_ID";
-        thisReader = thisCommand.ExecuteReader();
 
-        if (thisReader.Read())
+        querie += "COUNT(CAMBIO_ID) AS CUENTA FROM DEPARTAMENTO "
+             + " LEFT OUTER JOIN AREA ON  DEPARTAMENTO.DEPTO_ID = AREA.DEPTO_ID "
+             + " LEFT OUTER JOIN CAMBIO ON AREA.AREA_ID = CAMBIO.AREA_ID AND "
+             + " (CAMBIO.FECHA_RECEPCION <= CONVERT(DATETIME, '" + fin + "', 102)) AND "
+             + " (CAMBIO.FECHA_RECEPCION >= CONVERT(DATETIME, '" + inicio + "', 102)) ";
+
+
+        if (status.Equals("Pendiente")) querie += " AND CAMBIO.ESTADO_CAMBIO LIKE 'Pendiente' ";
+        if (status.Equals("Autorizado"))
         {
-            totalCambios += (int)thisReader["Tot"];
-            Label31.Text = thisReader["Tot"].ToString();
+            querie += " AND CAMBIO.ESTADO_CAMBIO LIKE 'Autorizado' "
+                + " AND (CAMBIO.FECHA_REALIZACION >= CURRENT_TIMESTAMP) " ;
+        }
+
+        if (status.Equals("Rechazado")) querie += " AND CAMBIO.ESTADO_CAMBIO LIKE 'Rechazado' ";
+        if (status.Equals("Cerrado"))
+        {
+            querie += " AND CAMBIO.ESTADO_CAMBIO LIKE 'Autorizado' "
+                + " AND (CAMBIO.FECHA_REALIZACION < CURRENT_TIMESTAMP) ";
+        }
+
+        if (totales)
+        {
+            querie += ";";
         }
         else
         {
-            Label31.Text = "0";
+            querie += "GROUP BY DEPARTAMENTO.DEPTO_ID;";
         }
-        thisReader.Close();
-
-        thisCommand = thisConnection.CreateCommand();
-        thisCommand.CommandText = "SELECT COUNT(*) AS Tot, DEPARTAMENTO.DEPTO_ID FROM         AREA INNER JOIN CAMBIO ON AREA.AREA_ID = CAMBIO.AREA_ID INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE      (DEPARTAMENTO.DEPTO_ID = '" + deptos[2] + "') AND (CAMBIO.FECHA_RECEPCION >= CONVERT(DATETIME, '" + TextBox1.Text + "', 102)) AND (CAMBIO.FECHA_RECEPCION <= CONVERT(DATETIME, '" + TextBox2.Text + "', 102)) GROUP BY DEPARTAMENTO.DEPTO_ID";
-        thisReader = thisCommand.ExecuteReader();
-
-        if (thisReader.Read())
-        {
-            totalCambios += (int)thisReader["Tot"];
-            Label32.Text = thisReader["Tot"].ToString();
-        }
-        else
-        {
-            Label32.Text = "0";
-        }
-        thisReader.Close();
-
-        thisCommand = thisConnection.CreateCommand();
-        thisCommand.CommandText = "SELECT COUNT(*) AS Tot, DEPARTAMENTO.DEPTO_ID FROM         AREA INNER JOIN CAMBIO ON AREA.AREA_ID = CAMBIO.AREA_ID INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE      (DEPARTAMENTO.DEPTO_ID = '" + deptos[3] + "') AND (CAMBIO.FECHA_RECEPCION >= CONVERT(DATETIME, '" + TextBox1.Text + "', 102)) AND (CAMBIO.FECHA_RECEPCION <= CONVERT(DATETIME, '" + TextBox2.Text + "', 102)) GROUP BY DEPARTAMENTO.DEPTO_ID";
-        thisReader = thisCommand.ExecuteReader();
-
-        if (thisReader.Read())
-        {
-            totalCambios += (int)thisReader["Tot"];
-            Label33.Text = thisReader["Tot"].ToString();
-        }
-        else
-        {
-            Label33.Text = "0";
-        }
-        thisReader.Close();
-
-        thisCommand = thisConnection.CreateCommand();
-        thisCommand.CommandText = "SELECT COUNT(*) AS Tot, DEPARTAMENTO.DEPTO_ID FROM         AREA INNER JOIN CAMBIO ON AREA.AREA_ID = CAMBIO.AREA_ID INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE      (DEPARTAMENTO.DEPTO_ID = '" + deptos[4] + "') AND (CAMBIO.FECHA_RECEPCION >= CONVERT(DATETIME, '" + TextBox1.Text + "', 102)) AND (CAMBIO.FECHA_RECEPCION <= CONVERT(DATETIME, '" + TextBox2.Text + "', 102)) GROUP BY DEPARTAMENTO.DEPTO_ID";
-        thisReader = thisCommand.ExecuteReader();
-
-        if (thisReader.Read())
-        {
-            totalCambios += (int)thisReader["Tot"];
-            Label34.Text = thisReader["Tot"].ToString();
-        }
-        else
-        {
-            Label34.Text = "0";
-        }
-        thisReader.Close();
-
-        thisCommand = thisConnection.CreateCommand();
-        thisCommand.CommandText = "SELECT COUNT(*) AS Tot, DEPARTAMENTO.DEPTO_ID FROM         AREA INNER JOIN CAMBIO ON AREA.AREA_ID = CAMBIO.AREA_ID INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE      (DEPARTAMENTO.DEPTO_ID = '" + deptos[5] + "') AND (CAMBIO.FECHA_RECEPCION >= CONVERT(DATETIME, '" + TextBox1.Text + "', 102)) AND (CAMBIO.FECHA_RECEPCION <= CONVERT(DATETIME, '" + TextBox2.Text + "', 102)) GROUP BY DEPARTAMENTO.DEPTO_ID";
-        thisReader = thisCommand.ExecuteReader();
-
-        if (thisReader.Read())
-        {
-            totalCambios += (int)thisReader["Tot"];
-            Label35.Text = thisReader["Tot"].ToString();
-        }
-        else
-        {
-            Label35.Text = "0";
-        }
-        thisReader.Close();
-
-        thisCommand = thisConnection.CreateCommand();
-        thisCommand.CommandText = "SELECT COUNT(*) AS Tot, DEPARTAMENTO.DEPTO_ID FROM         AREA INNER JOIN CAMBIO ON AREA.AREA_ID = CAMBIO.AREA_ID INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE      (DEPARTAMENTO.DEPTO_ID = '" + deptos[6] + "') AND (CAMBIO.FECHA_RECEPCION >= CONVERT(DATETIME, '" + TextBox1.Text + "', 102)) AND (CAMBIO.FECHA_RECEPCION <= CONVERT(DATETIME, '" + TextBox2.Text + "', 102)) GROUP BY DEPARTAMENTO.DEPTO_ID";
-        thisReader = thisCommand.ExecuteReader();
-
-        if (thisReader.Read())
-        {
-            totalCambios += (int)thisReader["Tot"];
-            Label36.Text = thisReader["Tot"].ToString();
-        }
-        else
-        {
-            Label36.Text = "0";
-        }
-        thisReader.Close();
-
-        thisCommand = thisConnection.CreateCommand();
-        thisCommand.CommandText = "SELECT COUNT(*) AS Tot, DEPARTAMENTO.DEPTO_ID FROM         AREA INNER JOIN CAMBIO ON AREA.AREA_ID = CAMBIO.AREA_ID INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE      (DEPARTAMENTO.DEPTO_ID = '" + deptos[7] + "') AND (CAMBIO.FECHA_RECEPCION >= CONVERT(DATETIME, '" + TextBox1.Text + "', 102)) AND (CAMBIO.FECHA_RECEPCION <= CONVERT(DATETIME, '" + TextBox2.Text + "', 102)) GROUP BY DEPARTAMENTO.DEPTO_ID";
-        thisReader = thisCommand.ExecuteReader();
-
-        if (thisReader.Read())
-        {
-            totalCambios += (int)thisReader["Tot"];
-            Label37.Text = thisReader["Tot"].ToString();
-        }
-        else
-        {
-            Label37.Text = "0";
-        }
-        thisReader.Close();
-
-        thisCommand = thisConnection.CreateCommand();
-        thisCommand.CommandText = "SELECT COUNT(*) AS Tot, DEPARTAMENTO.DEPTO_ID FROM         AREA INNER JOIN CAMBIO ON AREA.AREA_ID = CAMBIO.AREA_ID INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE      (DEPARTAMENTO.DEPTO_ID = '" + deptos[8] + "') AND (CAMBIO.FECHA_RECEPCION >= CONVERT(DATETIME, '" + TextBox1.Text + "', 102)) AND (CAMBIO.FECHA_RECEPCION <= CONVERT(DATETIME, '" + TextBox2.Text + "', 102)) GROUP BY DEPARTAMENTO.DEPTO_ID";
-        thisReader = thisCommand.ExecuteReader();
-
-        if (thisReader.Read())
-        {
-            totalCambios += (int)thisReader["Tot"];
-            Label38.Text = thisReader["Tot"].ToString();
-        }
-        else
-        {
-            Label38.Text = "0";
-        }
-        thisReader.Close();
-
+        return querie;
     }
 }

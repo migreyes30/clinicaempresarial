@@ -140,10 +140,55 @@
                                     </tr>
                                     <tr>
                                         <td class="style2" align="left">
-                                            <asp:TextBox ID="TextBox1" runat="server">2009/12/05</asp:TextBox>
+                                            <asp:DropDownList ID="DropDownList1" runat="server">
+                                                <asp:ListItem Value="00" Selected="True">Todos</asp:ListItem>
+                                                <asp:ListItem Value="01">ENE</asp:ListItem>
+                                                <asp:ListItem Value="02">FEB</asp:ListItem>
+                                                <asp:ListItem Value="03">MAR</asp:ListItem>
+                                                <asp:ListItem Value="04">ABR</asp:ListItem>
+                                                <asp:ListItem Value="05">MAY</asp:ListItem>
+                                                <asp:ListItem Value="06">JUN</asp:ListItem>
+                                                <asp:ListItem Value="07">JUL</asp:ListItem>
+                                                <asp:ListItem Value="08">AGO</asp:ListItem>
+                                                <asp:ListItem Value="09">SEP</asp:ListItem>
+                                                <asp:ListItem Value="10">OCT</asp:ListItem>
+                                                <asp:ListItem Value="11">NOV</asp:ListItem>
+                                                <asp:ListItem Value="12">DIC</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <asp:DropDownList ID="DropDownList2" runat="server" 
+                                                >
+                                                <asp:ListItem Selected="True" Value="00">--</asp:ListItem>
+                                                <asp:ListItem>2009</asp:ListItem>
+                                                <asp:ListItem>2010</asp:ListItem>
+                                                <asp:ListItem>2011</asp:ListItem>
+                                                <asp:ListItem>2012</asp:ListItem>
+                                                <asp:ListItem>2013</asp:ListItem>
+                                            </asp:DropDownList>
                                         </td>
                                         <td class="style2" align="left">
-                                            <asp:TextBox ID="TextBox2" runat="server">2009/12/12</asp:TextBox>
+                                            <asp:DropDownList ID="DropDownList3" runat="server">
+                                                <asp:ListItem Selected="True" Value="00">Todos</asp:ListItem>
+                                                <asp:ListItem Value="01">ENE</asp:ListItem>
+                                                <asp:ListItem Value="02">FEB</asp:ListItem>
+                                                <asp:ListItem Value="03">MAR</asp:ListItem>
+                                                <asp:ListItem Value="04">ABR</asp:ListItem>
+                                                <asp:ListItem Value="05">MAY</asp:ListItem>
+                                                <asp:ListItem Value="06">JUN</asp:ListItem>
+                                                <asp:ListItem Value="07">JUL</asp:ListItem>
+                                                <asp:ListItem Value="08">AGO</asp:ListItem>
+                                                <asp:ListItem Value="09">SEP</asp:ListItem>
+                                                <asp:ListItem Value="10">OCT</asp:ListItem>
+                                                <asp:ListItem Value="11">NOV</asp:ListItem>
+                                                <asp:ListItem Value="12">DIC</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <asp:DropDownList ID="DropDownList4" runat="server">
+                                                <asp:ListItem Selected="True" Value="00">--</asp:ListItem>
+                                                <asp:ListItem>2009</asp:ListItem>
+                                                <asp:ListItem>2010</asp:ListItem>
+                                                <asp:ListItem>2011</asp:ListItem>
+                                                <asp:ListItem>2012</asp:ListItem>
+                                                <asp:ListItem>2013</asp:ListItem>
+                                            </asp:DropDownList>
                                         </td>
                                         <td class="style3">
                                             <asp:Button ID="Button7" runat="server" Text="Aceptar" 
@@ -168,6 +213,8 @@
                         <tr>
                             <td align="center">
                                 <br />
+                                
+                                <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
                                 <table style="width:700px;">
                                     <tr>
                                         <td align="left" bgcolor="#F4F2E8" class="style4" height="25">
@@ -201,35 +248,31 @@
                                     </tr>
                                     <tr>
                                         <td align="left" class="style4">
-                                            <a href="../backup.aspx" target="_self">
+                                            
                                                 <asp:Label ID="Label9" runat="server" Text="Administrativos" 
-                                                Font-Names="Arial Narrow" Font-Size="Medium" Font-Underline="True"></asp:Label>
-                                            </a>
+                                                Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
+                                            
                                         </td>
                                         <td align="center">
                                             <asp:Label ID="Label30" runat="server" Font-Names="Arial Narrow" 
                                                 Font-Size="Medium"></asp:Label>
                                         </td>
                                         <td>
-                                            <asp:Label ID="Label26" runat="server" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium"></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="Label27" runat="server" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium"></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="Label28" runat="server" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium"></asp:Label>
-                                        </td>
-                                        <td>
-                                            <asp:Label ID="Label29" runat="server" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium"></asp:Label>
-                                        </td>
-                                        <td>
                                             <asp:Label ID="Label25" runat="server" Font-Names="Arial Narrow" 
                                                 Font-Size="Medium"></asp:Label>
                                         </td>
+                                        <td>
+                                            <asp:Label ID="Label41" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
+                                        <td>
+                                            <asp:Label ID="Label49" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
+                                        <td>
+                                            <asp:Label ID="Label57" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
+                                        <td>
+                                            <asp:Label ID="Label65" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                     </tr>
                                     <tr>
                                         <td align="left" class="style4">
@@ -241,15 +284,21 @@
                                                 Font-Size="Medium"></asp:Label>
                                         </td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label26" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label>
+                                        </td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label42" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label50" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label58" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label66" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                     </tr>
                                     <tr>
                                         <td align="left" class="style4">
@@ -261,15 +310,21 @@
                                                 Font-Size="Medium"></asp:Label>
                                         </td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label27" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label>
+                                        </td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label43" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label51" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label59" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label67" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                     </tr>
                                     <tr>
                                         <td align="left" class="style4">
@@ -281,15 +336,21 @@
                                                 Font-Size="Medium"></asp:Label>
                                         </td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label28" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label>
+                                        </td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label44" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label52" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                           <asp:Label ID="Label60" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label68" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                     </tr>
                                     <tr>
                                         <td align="left" class="style4">
@@ -301,15 +362,21 @@
                                                 Font-Size="Medium"></asp:Label>
                                         </td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label29" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label>
+                                        </td>
                                         <td>
-                                            &nbsp;</td>
+                                           <asp:Label ID="Label45" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label53" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label61" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label69" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                     </tr>
                                     <tr>
                                         <td align="left" class="style4">
@@ -321,15 +388,21 @@
                                                 Font-Size="Medium"></asp:Label>
                                         </td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label38" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label>
+                                        </td>
                                         <td>
-                                            &nbsp;</td>
+                                           <asp:Label ID="Label46" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label54" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label62" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label70" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                     </tr>
                                     <tr>
                                         <td align="left" class="style4">
@@ -341,15 +414,20 @@
                                                 Font-Size="Medium"></asp:Label>
                                         </td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label39" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label47" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label55" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                           <asp:Label ID="Label63" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label71" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                     </tr>
                                     <tr>
                                         <td align="left" class="style4">
@@ -361,25 +439,26 @@
                                                 Font-Size="Medium"></asp:Label>
                                         </td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label40" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label48" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label56" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label64" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label72" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                     </tr>
                                     <tr>
                                         <td align="left" class="style4">
-                                            <asp:Label ID="Label17" runat="server" Text="Nave de Empaque" 
-                                                Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
-                                        </td>
+                                            &nbsp;</td>
                                         <td align="center">
-                                            <asp:Label ID="Label38" runat="server" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium"></asp:Label>
-                                        </td>
+                                            &nbsp;</td>
                                         <td>
                                             &nbsp;</td>
                                         <td>
@@ -397,17 +476,23 @@
                                                 Font-Size="Medium"></asp:Label>
                                         </td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label73" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label74" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label75" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label76" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label77" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label78" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium"></asp:Label></td>
                                     </tr>
                                 </table>
                                 <br />
