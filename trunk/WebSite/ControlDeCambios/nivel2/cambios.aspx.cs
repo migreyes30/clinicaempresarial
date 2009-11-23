@@ -75,6 +75,9 @@ public partial class cambios : System.Web.UI.Page
             ManejadorCambio miManejador = new ManejadorCambio();
             miManejador.aceptarAreaSoporte(TextBoxComentario.Text, Int32.Parse(Label25.Text), area_soporte);
             Label24.Text = "Dato Insertado!!!";
+            Button7.Visible = false;
+            Button8.Visible = false;
+            Button3.Visible = true;
 
         }catch(SqlException){
 
@@ -102,6 +105,9 @@ public partial class cambios : System.Web.UI.Page
             ManejadorCambio miManejador = new ManejadorCambio();
             miManejador.rechazarAreaSoporte(TextBoxComentario.Text, Int32.Parse(Label25.Text), area_soporte);
             Label24.Text = "Dato Insertado!!!";
+            Button7.Visible = false;
+            Button8.Visible = false;
+            Button3.Visible = true;
 
         }
         catch (SqlException)
@@ -112,5 +118,9 @@ public partial class cambios : System.Web.UI.Page
 
         }
 
+    }
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("nivel2.aspx");
     }
 }

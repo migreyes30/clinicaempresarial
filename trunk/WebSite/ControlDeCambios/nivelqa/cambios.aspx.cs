@@ -68,6 +68,9 @@ public partial class cambios : System.Web.UI.Page
             miManejador.pasarQANDos(TextBoxComentario.Text, Int32.Parse(Label25.Text), areasSoporte);
 
             Label24.Text = "Dato Insertado!!!";
+            Button7.Visible = false;
+            Button8.Visible = false;
+            Button3.Visible = true;
 
 //        }catch(SqlException){
 
@@ -95,6 +98,9 @@ public partial class cambios : System.Web.UI.Page
             miManejador.rechazarN1QA(TextBoxComentario.Text, Int32.Parse(Label25.Text));
 
             Label24.Text = "Datos Actualizador";
+            Button7.Visible = false;
+            Button8.Visible = false;
+            Button3.Visible = true;
 
         }
         catch (SqlException)
@@ -105,5 +111,9 @@ public partial class cambios : System.Web.UI.Page
 
         }
 
+    }
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("nivel1qa.aspx");
     }
 }

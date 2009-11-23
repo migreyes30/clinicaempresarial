@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Data.SqlClient;
 using System.Data;
+using System.Globalization;
 
 /// <summary>
 /// Summary description for ManejadorCambio
@@ -176,8 +177,11 @@ public class ManejadorCambio
 
       public void pasarNCero(int folio, String nombreCambio, String tipoCambio, String areaID, String fechaRealizacion, String fileUpload1, byte[] imageFile)
       {
+        CultureInfo MyCultureInfo = new CultureInfo("es-MX");
+        DateTime MyDateTime = DateTime.Parse(fechaRealizacion, MyCultureInfo);
+        CultureInfo culture = new CultureInfo("en-US");
         SqlCommand insertando = new SqlCommand("INSERT INTO CAMBIO  (CAMBIO_ID, NOMBRE_CAMBIO, TIPO_CAMBIO, AREA_ID, FECHA_RECEPCION, FECHA_REALIZACION, ESTADO_CAMBIO, ARCHIVO, ARCHIVO_CONTENT)" +
-            "VALUES ('" + (folio) + "', '" + nombreCambio + "', '" + tipoCambio + "', '" + areaID + "', CURRENT_TIMESTAMP, '" + fechaRealizacion + "', 'Pendiente', '" + fileUpload1 + "',@Image)", thisConnection);
+            "VALUES ('" + (folio) + "', '" + nombreCambio + "', '" + tipoCambio + "', '" + areaID + "', CURRENT_TIMESTAMP, '" + MyDateTime.ToString("d",culture) + "', 'Pendiente', '" + fileUpload1 + "',@Image)", thisConnection);
 
         SqlParameter UploadedImage = new SqlParameter("@Image", SqlDbType.Image, imageFile.Length);
         UploadedImage.Value = imageFile;

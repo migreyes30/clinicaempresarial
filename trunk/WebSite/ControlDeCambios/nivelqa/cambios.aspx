@@ -387,7 +387,11 @@ from DEPARTAMENTO, CAMBIO, NIVEL1_QA, AREA
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                             
                                             <asp:Button ID="Button8" runat="server" 
-                                                Text="Rechazar" CausesValidation="true" onclick="Button8_Click" />
+                                                Text="Rechazar" CausesValidation="false" onclick="Button8_Click" />
+                                                                                            
+                                            <asp:Button ID="Button3" runat="server" 
+                                                Text="Regresar a Cambios" CausesValidation="false" onclick="Button3_Click" Visible="false"/>
+                                            
                                             <br />
                                             <br />
                                             <br />
