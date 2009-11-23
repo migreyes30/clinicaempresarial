@@ -89,6 +89,9 @@ public partial class cambios : System.Web.UI.Page
             miManejador.pasarHSENDos(TextBoxComentario.Text, Int32.Parse(Label25.Text), areasSoporte);
 
             Label24.Text = "Dato Insertado!!!";
+            Button7.Visible = false;
+            Button8.Visible = false;
+            Button3.Visible = true;
 
         }catch(SqlException){
 
@@ -116,6 +119,9 @@ public partial class cambios : System.Web.UI.Page
             miManejador.rechazarN1HSE(TextBoxComentario.Text, Int32.Parse(Label25.Text));
 
             Label24.Text = "Dato Insertado!!!";
+            Button7.Visible = false;
+            Button8.Visible = false;
+            Button3.Visible = true;
 
         }
         catch (SqlException)
@@ -130,5 +136,9 @@ public partial class cambios : System.Web.UI.Page
     protected void LinkButton1_Click(object sender, EventArgs e)
     {
         Response.Write("<script type='text/javascript'>window.open('imagenCambioN1_HSE.aspx?cambioID=" + Session["cambioID"] + "','_blank');</script>");
+    }
+    protected void Button3_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("nivel1hse.aspx");
     }
 }

@@ -81,7 +81,7 @@ public partial class cambios : System.Web.UI.Page
     }
     protected void Button3_Click(object sender, EventArgs e)
     {
-        
+        Response.Redirect("nivel0.aspx");
     }
     protected void Button4_Click(object sender, EventArgs e)
     {
@@ -107,6 +107,9 @@ public partial class cambios : System.Web.UI.Page
             ManejadorCambio miManejador = new ManejadorCambio();
             miManejador.pasarNUno(TextBoxComentario.Text, Int32.Parse(Label25.Text));
             Label24.Text = "Dato Insertado!!!";
+            Button7.Visible = false;
+            Button8.Visible = false;
+            Button3.Visible = true;
 
             /*SendEmail correo = new SendEmail();
 
@@ -141,6 +144,9 @@ public partial class cambios : System.Web.UI.Page
             Label24.Text = "Se ha rechazado correctamente";
 
             miManejador.mailRechazar();
+            Button7.Visible = false;
+            Button8.Visible = false;
+            Button3.Visible = true;
 
         }
         catch (SqlException)

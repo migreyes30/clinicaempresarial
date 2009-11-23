@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Linq;
 using System.Web;
+using System.IO;
 
 //namespace LodelCorreo.Ejemplo
 //{
     public class SendEmail
     {
-
+        public SendEmail()
+        {
+        }
         public void Correo(String sender, String receiver, String bodyMail, String asunto, String cambioNombre)
         {
             System.Net.Mail.MailMessage correo = new System.Net.Mail.MailMessage();
@@ -15,10 +17,12 @@ using System.Web;
             correo.To.Add(new System.Net.Mail.MailAddress(receiver));
             correo.Subject = asunto;
             //pone la hora y fecha de cuando le das submit
-            String body = bodyMail + "\n\nFecha y hora GMT: " +
-                DateTime.Now.ToUniversalTime().ToString("dd/MM/yyyy HH:mm:ss");
+            //String body = bodyMail + "\n\nFecha y hora GMT: " +
+              //  DateTime.Now.ToUniversalTime().ToString("dd/MM/yyyy HH:mm:ss");
+            String body = bodyMail;
             correo.Body = body;
             correo.IsBodyHtml = false;
+            //Console.WriteLine("hola");
 
             correo.Priority = System.Net.Mail.MailPriority.Normal;
             //
@@ -47,7 +51,7 @@ using System.Web;
         public void MandarCancelado(String receiver, String cambioNombre)
         {
             String sender = "control_de_cambios@yahoo.com";
-            String body = "El cambio \"" + cambioNombre + "\" ha sido cancelado \n cualquier duda favor de consultarlo con el administrador de Sistemas de Cambio\n Gracias. \nAtte. Servicio de Cambios";
+            String body = "El cambio \"" + cambioNombre + "\" ha sido cancelado \n cualquier duda favor de consultarlo con el administrador de Sistemas de Cambio\n Gracias. \nAtte. Servicio de Sistemas de Cambios";
             String asunto = "Cambio cancelado";
             Correo(sender, receiver, body, asunto, cambioNombre);
         }
@@ -55,7 +59,7 @@ using System.Web;
         public void MandarAceptado(String receiver, String cambioNombre)
         {
             String sender = "control_de_cambios@yahoo.com";
-            String body = "El cambio \"" + cambioNombre + "\" ha sido aceptado \n cualquier duda favor de consultarlo con el administrador de Sistemas de Cambios.\n Gracias. \nAtte. Servicio de Cambios";
+            String body = "El cambio \"" + cambioNombre + "\" ha sido aceptado \n cualquier duda favor de consultarlo con el administrador de Sistemas de Cambios.\n Gracias. \nAtte. Servicio Sistemas de Cambios";
             String asunto = "Cambio Aceptado";
             Correo(sender, receiver, body, asunto, cambioNombre);
         }
@@ -63,11 +67,17 @@ using System.Web;
         public void NuevoCambio(String receiver, String cambioNombre)
         {
             String sender = "control_de_cambios@yahoo.com";
-            String body = "Un nuevo cambio llamado \""+cambioNombre + "\" se encuentra en espera para su aprobación, favor de entrar al sistema de cambios. \n Atte. Servicio de Cambios";
+            String body = "Un nuevo cambio llamado \""+cambioNombre + "\" se encuentra en espera para su aprobacion, favor de entrar al sistema de cambios. \n Atte. Servicio de Sistemas de Cambios";
             String asunto = "Nuevo Cambio";
             Correo(sender, receiver, body, asunto, cambioNombre);
         }
 
-
+        public void MandarBack(String receiver, String cambioNombre)
+        {
+            String sender="control_de_cambios@yahoo.com";
+            String body = "Se le notifica que el siguinte cambio \"" + cambioNombre + " \" necesita ser revisado por usted \n Gracias.\n Atte. Servicio de Sistemas de Cambio";
+            String asunto="Nuevo Correo Back";
+            Correo(sender, receiver, body, asunto, cambioNombre);
+        }
     }
 //}
