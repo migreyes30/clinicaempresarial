@@ -171,10 +171,10 @@
                         InsertCommand="INSERT INTO [NIVEL0] ([STATUS], [AREA_ID], [FECHA_ASIGNACION], [FECHA_APROBACION], [COMENTARIOS], [CAMBIO_ID]) VALUES (@STATUS, @AREA_ID, @FECHA_ASIGNACION, @FECHA_APROBACION, @COMENTARIOS, @CAMBIO_ID)" 
                         
                         ProviderName="<%$ ConnectionStrings:ControlCambiosConnectionString1.ProviderName %>" 
-                        SelectCommand="SELECT     CAMBIO.ESTADO_CAMBIO, NIVEL1_QA.CAMBIO_ID, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, CAMBIO.FECHA_APROBACION, AREA.NOMBRE_AREA                      
-FROM         CAMBIO INNER JOIN
-                      NIVEL1_QA ON CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID INNER JOIN
-                      AREA ON NIVEL1_QA.AREA_ID = AREA.AREA_ID" 
+                        SelectCommand="SELECT  CAMBIO.ESTADO_CAMBIO, NIVEL1_QA.CAMBIO_ID, CAMBIO.NOMBRE_CAMBIO, 
+CAMBIO.TIPO_CAMBIO, CAMBIO.FECHA_APROBACION, AREA.NOMBRE_AREA                      
+FROM CAMBIO INNER JOIN NIVEL1_QA ON CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID INNER JOIN
+AREA ON NIVEL1_QA.AREA_ID = AREA.AREA_ID AND NIVEL1_QA.STATUS NOT IN ('Pendiente', '---------');" 
                         
                         
                                     
