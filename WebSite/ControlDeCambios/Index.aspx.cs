@@ -11,6 +11,7 @@ public partial class _Default : System.Web.UI.Page
 
     String usuario;
     String perfil;
+    String correo_sesion;
     SqlConnection thisConnection;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -50,6 +51,7 @@ public partial class _Default : System.Web.UI.Page
                 {
                     usuario = thisReader["nombre_usuario"].ToString();
                     perfil = thisReader["perfil_usuario"].ToString();
+                    correo_sesion = thisReader["correo_usuario"].ToString();
                     correcto = true;
                 }
             }
@@ -58,42 +60,40 @@ public partial class _Default : System.Web.UI.Page
 
             if (correcto)
             {
+                ManejadorCambio miManejadorMail = new ManejadorCambio();
+                String depto = "Administrador";
                 statusConnection.Text = usuario;
+                Session["user"] = usuario;
+                Session["correo"] = correo_sesion;
+                Session["perfil"] = perfil;
+                if(miManejadorMail.getDepto(correo_sesion).Equals("")){
+                    Session["depto"] = depto;
+                }else{
+                    Session["depto"] = miManejadorMail.getDepto(correo_sesion);
+                }
                 switch (perfil)
                 {
                     case "admin":
-                        Session["user"] = usuario;
-                        Session["perfil"] = perfil;
                         Response.Redirect("admin/reporte.aspx");
                     break;
 
                     case "n0":
-                        Session["user"] = usuario;
-                        Session["perfil"] = perfil;
                         Response.Redirect("nivel0/nivel0.aspx");
                     break;
 
                     case "n1hse":
-                        Session["user"] = usuario;
-                        Session["perfil"] = perfil;
                         Response.Redirect("nivel1hse/nivel1hse.aspx");
                     break;
 
                     case "n1qa":
-                        Session["user"] = usuario;
-                        Session["perfil"] = perfil;
                         Response.Redirect("nivelqa/nivel1qa.aspx");
                     break;
 
                     case "n2":
-                        Session["user"] = usuario;
-                        Session["perfil"] = perfil;
                         Response.Redirect("nivel2/nivel2.aspx");
                     break;
 
                     case "backup":
-                        Session["user"] = usuario;
-                        Session["perfil"] = perfil;
                         Response.Redirect("backup.aspx");
                     break;
                 }

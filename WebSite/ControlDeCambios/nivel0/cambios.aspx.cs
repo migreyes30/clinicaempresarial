@@ -29,18 +29,11 @@ public partial class cambios : System.Web.UI.Page
         try
         {
 
-//            String[] aaaaa;
-
             ManejadorCambio miManejador = new ManejadorCambio();
-
-
 
             datos = miManejador.cambiosDatos(Int32.Parse(Label25.Text));
 
-            
-
             cambioNombre = datos[0];
-
 
             TextBox1.Text = datos[0];
             TextBox2.Text = datos[1];
@@ -66,7 +59,9 @@ public partial class cambios : System.Web.UI.Page
     protected void Button1_Click(object sender, EventArgs e)
     {
         Session["user"] = null;
-        Session["perfil"] = null;        
+        Session["perfil"] = null;
+        Session["correo"] = null;
+        Session["depto"] = null;       
         Response.Redirect("../index.aspx");
         
 

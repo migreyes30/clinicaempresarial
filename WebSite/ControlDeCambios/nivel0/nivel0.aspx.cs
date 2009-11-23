@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
 
 public partial class nivel0 : System.Web.UI.Page
 {
@@ -24,6 +25,8 @@ public partial class nivel0 : System.Web.UI.Page
     {
         Session["user"] = null;
         Session["perfil"] = null;
+        Session["correo"] = null;
+        Session["depto"] = null;
         Response.Redirect("../index.aspx");
     }
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -33,6 +36,7 @@ public partial class nivel0 : System.Web.UI.Page
     protected void GridView1_SelectedIndexChanged1(object sender, EventArgs e)
     {
         Session["cambioID"] = ((System.Web.UI.WebControls.GridView)sender).SelectedValue;
+
         //int folio = (int)Session["cambioID"];
         Response.Redirect("cambios.aspx?cambioID=" + ((System.Web.UI.WebControls.GridView)sender).SelectedValue);
     }
@@ -44,4 +48,5 @@ public partial class nivel0 : System.Web.UI.Page
     {
 
     }
+
 }
