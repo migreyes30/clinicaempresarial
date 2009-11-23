@@ -105,23 +105,22 @@
                     style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0">
                     <br />
                     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
-                        AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
+                        AutoGenerateColumns="False" 
                         DataSourceID="SqlDataSourceQA" 
                         onselectedindexchanged="GridView1_SelectedIndexChanged" 
                         AllowSorting="True" CellPadding="4" Font-Names="Arial Narrow" 
                         Font-Size="Medium" Width="880px">
                         <Columns>
-                            <asp:CommandField ShowSelectButton="True" />
-                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="FOLIO" 
-                                SortExpression="CAMBIO_ID" />
-                            <asp:BoundField DataField="STATUS" HeaderText="ESTADO" 
+                            <asp:BoundField DataField="STATUS" HeaderText="STATUS" 
                                 SortExpression="STATUS" />
-                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE DE CAMBIO" 
-                                SortExpression="NOMBRE_CAMBIO" />
-                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO DE CAMBIO" 
-                                SortExpression="TIPO_CAMBIO" />
-                            <asp:BoundField DataField="FECHA_ASIGNACION" HeaderText="FECHA" 
+                            <asp:BoundField DataField="FECHA_ASIGNACION" HeaderText="FECHA_ASIGNACION" 
                                 SortExpression="FECHA_ASIGNACION" />
+                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" 
+                                SortExpression="CAMBIO_ID" />
+                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE_CAMBIO" 
+                                SortExpression="NOMBRE_CAMBIO" />
+                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
+                                SortExpression="TIPO_CAMBIO" />
                         </Columns>
                     </asp:GridView>
                     <br />
@@ -131,18 +130,12 @@
                         ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
                         
                         
-                        SelectCommand="SELECT     NIVEL2.STATUS, NIVEL2.FECHA_ASIGNACION, NIVEL2.CAMBIO_ID, 
-                      CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO
-FROM         NIVEL2 INNER JOIN
-                      AREAS_SOPORTE ON NIVEL2.AREA_SOPORTE_ID = AREAS_SOPORTE.AREA_SOPORTE_ID INNER JOIN
-                      CAMBIO ON NIVEL2.CAMBIO_ID = CAMBIO.CAMBIO_ID
-WHERE     (NIVEL2.STATUS = 'Pendiente') AND (AREAS_SOPORTE.REPONSABLE_ID =
-                          (SELECT     USUARIO_ID
-                            FROM          USUARIO
-                            WHERE      (NOMBRE_USUARIO = ?)))">
+                        
+                        SelectCommand="SELECT NIVEL2.STATUS, NIVEL2.FECHA_ASIGNACION, NIVEL2.CAMBIO_ID, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO FROM NIVEL2 INNER JOIN AREAS_SOPORTE ON NIVEL2.AREA_SOPORTE_ID = AREAS_SOPORTE.AREA_SOPORTE_ID INNER JOIN CAMBIO ON NIVEL2.CAMBIO_ID = CAMBIO.CAMBIO_ID WHERE (NIVEL2.STATUS = 'Pendiente') AND (AREAS_SOPORTE.REPONSABLE_ID = (SELECT USUARIO_ID FROM USUARIO WHERE (NOMBRE_USUARIO = ?))) OR (NIVEL2.STATUS = 'Pendiente') AND (AREAS_SOPORTE.BACKUP_ID = (SELECT USUARIO_ID FROM USUARIO AS USUARIO_1 WHERE (NOMBRE_USUARIO = ?)))" >
                          <SelectParameters>
                              <asp:ControlParameter ControlID="usuarioSesion" DbType="String" Name="user" 
                                  PropertyName="Text" />
+                             <asp:ControlParameter ControlID="usuarioSesion" Name="?" PropertyName="Text" />
                         </SelectParameters>
                     </asp:SqlDataSource>
                     <br />
