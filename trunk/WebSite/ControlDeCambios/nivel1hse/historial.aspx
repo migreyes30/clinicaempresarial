@@ -192,7 +192,7 @@
                         SelectCommand="SELECT     CAMBIO.ESTADO_CAMBIO, NIVEL1_HSE.CAMBIO_ID, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, CAMBIO.FECHA_APROBACION, AREA.NOMBRE_AREA                      
 FROM         CAMBIO INNER JOIN
                       NIVEL1_HSE ON CAMBIO.CAMBIO_ID = NIVEL1_HSE.CAMBIO_ID INNER JOIN
-                      AREA ON NIVEL1_HSE.AREA_ID = AREA.AREA_ID" 
+                      AREA ON NIVEL1_HSE.AREA_ID = AREA.AREA_ID AND NIVEL1_HSE.STATUS NOT IN ('Pendiente', '---------');" 
                         
                         
                                     
