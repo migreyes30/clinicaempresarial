@@ -26,16 +26,22 @@ public partial class nivel0 : System.Web.UI.Page
 
     public void selectFlujoNormalOrBackUP(){
 
-        NivelCeroDataSource.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+        try
+        {
 
-        NivelCeroDataSource.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+            NivelCeroDataSource.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
 
-        ManejadorCambio mostrarBackUp = new ManejadorCambio();
+            NivelCeroDataSource.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
 
-        NivelCeroDataSource.SelectCommand = mostrarBackUp.getCambiosPendientesBack(Session["correo"].ToString(),Session["userPrincipal"].ToString());
+            ManejadorCambio mostrarBackUp = new ManejadorCambio();
 
-        NivelCeroDataSource.SelectParameters.Add("correo", System.Data.DbType.String, Session["correo"].ToString());
+            NivelCeroDataSource.SelectCommand = mostrarBackUp.getCambiosPendientesBack(Session["correo"].ToString(), Session["userPrincipal"].ToString());
 
+            NivelCeroDataSource.SelectParameters.Add("correo", System.Data.DbType.String, Session["correo"].ToString());
+        }
+        catch(Exception) { 
+            
+        }
     }
 
     protected void Button1_Click(object sender, EventArgs e)
