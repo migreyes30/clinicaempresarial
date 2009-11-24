@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
 
 public partial class nivel0_historial : System.Web.UI.Page
 {
@@ -14,14 +15,37 @@ public partial class nivel0_historial : System.Web.UI.Page
         }
         usuarioSesion.Text = Session["user"].ToString();
 
-        Label14.Text = Request.QueryString["folio"];
-        Label15.Text = Request.QueryString["cambio"];
-        Label16.Text = Request.QueryString["area"];
-        //Label17.Text = Request.QueryString["fecha"];
-        Label18.Text = Request.QueryString["edo"];
-        Label19.Text = Request.QueryString["tipo"];
+    }
+	
+	public void selectFlujoNormalOrBackUP(String folioSearch,String cambioName,String area,String estado,String tipo,String depto)
+    {
+		try{
+	        string lastPartQuerie = crearLastPartQuerieSearch(folioSearch,cambioName,area,estado,tipo,depto);
+
+	        Nivel1QAHistDataSource.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+	        Nivel1QAHistDataSource.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+	        ManejadorCambio mostrarBackUpHistQA = new ManejadorCambio();
+
+	        Nivel1QAHistDataSource.SelectCommand = mostrarBackUpHistQA.getCambiosHistBackQA(Session["userPrincipal"].ToString(), lastPartQuerie);
+			
+		}
+        catch (Exception)
+        {
+
+        }
 
     }
+	
+   private string crearLastPartQuerieSearch(String folioSearch,String cambioName,String area,String estado,String tipo,String depto) {
+
+       string resultquerie = "AND (CAMBIO.CAMBIO_ID LIKE '%" + folioSearch + "%') AND (CAMBIO.NOMBRE_CAMBIO LIKE '%" + cambioName + "%') AND (AREA.AREA_ID LIKE '%" + area + "%') AND (CAMBIO.ESTADO_CAMBIO LIKE '%" + estado + "%') AND (DEPARTAMENTO.DEPTO_ID LIKE '%" + depto + "%') AND (CAMBIO.TIPO_CAMBIO LIKE '%" + tipo + "%')";
+
+        return resultquerie;
+        
+    }
+	
     protected void Button6_Click(object sender, EventArgs e)
     {
         Response.Redirect("nivel1qa.aspx");
@@ -34,9 +58,11 @@ public partial class nivel0_historial : System.Web.UI.Page
     {
         Session["user"] = null;
         Session["perfil"] = null;
+        Session["correo"] = null;
+        Session["depto"] = null;
+        Session["userPrincipal"] = null;
         Response.Redirect("../index.aspx");
         
-
     }
     protected void GridView1_SelectedIndexChanged1(object sender, EventArgs e)
     {
@@ -45,11 +71,21 @@ public partial class nivel0_historial : System.Web.UI.Page
     }
     protected void Button7_Click(object sender, EventArgs e)
     {
-        Response.Redirect("historial.aspx?folio=" + TextBox3.Text + "&cambio=" + TextBox4.Text + "&area=" + DropDownList9.SelectedValue + "&fecha=" + TextBox5.Text + "&edo=" + DropDownList7.Text + "&tipo=" + DropDownList8.Text);
+		selectFlujoNormalOrBackUP(TextBox3.Text,TextBox4.Text,DropDownList9.SelectedValue,DropDownList7.Text,DropDownList8.Text,DropDownList10.SelectedValue);
     }
 
     protected void DropDownListUser_DataBound(object sender, EventArgs e)
     {
     }
 
+    protected void DropDownList10_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
+
+
+    protected void DropDownList9_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+    }
 }

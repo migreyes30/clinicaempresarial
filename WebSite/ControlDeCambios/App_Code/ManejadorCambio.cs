@@ -648,7 +648,7 @@ public class ManejadorCambio
             {
                 accum = accum.Substring(0, accum.LastIndexOf(" or "));
 
-                String querieFlujoBackUp = "SELECT CAMBIO.CAMBIO_ID, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, NIVEL0.FECHA_ASIGNACION FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID WHERE (CAMBIO.AREA_ID IN (SELECT AREA_1.AREA_ID FROM USUARIO INNER JOIN DEPARTAMENTO ON USUARIO.USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID OR USUARIO.USUARIO_ID = DEPARTAMENTO.BACKUP_ID INNER JOIN AREA AS AREA_1 ON DEPARTAMENTO.DEPTO_ID = AREA_1.DEPTO_ID WHERE (USUARIO.CORREO_USUARIO = @correo))) AND (NIVEL0.STATUS = 'Pendiente') AND (" + accum + ")";
+                String querieFlujoBackUp =  querieFlujoNormal + " AND (" + accum + ")";
 
                 return querieFlujoBackUp;
             }
@@ -656,7 +656,7 @@ public class ManejadorCambio
             {
                 accumNormal = accumNormal.Substring(0, accumNormal.LastIndexOf(" or "));
 
-                String querieFlujoN0Delay = "SELECT CAMBIO.CAMBIO_ID, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, NIVEL0.FECHA_ASIGNACION FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID WHERE (CAMBIO.AREA_ID IN (SELECT AREA_1.AREA_ID FROM USUARIO INNER JOIN DEPARTAMENTO ON USUARIO.USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID OR USUARIO.USUARIO_ID = DEPARTAMENTO.BACKUP_ID INNER JOIN AREA AS AREA_1 ON DEPARTAMENTO.DEPTO_ID = AREA_1.DEPTO_ID WHERE (USUARIO.CORREO_USUARIO = @correo))) AND (NIVEL0.STATUS = 'Pendiente') AND (" + accumNormal + ")";
+                String querieFlujoN0Delay = querieFlujoNormal + " AND (" + accumNormal + ")";
 
                 return querieFlujoN0Delay;
 
@@ -717,7 +717,7 @@ public class ManejadorCambio
             {
                 accum = accum.Substring(0, accum.LastIndexOf(" or "));
 
-                String querieFlujoBackUp = "SELECT CAMBIO.CAMBIO_ID, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, NIVEL0.FECHA_APROBACION,NIVEL0.FECHA_ASIGNACION, NIVEL0.STATUS AS STATUS_N0, CAMBIO.ESTADO_CAMBIO FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID WHERE (CAMBIO.AREA_ID IN (SELECT AREA_1.AREA_ID FROM USUARIO INNER JOIN DEPARTAMENTO ON USUARIO.USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID OR USUARIO.USUARIO_ID = DEPARTAMENTO.BACKUP_ID INNER JOIN AREA AS AREA_1 ON DEPARTAMENTO.DEPTO_ID = AREA_1.DEPTO_ID WHERE (USUARIO.CORREO_USUARIO = @correo) AND (NIVEL0.STATUS NOT IN ('Pendiente')))) AND (" + accum + ")" + lastPartQuerie;
+                String querieFlujoBackUp = querieHistN0 + " AND (" + accum + ")" + lastPartQuerie;
 
                 return querieFlujoBackUp;
             }
@@ -725,7 +725,7 @@ public class ManejadorCambio
             {
                 accumNormal = accumNormal.Substring(0, accumNormal.LastIndexOf(" or "));
 
-                String querieFlujoN0 = "SELECT CAMBIO.CAMBIO_ID, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, NIVEL0.FECHA_APROBACION,NIVEL0.FECHA_ASIGNACION, NIVEL0.STATUS AS STATUS_N0, CAMBIO.ESTADO_CAMBIO FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID WHERE (CAMBIO.AREA_ID IN (SELECT AREA_1.AREA_ID FROM USUARIO INNER JOIN DEPARTAMENTO ON USUARIO.USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID OR USUARIO.USUARIO_ID = DEPARTAMENTO.BACKUP_ID INNER JOIN AREA AS AREA_1 ON DEPARTAMENTO.DEPTO_ID = AREA_1.DEPTO_ID WHERE (USUARIO.CORREO_USUARIO = @correo) AND (NIVEL0.STATUS NOT IN ('Pendiente')))) AND (" + accumNormal + ")" + lastPartQuerie;
+                String querieFlujoN0 = querieHistN0 + " AND (" + accumNormal + ")" + lastPartQuerie;
 
                 return querieFlujoN0;
 
@@ -734,6 +734,210 @@ public class ManejadorCambio
 
     }
 
+    public String getCambiosPendientesBackQA(String userPrincipal)
+    {
+        String querieFlujoNormal = "SELECT CAMBIO.CAMBIO_ID, DEPARTAMENTO.NOMBRE_DEPTO, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, NIVEL1_QA.FECHA_ASIGNACION FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL1_QA ON CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID AND AREA.AREA_ID = NIVEL1_QA.AREA_ID INNER JOIN DEPARTAMENTO ON DEPARTAMENTO.DEPTO_ID = AREA.DEPTO_ID AND AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE (NIVEL1_QA.N1QA_ACEPTADO = '1') AND (NIVEL1_QA.STATUS = 'Pendiente')";
+        String sqlPrefix = "CAMBIO.CAMBIO_ID = ";
+        String accum = "";
+        String accumNormal = "";
 
+
+        thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = querieFlujoNormal;
+        thisCommand.CommandType = CommandType.Text;
+
+        SqlDataReader result = thisCommand.ExecuteReader();
+
+        while (result.Read())
+        {
+            DateTime fechaAsignacion = DateTime.Parse(result["FECHA_ASIGNACION"].ToString());
+            DateTime fechaCur = fechaAsignacion;
+            int daysOff = 0;
+
+            while (fechaCur <= DateTime.Now.ToUniversalTime())
+            {
+                if (!(fechaCur.DayOfWeek == DayOfWeek.Saturday || fechaCur.DayOfWeek == DayOfWeek.Sunday))
+                {
+                    daysOff += 1;
+                }
+
+                fechaCur = fechaCur.AddDays(1);
+            }
+
+            if (daysOff > 2)
+            {
+                accum += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+            }
+            else
+            {
+                accumNormal += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+            }
+        }
+
+        result.Close();
+
+        if (accum.Equals(""))
+        {
+            return querieFlujoNormal;
+
+        }
+        else
+        {
+
+            if (userPrincipal.Equals("False"))
+            {
+                accum = accum.Substring(0, accum.LastIndexOf(" or "));
+
+                String querieFlujoBackUp = querieFlujoNormal + " AND (" + accum + ")";
+
+                return querieFlujoBackUp;
+            }
+            else
+            {
+                accumNormal = accumNormal.Substring(0, accumNormal.LastIndexOf(" or "));
+
+                String querieFlujoN0Delay = querieFlujoNormal + " AND (" + accumNormal + ")";
+
+                return querieFlujoN0Delay;
+
+            }
+        }
+
+    }
+
+	    public String getCambiosHistBackQA(String userPrincipal, String lastPartQuerie)
+    {
+        String querieHistQA = "SELECT  CAMBIO.ESTADO_CAMBIO, CAMBIO.CAMBIO_ID, CAMBIO.NOMBRE_CAMBIO, DEPARTAMENTO.NOMBRE_DEPTO, CAMBIO.TIPO_CAMBIO, NIVEL1_QA.FECHA_APROBACION, NIVEL1_QA.FECHA_ASIGNACION,AREA.NOMBRE_AREA,NIVEL1_QA.STATUS FROM CAMBIO INNER JOIN NIVEL1_QA ON CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID INNER JOIN AREA ON NIVEL1_QA.AREA_ID = AREA.AREA_ID AND CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN DEPARTAMENTO ON DEPARTAMENTO.DEPTO_ID = AREA.DEPTO_ID AND AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID AND NIVEL1_QA.STATUS NOT IN ('Pendiente', '---------')";
+        String sqlPrefix = "CAMBIO.CAMBIO_ID = ";
+        String accum = "";
+        String accumNormal = "";
+
+        thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = querieHistQA;
+        thisCommand.CommandType = CommandType.Text;
+
+        SqlDataReader result = thisCommand.ExecuteReader();
+
+        while (result.Read())
+        {
+            DateTime fechaAsignacion = DateTime.Parse(result["FECHA_ASIGNACION"].ToString());
+            DateTime fechaAprobacion = DateTime.Parse(result["FECHA_APROBACION"].ToString());
+            DateTime fechaCur = fechaAsignacion;
+            int daysOff = 0;
+
+            while (fechaCur <= fechaAprobacion)
+            {
+                if (!(fechaCur.DayOfWeek == DayOfWeek.Saturday || fechaCur.DayOfWeek == DayOfWeek.Sunday))
+                {
+                    daysOff += 1;
+                }
+
+                fechaCur = fechaCur.AddDays(1);
+            }
+
+            if (daysOff > 2)
+            {
+                accum += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+            }
+            else
+            {
+                accumNormal += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+            }
+        }
+
+        result.Close();
+
+
+            if (userPrincipal.Equals("False"))
+            {
+                accum = accum.Substring(0, accum.LastIndexOf(" or "));
+
+                String querieFlujoBackUp = querieHistQA + " WHERE (" + accum + ")" + lastPartQuerie;
+
+                return querieFlujoBackUp;
+            }
+            else
+            {
+                accumNormal = accumNormal.Substring(0, accumNormal.LastIndexOf(" or "));
+
+                String querieFlujoN0 = querieHistQA + " WHERE (" +accumNormal + ")" + lastPartQuerie;
+
+                return querieFlujoN0;
+
+            }
+
+
+    }
+	
+	public String getCambiosPendientesBackHSE(String userPrincipal)
+    {
+        String querieFlujoNormal = "SELECT	CAMBIO.CAMBIO_ID, DEPARTAMENTO.NOMBRE_DEPTO, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, NIVEL1_HSE.FECHA_ASIGNACION  FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL1_HSE ON CAMBIO.CAMBIO_ID = NIVEL1_HSE.CAMBIO_ID AND AREA.AREA_ID = NIVEL1_HSE.AREA_ID INNER JOIN DEPARTAMENTO ON DEPARTAMENTO.DEPTO_ID = AREA.DEPTO_ID AND AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE (NIVEL1_HSE.N1HSE_ACEPTADO = '1') AND (NIVEL1_HSE.STATUS = 'Pendiente')";
+        String sqlPrefix = "CAMBIO.CAMBIO_ID = ";
+        String accum = "";
+        String accumNormal = "";
+
+
+        thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = querieFlujoNormal;
+        thisCommand.CommandType = CommandType.Text;
+
+        SqlDataReader result = thisCommand.ExecuteReader();
+
+        while (result.Read())
+        {
+            DateTime fechaAsignacion = DateTime.Parse(result["FECHA_ASIGNACION"].ToString());
+            DateTime fechaCur = fechaAsignacion;
+            int daysOff = 0;
+
+            while (fechaCur <= DateTime.Now.ToUniversalTime())
+            {
+                if (!(fechaCur.DayOfWeek == DayOfWeek.Saturday || fechaCur.DayOfWeek == DayOfWeek.Sunday))
+                {
+                    daysOff += 1;
+                }
+
+                fechaCur = fechaCur.AddDays(1);
+            }
+
+            if (daysOff > 2)
+            {
+                accum += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+            }
+            else
+            {
+                accumNormal += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+            }
+        }
+
+        result.Close();
+
+        if (accum.Equals(""))
+        {
+            return querieFlujoNormal;
+
+        }
+        else
+        {
+
+            if (userPrincipal.Equals("False"))
+            {
+                accum = accum.Substring(0, accum.LastIndexOf(" or "));
+
+                String querieFlujoBackUp = querieFlujoNormal + " AND (" + accum + ")";
+
+                return querieFlujoBackUp;
+            }
+            else
+            {
+                accumNormal = accumNormal.Substring(0, accumNormal.LastIndexOf(" or "));
+
+                String querieFlujoN0Delay = querieFlujoNormal + " AND (" + accumNormal + ")";
+
+                return querieFlujoN0Delay;
+
+            }
+        }
+
+    }
 
 }
