@@ -13,8 +13,6 @@ public partial class nivel0_historial : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
 
-        //TextBox3.Text = Request.QueryString["folio"];
-
         if (Session["user"] == null)
         {
             Response.Redirect("../index.aspx");
@@ -81,4 +79,5 @@ public partial class nivel0_historial : System.Web.UI.Page
     {
         selectFlujoNormalOrBackUP(TextBox3.Text,TextBox4.Text,DropDownList9.SelectedValue,DropDownList7.Text,DropDownList8.Text);
     }
+
 }
