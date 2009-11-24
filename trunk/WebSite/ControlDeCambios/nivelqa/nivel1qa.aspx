@@ -107,34 +107,39 @@
                     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
                         AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
                         DataSourceID="SqlDataSourceQA" 
+                        EmptyDataText="No tienes cambios por aprobar" 
                         onselectedindexchanged="GridView1_SelectedIndexChanged" 
                         AllowSorting="True" CellPadding="4" Font-Names="Arial Narrow" 
                         Font-Size="Medium" Width="880px">
                         <Columns>
-                            <asp:CommandField ShowSelectButton="True" />
-                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" ReadOnly="True" 
-                                SortExpression="CAMBIO_ID" />
+                            <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" >
+                            <HeaderStyle BackColor="#F9F8F4" />
+                            </asp:CommandField>
+                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="FOLIO" ReadOnly="True" 
+                                SortExpression="CAMBIO_ID" >
+                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE_CAMBIO" 
+                                SortExpression="NOMBRE_CAMBIO" />
                             <asp:BoundField DataField="NOMBRE_DEPTO" HeaderText="NOMBRE_DEPTO" 
                                 SortExpression="NOMBRE_DEPTO" />
                             <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
                                 SortExpression="NOMBRE_AREA" />
-                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE_CAMBIO" 
-                                SortExpression="NOMBRE_CAMBIO" />
                             <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
                                 SortExpression="TIPO_CAMBIO" />
-                            <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="FECHA_RECEPCION" 
-                                SortExpression="FECHA_RECEPCION" />
+                            <asp:BoundField DataField="FECHA_ASIGNACION" HeaderText="FECHA_ASIGNACION" 
+                                SortExpression="FECHA_ASIGNACION" />
                         </Columns>
+                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <EditRowStyle BackColor="#2461BF" />
+                        <AlternatingRowStyle BackColor="White" />
                     </asp:GridView>
                     <br />
                     <br />
-                    <asp:SqlDataSource ID="SqlDataSourceQA" runat="server" 
-                        ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                        ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                        
-                        
-                        
-                        SelectCommand="SELECT CAMBIO.CAMBIO_ID, DEPARTAMENTO.NOMBRE_DEPTO, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, CAMBIO.FECHA_RECEPCION FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL1_QA ON CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID AND CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID AND AREA.AREA_ID = NIVEL1_QA.AREA_ID INNER JOIN DEPARTAMENTO ON DEPARTAMENTO.DEPTO_ID = AREA.DEPTO_ID AND AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE (NIVEL1_QA.N1QA_ACEPTADO = '1') AND (NIVEL1_QA.STATUS = 'Pendiente')">
+                    <asp:SqlDataSource ID="SqlDataSourceQA" runat="server">
                     </asp:SqlDataSource>
                     <br />
     

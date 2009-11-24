@@ -23,21 +23,28 @@ public partial class nivel0_historial : System.Web.UI.Page
 
     public void selectFlujoNormalOrBackUP(String folioSearch,String cambioName,String area,String estado,String tipo)
     {
+		
+		try{
+		
+	        string lastPartQuerie = crearLastPartQuerieSearch(folioSearch,cambioName,area,estado,tipo);
 
-        string lastPartQuerie = crearLastPartQuerieSearch(folioSearch,cambioName,area,estado,tipo);
+	        NivelCeroHistDataSource.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
 
-        NivelCeroHistDataSource.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+	        NivelCeroHistDataSource.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
 
-        NivelCeroHistDataSource.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+	        ManejadorCambio mostrarBackUpHist = new ManejadorCambio();
 
-        ManejadorCambio mostrarBackUpHist = new ManejadorCambio();
+	        NivelCeroHistDataSource.SelectCommand = mostrarBackUpHist.getCambiosHistBack(Session["correo"].ToString(), Session["userPrincipal"].ToString(), lastPartQuerie);
 
-        NivelCeroHistDataSource.SelectCommand = mostrarBackUpHist.getCambiosHistBack(Session["correo"].ToString(), Session["userPrincipal"].ToString(), lastPartQuerie);
+	        NivelCeroHistDataSource.SelectParameters.Clear();
 
-        NivelCeroHistDataSource.SelectParameters.Clear();
+	        NivelCeroHistDataSource.SelectParameters.Add("correo", System.Data.DbType.String, Session["correo"].ToString());
 
-        NivelCeroHistDataSource.SelectParameters.Add("correo", System.Data.DbType.String, Session["correo"].ToString());
-
+		}
+        catch(Exception) { 
+            
+        }
+		
     }
 
     private string crearLastPartQuerieSearch(String folioSearch,String cambioName,String area,String estado,String tipo) {

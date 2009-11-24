@@ -225,11 +225,11 @@
                             <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" ReadOnly="True" 
                                 SortExpression="CAMBIO_ID" >
                             </asp:BoundField>
-                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
-                                SortExpression="NOMBRE_AREA" />
                             <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE_CAMBIO" 
                                 SortExpression="NOMBRE_CAMBIO" >
                             </asp:BoundField>
+                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
+                                SortExpression="NOMBRE_AREA" />
                             <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
                                 SortExpression="TIPO_CAMBIO" >
                             </asp:BoundField>
