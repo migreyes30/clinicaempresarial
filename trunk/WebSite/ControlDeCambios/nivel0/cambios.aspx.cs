@@ -61,7 +61,8 @@ public partial class cambios : System.Web.UI.Page
         Session["user"] = null;
         Session["perfil"] = null;
         Session["correo"] = null;
-        Session["depto"] = null;       
+        Session["depto"] = null;
+        Session["userPrincipal"] = null;
         Response.Redirect("../index.aspx");
         
 

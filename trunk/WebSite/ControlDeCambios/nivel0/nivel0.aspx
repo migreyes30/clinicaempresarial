@@ -93,6 +93,7 @@
                     &nbsp;</td>
             </tr>
             <tr>
+
                 <td colspan="6" align="center" 
                     
                     style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0">
@@ -105,59 +106,25 @@
                         Font-Names="Arial Narrow" Font-Size="Medium" Width="850px">
                         <Columns>
                             <asp:CommandField ShowSelectButton="True" />
-                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" ReadOnly="True" 
+                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO ID" ReadOnly="True" 
                                 SortExpression="CAMBIO_ID" >
                             </asp:BoundField>
-                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
+                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE AREA" 
                                 SortExpression="NOMBRE_AREA" >
                             </asp:BoundField>
-                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE_CAMBIO" 
+                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE CAMBIO" 
                                 SortExpression="NOMBRE_CAMBIO" >
                             </asp:BoundField>
                             <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
                                 SortExpression="TIPO_CAMBIO" >
                             </asp:BoundField>
-                            <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="FECHA_RECEPCION" 
-                                SortExpression="FECHA_RECEPCION" >
+                            <asp:BoundField DataField="FECHA_ASIGNACION" HeaderText="FECHA ASIGNACION" 
+                                SortExpression="FECHA_ASIGNACION" >
                             </asp:BoundField>
                         </Columns>
                     </asp:GridView>
-                    <asp:SqlDataSource ID="NivelCeroDataSource" runat="server" 
-                        ConnectionString="<%$ ConnectionStrings:ControlCambiosConnectionString1 %>" 
-                        DeleteCommand="DELETE FROM [NIVEL0] WHERE [NIVEL0_ID] = @NIVEL0_ID" 
-                        InsertCommand="INSERT INTO [NIVEL0] ([STATUS], [AREA_ID], [FECHA_ASIGNACION], [FECHA_APROBACION], [COMENTARIOS], [CAMBIO_ID]) VALUES (@STATUS, @AREA_ID, @FECHA_ASIGNACION, @FECHA_APROBACION, @COMENTARIOS, @CAMBIO_ID)" 
-                        
-                        ProviderName="<%$ ConnectionStrings:ControlCambiosConnectionString1.ProviderName %>" 
-                        SelectCommand="SELECT CAMBIO.CAMBIO_ID, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, CAMBIO.FECHA_RECEPCION FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID WHERE (CAMBIO.AREA_ID IN (SELECT AREA_1.AREA_ID FROM USUARIO INNER JOIN DEPARTAMENTO ON USUARIO.USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID OR USUARIO.USUARIO_ID = DEPARTAMENTO.BACKUP_ID INNER JOIN AREA AS AREA_1 ON DEPARTAMENTO.DEPTO_ID = AREA_1.DEPTO_ID WHERE (USUARIO.NOMBRE_USUARIO = @user ))) AND (NIVEL0.STATUS = 'Pendiente')" 
-                        
-                        
-                        
-                        UpdateCommand="UPDATE [NIVEL0] SET [STATUS] = @STATUS, [AREA_ID] = @AREA_ID, [FECHA_ASIGNACION] = @FECHA_ASIGNACION, [FECHA_APROBACION] = @FECHA_APROBACION, [COMENTARIOS] = @COMENTARIOS, [CAMBIO_ID] = @CAMBIO_ID WHERE [NIVEL0_ID] = @NIVEL0_ID">
-                        <SelectParameters>                            
-                            <asp:SessionParameter DbType="String" Name="user" SessionField="user" />
-                        </SelectParameters>
-                        <DeleteParameters>
-                            <asp:Parameter Name="NIVEL0_ID" Type="Int32" />
-                        </DeleteParameters>
-                        <InsertParameters>
-                            <asp:Parameter Name="STATUS" Type="String" />
-                            <asp:Parameter Name="AREA_ID" Type="Int32" />
-                            <asp:Parameter Name="FECHA_ASIGNACION" Type="DateTime" />
-                            <asp:Parameter Name="FECHA_APROBACION" Type="DateTime" />
-                            <asp:Parameter Name="COMENTARIOS" Type="String" />
-                            <asp:Parameter Name="CAMBIO_ID" Type="Int32" />
-                        </InsertParameters>
-                        <UpdateParameters>
-                            <asp:Parameter Name="STATUS" Type="String" />
-                            <asp:Parameter Name="AREA_ID" Type="Int32" />
-                            <asp:Parameter Name="FECHA_ASIGNACION" Type="DateTime" />
-                            <asp:Parameter Name="FECHA_APROBACION" Type="DateTime" />
-                            <asp:Parameter Name="COMENTARIOS" Type="String" />
-                            <asp:Parameter Name="CAMBIO_ID" Type="Int32" />
-                            <asp:Parameter Name="NIVEL0_ID" Type="Int32" />
-                        </UpdateParameters>
+                    <asp:SqlDataSource runat="server" ID="NivelCeroDataSource">
                     </asp:SqlDataSource>
-        
                     <br />
                 </td>
             </tr>

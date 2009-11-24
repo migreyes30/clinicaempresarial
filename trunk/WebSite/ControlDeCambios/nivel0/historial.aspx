@@ -158,14 +158,10 @@
                                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
                                                 ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
                                                 ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT     AREA.AREA_ID, AREA.NOMBRE_AREA, DEPARTAMENTO.DEPTO_ID
-FROM         AREA INNER JOIN
-                      DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID
-WHERE     (DEPARTAMENTO.DEPTO_ID = (SELECT     DEPTO_ID
-FROM         DEPARTAMENTO
-WHERE RESPONSABLE_ID = (SELECT USUARIO_ID FROM USUARIO WHERE NOMBRE_USUARIO = ?)))">
+                                                SelectCommand="SELECT AREA.AREA_ID, AREA.NOMBRE_AREA, DEPARTAMENTO.DEPTO_ID FROM AREA INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE (DEPARTAMENTO.DEPTO_ID = (SELECT DEPTO_ID FROM DEPARTAMENTO AS DEPARTAMENTO_1 WHERE (RESPONSABLE_ID = (SELECT USUARIO_ID FROM USUARIO WHERE (CORREO_USUARIO = ?))) OR (BACKUP_ID = (SELECT USUARIO_ID FROM USUARIO AS USUARIO_1 WHERE (CORREO_USUARIO = ?)))))">
                         <SelectParameters>
-                            <asp:ControlParameter DbType="String" Name="usuario" ControlID="usuarioSesion" />
+                            <asp:SessionParameter DbType="String" Name="correo_a" SessionField="correo" />
+                            <asp:SessionParameter DbType="String" Name="correo_b" SessionField="correo" />
                         </SelectParameters>
                                             </asp:SqlDataSource>
                                         </td>
@@ -226,68 +222,8 @@ WHERE RESPONSABLE_ID = (SELECT USUARIO_ID FROM USUARIO WHERE NOMBRE_USUARIO = ?)
                                             <asp:Label ID="Label18" runat="server" ForeColor="White"></asp:Label>
 &nbsp;&nbsp;
                                             <asp:Label ID="Label19" runat="server" ForeColor="White"></asp:Label>
-                    <asp:SqlDataSource ID="NivelCeroDataSource" runat="server" 
-                        ConnectionString="<%$ ConnectionStrings:ControlCambiosConnectionString1 %>" 
-                        DeleteCommand="DELETE FROM [NIVEL0] WHERE [NIVEL0_ID] = @NIVEL0_ID" 
-                        InsertCommand="INSERT INTO [NIVEL0] ([STATUS], [AREA_ID], [FECHA_ASIGNACION], [FECHA_APROBACION], [COMENTARIOS], [CAMBIO_ID]) VALUES (@STATUS, @AREA_ID, @FECHA_ASIGNACION, @FECHA_APROBACION, @COMENTARIOS, @CAMBIO_ID)" 
-                        
-                        ProviderName="<%$ ConnectionStrings:ControlCambiosConnectionString1.ProviderName %>" 
-                        SelectCommand="SELECT     CAMBIO.CAMBIO_ID, AREA.NOMBRE_AREA, AREA.AREA_ID, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, CAMBIO.FECHA_APROBACION, 
-                      CAMBIO.ESTADO_CAMBIO
-FROM         CAMBIO INNER JOIN
-                      AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN
-                      NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID
-WHERE     (CAMBIO.AREA_ID IN
-                          (SELECT     AREA_1.AREA_ID
-                            FROM          USUARIO INNER JOIN
-                                                   DEPARTAMENTO ON USUARIO.USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID INNER JOIN
-                                                   AREA AS AREA_1 ON DEPARTAMENTO.DEPTO_ID = AREA_1.DEPTO_ID
-
-                            WHERE      (USUARIO.NOMBRE_USUARIO = @user) AND CAMBIO.ESTADO_CAMBIO not IN ('Pendiente')))                            
-                            AND                            
-                            CAMBIO.CAMBIO_ID LIKE '%'+@FOLIO+'%'  AND
-                            CAMBIO.NOMBRE_CAMBIO LIKE '%'+@NOMBRE+'%' AND
-                            AREA.AREA_ID LIKE '%'+@AREA+'%' AND                            
-                            CAMBIO.ESTADO_CAMBIO LIKE '%'+@ESTADO+'%' AND
-                            CAMBIO.TIPO_CAMBIO LIKE '%'+@TIPO+'%'                            
-                            
-                            "                                                                                     
-                        UpdateCommand="UPDATE [NIVEL0] SET [STATUS] = @STATUS, [AREA_ID] = @AREA_ID, [FECHA_ASIGNACION] = @FECHA_ASIGNACION, [FECHA_APROBACION] = @FECHA_APROBACION, [COMENTARIOS] = @COMENTARIOS, [CAMBIO_ID] = @CAMBIO_ID WHERE [NIVEL0_ID] = @NIVEL0_ID">
-                        <SelectParameters>
-                            <asp:SessionParameter DbType="String" Name="user" SessionField="user" />
-                            <asp:ControlParameter ControlID="Label14" Name="FOLIO" PropertyName="Text" 
-                            Type="String" ConvertEmptyStringToNull="False" />
-                            <asp:ControlParameter ControlID="Label15" Name="NOMBRE" PropertyName="Text" 
-                            Type="String" ConvertEmptyStringToNull="False" />
-                            <asp:ControlParameter ControlID="Label16" Name="AREA" PropertyName="Text" 
-                            Type="String" ConvertEmptyStringToNull="False" />
-                            <asp:ControlParameter ControlID="Label18" Name="ESTADO" PropertyName="Text" 
-                            Type="String" ConvertEmptyStringToNull="False" />
-                            <asp:ControlParameter ControlID="Label19" Name="TIPO" PropertyName="Text" 
-                            Type="String" ConvertEmptyStringToNull="False" />
-                                                       
-                            
-                        </SelectParameters>
-                        <DeleteParameters>
-                            <asp:Parameter Name="NIVEL0_ID" Type="Int32" />
-                        </DeleteParameters>
-                        <InsertParameters>
-                            <asp:Parameter Name="STATUS" Type="String" />
-                            <asp:Parameter Name="AREA_ID" Type="Int32" />
-                            <asp:Parameter Name="FECHA_ASIGNACION" Type="DateTime" />
-                            <asp:Parameter Name="FECHA_APROBACION" Type="DateTime" />
-                            <asp:Parameter Name="COMENTARIOS" Type="String" />
-                            <asp:Parameter Name="CAMBIO_ID" Type="Int32" />
-                        </InsertParameters>
-                        <UpdateParameters>
-                            <asp:Parameter Name="STATUS" Type="String" />
-                            <asp:Parameter Name="AREA_ID" Type="Int32" />
-                            <asp:Parameter Name="FECHA_ASIGNACION" Type="DateTime" />
-                            <asp:Parameter Name="FECHA_APROBACION" Type="DateTime" />
-                            <asp:Parameter Name="COMENTARIOS" Type="String" />
-                            <asp:Parameter Name="CAMBIO_ID" Type="Int32" />
-                            <asp:Parameter Name="NIVEL0_ID" Type="Int32" />
-                        </UpdateParameters>
+                    
+                    <asp:SqlDataSource ID="NivelCeroHistDataSource" runat="server">
                     </asp:SqlDataSource>
                                         </td>
                                     </tr>
@@ -295,8 +231,8 @@ WHERE     (CAMBIO.AREA_ID IN
                                         <td align="center">
                     <asp:GridView ID="GridListaNivelCero" runat="server" AllowPaging="True" 
                         AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
-                        DataSourceID="NivelCeroDataSource" 
-                        EmptyDataText="There are no data records to display." 
+                        DataSourceID="NivelCeroHistDataSource" 
+                        EmptyDataText="Busque por campo o presione el boton Aceptar para ver todo el Historial" 
                         onselectedindexchanged="GridView1_SelectedIndexChanged1" CellPadding="4" Font-Names="Arial Narrow" 
                                                 Font-Size="Medium" Width="880px" PageSize="30">
                         <Columns>
@@ -304,11 +240,8 @@ WHERE     (CAMBIO.AREA_ID IN
                             <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" ReadOnly="True" 
                                 SortExpression="CAMBIO_ID" >
                             </asp:BoundField>
-                            <asp:BoundField DataField="ESTADO_CAMBIO" HeaderText="ESTADO_CAMBIO" 
-                                SortExpression="ESTADO_CAMBIO" />
                             <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
-                                SortExpression="NOMBRE_AREA" >
-                            </asp:BoundField>
+                                SortExpression="NOMBRE_AREA" />
                             <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE_CAMBIO" 
                                 SortExpression="NOMBRE_CAMBIO" >
                             </asp:BoundField>
@@ -318,6 +251,11 @@ WHERE     (CAMBIO.AREA_ID IN
                             <asp:BoundField DataField="FECHA_APROBACION" HeaderText="FECHA_APROBACION" 
                                 SortExpression="FECHA_APROBACION" >
                             </asp:BoundField>
+                            <asp:BoundField DataField="STATUS_N0" HeaderText="STATUS_N0" 
+                                SortExpression="STATUS_N0" >
+                            </asp:BoundField>
+                            <asp:BoundField DataField="ESTADO_CAMBIO" HeaderText="ESTADO_CAMBIO" 
+                                SortExpression="ESTADO_CAMBIO" />
                         </Columns>
                     </asp:GridView>
                                         </td>
