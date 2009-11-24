@@ -12,6 +12,7 @@ public partial class _Default : System.Web.UI.Page
     String usuario;
     String perfil;
     String correo_sesion;
+    String user_principal;
     SqlConnection thisConnection;
 
     protected void Page_Load(object sender, EventArgs e)
@@ -41,7 +42,7 @@ public partial class _Default : System.Web.UI.Page
         {
 
             SqlCommand thisCommand = thisConnection.CreateCommand();
-            thisCommand.CommandText = "select nombre_usuario, correo_usuario, contrasena_usuario, perfil_usuario from usuario where correo_usuario = '" + user + "'";
+            thisCommand.CommandText = "select nombre_usuario, correo_usuario, contrasena_usuario, perfil_usuario,principal from usuario where correo_usuario = '" + user + "'";
             SqlDataReader thisReader = thisCommand.ExecuteReader();
 
             if (thisReader.Read())
@@ -52,6 +53,7 @@ public partial class _Default : System.Web.UI.Page
                     usuario = thisReader["nombre_usuario"].ToString();
                     perfil = thisReader["perfil_usuario"].ToString();
                     correo_sesion = thisReader["correo_usuario"].ToString();
+                    user_principal = thisReader["principal"].ToString();
                     correcto = true;
                 }
             }
@@ -66,6 +68,7 @@ public partial class _Default : System.Web.UI.Page
                 Session["user"] = usuario;
                 Session["correo"] = correo_sesion;
                 Session["perfil"] = perfil;
+                Session["userPrincipal"] = user_principal;
                 if(miManejadorMail.getDepto(correo_sesion).Equals("")){
                     Session["depto"] = depto;
                 }else{
