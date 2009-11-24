@@ -137,9 +137,7 @@
                                                 Font-Size="Medium" Text="Área"></asp:Label>
                                         </td>
                                         <td align="left" width="180">
-                                            <asp:Label ID="Label11" runat="server" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium" Text="Fecha de Aprobación"></asp:Label>
-                                        </td>
+                                            &nbsp;</td>
                                     </tr>
                                     <tr>
                                         <td align="left">
@@ -152,7 +150,7 @@
                                         <td align="left">
                                             <asp:DropDownList ID="DropDownList9" runat="server" 
                                                 DataSourceID="SqlDataSource1" DataTextField="NOMBRE_AREA" 
-                                                DataValueField="AREA_ID" >
+                                                DataValueField="AREA_ID" style="margin-bottom: 0px" >
                                                 <asp:ListItem Value="" Selected="True" Enabled="true">Todos</asp:ListItem>
                                             </asp:DropDownList>
                                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
@@ -166,8 +164,7 @@
                                             </asp:SqlDataSource>
                                         </td>
                                         <td align="left">
-                                            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
-                                        </td>
+                                            &nbsp;</td>
                                     </tr>
                                     <tr>
                                         <td align="left">
