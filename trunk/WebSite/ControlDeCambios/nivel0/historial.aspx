@@ -153,7 +153,7 @@
                                             <asp:DropDownList ID="DropDownList9" runat="server" 
                                                 DataSourceID="SqlDataSource1" DataTextField="NOMBRE_AREA" 
                                                 DataValueField="AREA_ID" >
-                                                <asp:ListItem Value="" Selected="True" Enabled="true">Juan</asp:ListItem>
+                                                <asp:ListItem Value="" Selected="True" Enabled="true">Todos</asp:ListItem>
                                             </asp:DropDownList>
                                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
                                                 ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
