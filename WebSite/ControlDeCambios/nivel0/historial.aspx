@@ -211,18 +211,6 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <asp:Label ID="Label14" runat="server" ForeColor="White"></asp:Label>
-&nbsp;&nbsp;
-                                            <asp:Label ID="Label15" runat="server" ForeColor="White"></asp:Label>
-&nbsp;&nbsp;
-                                            <asp:Label ID="Label16" runat="server" ForeColor="White"></asp:Label>
-&nbsp;&nbsp;
-                                            <asp:Label ID="Label17" runat="server" ForeColor="White"></asp:Label>
-&nbsp;&nbsp;
-                                            <asp:Label ID="Label18" runat="server" ForeColor="White"></asp:Label>
-&nbsp;&nbsp;
-                                            <asp:Label ID="Label19" runat="server" ForeColor="White"></asp:Label>
-                    
                     <asp:SqlDataSource ID="NivelCeroHistDataSource" runat="server">
                     </asp:SqlDataSource>
                                         </td>
