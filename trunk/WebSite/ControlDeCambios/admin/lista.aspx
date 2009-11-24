@@ -11,14 +11,6 @@
         {
             width: 317px;
         }
-        .style2
-        {
-            width: 144px;
-        }
-        .style3
-        {
-            width: 94px;
-        }
         </style>
 </head>
 
@@ -33,7 +25,8 @@
                     
                     style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0" 
                     height="100">
-                    <asp:Image ID="Image1" runat="server" ImageUrl="~/imagenes/logoPG.jpg" />
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/imagenes/logoPG.jpg" 
+                        style="margin-left: 0px" />
                 </td>
                 <td colspan="3" align="center" 
                     
@@ -120,49 +113,151 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>
+                            <td bgcolor="#F7F7F3">
                                 <table cellpadding="4" style="width:100%;">
                                     <tr>
-                                        <td class="style2" align="left">
-                                            <asp:Label ID="Label6" runat="server" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium" Text="Fecha Inicio"></asp:Label>
+                                        <td align="left" width="180">
+                                            <asp:Label ID="Label8" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium" Text="Folio"></asp:Label>
                                         </td>
-                                        <td class="style2" align="left">
-                                            <asp:Label ID="Label7" runat="server" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium" Text="Fecha Fin"></asp:Label>
+                                        <td align="left" width="360">
+                                            <asp:Label ID="Label9" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium" Text="Nombre de Cambio"></asp:Label>
                                         </td>
-                                        <td class="style3">
-                                            &nbsp;</td>
-                                        <td>
-                                            &nbsp;</td>
-                                        <td>
-                                            &nbsp;</td>
+                                        <td align="left" width="180">
+                                            <asp:Label ID="Label10" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium" Text="Tipo de Cambio"></asp:Label>
+                                        </td>
+                                        <td align="left" width="180">
+                                            <asp:Label ID="Label11" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium" Text="Fecha"></asp:Label>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td class="style2" align="left">
-                                            <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
+                                        <td align="left">
+                                            <asp:TextBox ID="TextBox6" runat="server"></asp:TextBox>
                                         </td>
-                                        <td class="style2" align="left">
-                                            <asp:TextBox ID="TextBox2" runat="server"></asp:TextBox>
+                                        <td align="left">
+                                            <asp:TextBox ID="TextBox4" runat="server" Width="300px"></asp:TextBox>
                                         </td>
-                                        <td class="style3">
-                                            &nbsp;</td>
-                                        <td>
-                                            &nbsp;</td>
-                                        <td>
-                                            &nbsp;</td>
+                                        <td align="left">
+                                            <asp:DropDownList ID="DropDownList6" runat="server">
+                                                <asp:ListItem></asp:ListItem>
+                                                <asp:ListItem Value="Cambio">Cambio</asp:ListItem>
+                                                <asp:ListItem Value="Kaizen">Kaizen</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </td>
+                                        <td align="left">
+                                            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" bgcolor="#F7F7F3">
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td width="180">
+                                            <asp:Label ID="Label12" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium" Text="Estado Cambio"></asp:Label>
+                                        </td>
+                                        <td width="180">
+                                            <asp:Label ID="Label13" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium" Text="Estado N0"></asp:Label>
+                                        </td>
+                                        <td width="180">
+                                            <asp:Label ID="Label14" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium" Text="Estado QA"></asp:Label>
+                                        </td>
+                                        <td width="180">
+                                            <asp:Label ID="Label15" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium" Text="Estado HSE"></asp:Label>
+                                        </td>
+                                        <td width="180">
+                                            <asp:Label ID="Label16" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium" Text="Estado N2"></asp:Label>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td class="style2">
-                                            &nbsp;</td>
-                                        <td class="style2">
-                                            &nbsp;</td>
-                                        <td class="style3">
-                                            &nbsp;</td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:DropDownList ID="DropDownList5" runat="server">
+                                                <asp:ListItem></asp:ListItem>
+                                                <asp:ListItem>Pendiente</asp:ListItem>
+                                                <asp:ListItem>Proceso</asp:ListItem>
+                                                <asp:ListItem>Autorizado</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </td>
                                         <td>
-                                            &nbsp;</td>
+                                            <asp:DropDownList ID="DropDownList1" runat="server">
+                                                <asp:ListItem></asp:ListItem>
+                                                <asp:ListItem Value="Pendiente">Pendiente</asp:ListItem>
+                                                <asp:ListItem Value="Autorizado">Autorizado</asp:ListItem>
+                                                <asp:ListItem Value="Rechazado">Rechazado</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </td>
+                                        <td>
+                                            <asp:DropDownList ID="DropDownList7" runat="server">
+                                                <asp:ListItem></asp:ListItem>
+                                                <asp:ListItem Value="Pendiente">Pendiente</asp:ListItem>
+                                                <asp:ListItem Value="Autorizado">Autorizado</asp:ListItem>
+                                                <asp:ListItem Value="Rechazado">Rechazado</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </td>
+                                        <td>
+                                            <asp:DropDownList ID="DropDownList8" runat="server">
+                                                <asp:ListItem></asp:ListItem>
+                                                <asp:ListItem Value="Pendiente">Pendiente</asp:ListItem>
+                                                <asp:ListItem Value="Autorizado">Autorizado</asp:ListItem>
+                                                <asp:ListItem Value="Rechazado">Rechazado</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </td>
+                                        <td align="left">
+                                            <asp:DropDownList ID="DropDownList9" runat="server">
+                                                <asp:ListItem></asp:ListItem>
+                                                <asp:ListItem Value="Pendiente">Pendiente</asp:ListItem>
+                                                <asp:ListItem Value="Autorizado">Autorizado</asp:ListItem>
+                                                <asp:ListItem Value="Rechazado">Rechazado</asp:ListItem>
+                                            </asp:DropDownList>
+                                        </td>
+                                    </tr>
+                                    </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right">
+                                            <asp:Button ID="Button7" runat="server" onclick="Button7_Click1" 
+                                                Text="Aceptar" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <table style="width:100%;">
+                                    <tr>
+                                        <td height="20">
+                                            <asp:Label ID="Label17" runat="server" Text="Label" ForeColor="White"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="Label18" runat="server" Text="Label" ForeColor="White"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="Label19" runat="server" Text="Label" ForeColor="White"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="Label20" runat="server" Text="Label" ForeColor="White"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="Label21" runat="server" Text="Label" ForeColor="White"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="Label22" runat="server" Text="Label" ForeColor="White"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="Label23" runat="server" Text="Label" ForeColor="White"></asp:Label>
+                                        </td>
+                                        <td>
+                                            <asp:Label ID="Label24" runat="server" Text="Label" ForeColor="White"></asp:Label>
+                                        </td>
                                     </tr>
                                 </table>
                             </td>
@@ -173,9 +268,50 @@
                                     ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
                                     ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
                                     
-                                    SelectCommand="SELECT CAMBIO.CAMBIO_ID, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, CAMBIO.ESTADO_CAMBIO, NIVEL0.STATUS AS NIVEL0, NIVEL1_HSE.STATUS AS HSE, NIVEL1_QA.STATUS AS QA, NIVEL2_STATUS.STATUS AS NIVEL2 FROM CAMBIO INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID INNER JOIN NIVEL1_HSE ON CAMBIO.CAMBIO_ID = NIVEL1_HSE.CAMBIO_ID INNER JOIN NIVEL1_QA ON CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID INNER JOIN NIVEL2_STATUS ON CAMBIO.CAMBIO_ID = NIVEL2_STATUS.CAMBIO_ID">
+                                    SelectCommand="SELECT     CAMBIO.CAMBIO_ID, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, CAMBIO.ESTADO_CAMBIO, NIVEL0.STATUS AS NIVEL0, 
+                      NIVEL1_HSE.STATUS AS HSE, NIVEL1_QA.STATUS AS QA, NIVEL2_STATUS.STATUS AS NIVEL2
+FROM         CAMBIO INNER JOIN
+                      NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID INNER JOIN
+                      NIVEL1_HSE ON CAMBIO.CAMBIO_ID = NIVEL1_HSE.CAMBIO_ID INNER JOIN
+                      NIVEL1_QA ON CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID INNER JOIN
+                      NIVEL2_STATUS ON CAMBIO.CAMBIO_ID = NIVEL2_STATUS.CAMBIO_ID
+                      
+                      WHERE 
+                      CAMBIO.CAMBIO_ID LIKE '%' + ? + '%'
+                    AND CAMBIO.NOMBRE_CAMBIO LIKE '%' + ? + '%'
+                    AND CAMBIO.TIPO_CAMBIO LIKE '%' + ? + '%'
+                    AND CAMBIO.ESTADO_CAMBIO LIKE '%' + ? + '%'
+                    AND NIVEL0.STATUS LIKE '%' + ? + '%'
+                    AND NIVEL1_HSE.STATUS LIKE '%' + ? + '%'
+                    AND NIVEL1_QA.STATUS LIKE '%' + ? + '%'
+                    AND NIVEL2_STATUS.STATUS LIKE '%' + ? + '%'
+                      
+                      
+                      "
+                      
+                    >
+                    
+                <SelectParameters>
+                    <asp:ControlParameter ControlID="Label17" Name="FOLIO" PropertyName="Text" 
+                    Type="String" ConvertEmptyStringToNull="False" />                   
+                    <asp:ControlParameter ControlID="Label18" Name="NOMBRE" PropertyName="Text" 
+                    Type="String" ConvertEmptyStringToNull="False" />                   
+                    <asp:ControlParameter ControlID="Label19" Name="TIPO_CAMBIO" PropertyName="Text" 
+                    Type="String" ConvertEmptyStringToNull="False" />                   
+                    <asp:ControlParameter ControlID="Label20" Name="EDO_CAMBIO" PropertyName="Text" 
+                    Type="String" ConvertEmptyStringToNull="False" />                   
+                    <asp:ControlParameter ControlID="Label21" Name="EDO_N0" PropertyName="Text" 
+                    Type="String" ConvertEmptyStringToNull="False" />                   
+                    <asp:ControlParameter ControlID="Label22" Name="EDO_QA" PropertyName="Text" 
+                    Type="String" ConvertEmptyStringToNull="False" />                   
+                    <asp:ControlParameter ControlID="Label23" Name="EDO_HSE" PropertyName="Text" 
+                    Type="String" ConvertEmptyStringToNull="False" />           
+                    <asp:ControlParameter ControlID="Label24" Name="EDO_N2" PropertyName="Text" 
+                    Type="String" ConvertEmptyStringToNull="False" />
+                </SelectParameters>
+                    
+                    
                                 </asp:SqlDataSource>
-                                <br />
                                 <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
                                     AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
                                     DataSourceID="SqlDataSource1" Width="880px" CellPadding="4" 

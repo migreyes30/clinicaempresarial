@@ -105,25 +105,20 @@
                         Font-Names="Arial Narrow" Font-Size="Medium" Width="850px">
                         <Columns>
                             <asp:CommandField ShowSelectButton="True" />
-                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="FOLIO" ReadOnly="True" 
+                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" ReadOnly="True" 
                                 SortExpression="CAMBIO_ID" >
-                            <HeaderStyle BackColor="#3333CC" ForeColor="White" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="AREA" 
+                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
                                 SortExpression="NOMBRE_AREA" >
-                            <HeaderStyle BackColor="#3333CC" ForeColor="White" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE DE CAMBIO" 
+                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE_CAMBIO" 
                                 SortExpression="NOMBRE_CAMBIO" >
-                            <HeaderStyle BackColor="#3333CC" ForeColor="White" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO DE CAMBIO" 
+                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
                                 SortExpression="TIPO_CAMBIO" >
-                            <HeaderStyle BackColor="#3333CC" ForeColor="White" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="FECHA" 
+                            <asp:BoundField DataField="FECHA_RECEPCION" HeaderText="FECHA_RECEPCION" 
                                 SortExpression="FECHA_RECEPCION" >
-                            <HeaderStyle BackColor="#3333CC" ForeColor="White" />
                             </asp:BoundField>
                         </Columns>
                     </asp:GridView>
@@ -138,7 +133,7 @@
                         
                         
                         UpdateCommand="UPDATE [NIVEL0] SET [STATUS] = @STATUS, [AREA_ID] = @AREA_ID, [FECHA_ASIGNACION] = @FECHA_ASIGNACION, [FECHA_APROBACION] = @FECHA_APROBACION, [COMENTARIOS] = @COMENTARIOS, [CAMBIO_ID] = @CAMBIO_ID WHERE [NIVEL0_ID] = @NIVEL0_ID">
-                        <SelectParameters>
+                        <SelectParameters>                            
                             <asp:SessionParameter DbType="String" Name="user" SessionField="user" />
                         </SelectParameters>
                         <DeleteParameters>
