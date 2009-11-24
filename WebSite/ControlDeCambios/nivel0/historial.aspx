@@ -179,7 +179,7 @@ WHERE     (CAMBIO.AREA_ID IN
                             FROM          USUARIO INNER JOIN
                                                    DEPARTAMENTO ON USUARIO.USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID INNER JOIN
                                                    AREA AS AREA_1 ON DEPARTAMENTO.DEPTO_ID = AREA_1.DEPTO_ID
-                            WHERE      (USUARIO.NOMBRE_USUARIO = @user)))" 
+                            WHERE      (USUARIO.NOMBRE_USUARIO = @user) AND CAMBIO.ESTADO_CAMBIO not IN ('Pendiente')))" 
                         
                         
                                     
