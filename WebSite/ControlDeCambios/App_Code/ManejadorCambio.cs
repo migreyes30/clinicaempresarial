@@ -593,72 +593,147 @@ public class ManejadorCambio
 
     }
 
-    public SqlDataReader getCambiosPendientesBack(String querie, String mail)
+    public String getCambiosPendientesBack(String mail,String userPrincipal)
     {
-        SqlDataReader resultBackUp = null;
+        String querieFlujoNormal = "SELECT CAMBIO.CAMBIO_ID, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, NIVEL0.FECHA_ASIGNACION FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID WHERE (CAMBIO.AREA_ID IN (SELECT AREA_1.AREA_ID FROM USUARIO INNER JOIN DEPARTAMENTO ON USUARIO.USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID OR USUARIO.USUARIO_ID = DEPARTAMENTO.BACKUP_ID INNER JOIN AREA AS AREA_1 ON DEPARTAMENTO.DEPTO_ID = AREA_1.DEPTO_ID WHERE (USUARIO.CORREO_USUARIO = @correo))) AND (NIVEL0.STATUS = 'Pendiente')";
+        String sqlPrefix = "CAMBIO.CAMBIO_ID = ";
+        String accum = "";
+        String accumNormal = "";
 
-            List<string> idCambiosBack = new List<string>();
-            String sqlPrefix = "CAMBIO.CAMBIO_ID = ";
+        
+        thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = querieFlujoNormal;
+        thisCommand.CommandType = CommandType.Text;
 
+        SqlParameter mailUser = new SqlParameter("@correo", System.Data.SqlDbType.VarChar);
+        mailUser.Value = mail;
+        thisCommand.Parameters.Add(mailUser);
 
-            thisCommand = thisConnection.CreateCommand();
-            thisCommand.CommandText = querie;
-            thisCommand.CommandType = CommandType.Text;
-
-            SqlParameter mailUser = new SqlParameter("@correo", System.Data.SqlDbType.VarChar);
-            mailUser.Value = mail;
-            thisCommand.Parameters.Add(mailUser);
-
-            SqlDataReader result = thisCommand.ExecuteReader();
+        SqlDataReader result = thisCommand.ExecuteReader();
                
-            while (result.Read())
+        while (result.Read())
+        {
+          DateTime fechaAsignacion = DateTime.Parse(result["FECHA_ASIGNACION"].ToString());
+          DateTime fechaCur = fechaAsignacion;
+          int daysOff = 0;
+        
+          while (fechaCur <= DateTime.Now.ToUniversalTime())
+          {
+              if (!(fechaCur.DayOfWeek == DayOfWeek.Saturday || fechaCur.DayOfWeek == DayOfWeek.Sunday))
+              {
+                  daysOff += 1;
+              }
+
+              fechaCur = fechaCur.AddDays(1);
+          }
+
+          if (daysOff > 2)
+          {
+              accum += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+          }
+          else {
+              accumNormal += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+          }
+        }
+        
+        result.Close();
+
+        if(accum.Equals(""))
+        {
+            return querieFlujoNormal;
+
+        }else{
+
+            if (userPrincipal.Equals("False"))
             {
-                DateTime fechaAsignacion = DateTime.Parse(result["FECHA_ASIGNACION"].ToString());
-                DateTime fechaCur = fechaAsignacion;
-                int daysOff = 0;
-                while (fechaCur <= DateTime.Now.ToUniversalTime())
-                {
-                    if (!(fechaCur.DayOfWeek == DayOfWeek.Saturday || fechaCur.DayOfWeek == DayOfWeek.Sunday))
-                    {
-                        daysOff += 1;
-                    }
-                    fechaCur = fechaCur.AddDays(1);
-                }
-                if (daysOff > 2)
-                {
+                accum = accum.Substring(0, accum.LastIndexOf(" or "));
 
-                    idCambiosBack.Add(sqlPrefix + result["CAMBIO_ID"].ToString());
+                String querieFlujoBackUp = "SELECT CAMBIO.CAMBIO_ID, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, NIVEL0.FECHA_ASIGNACION FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID WHERE (CAMBIO.AREA_ID IN (SELECT AREA_1.AREA_ID FROM USUARIO INNER JOIN DEPARTAMENTO ON USUARIO.USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID OR USUARIO.USUARIO_ID = DEPARTAMENTO.BACKUP_ID INNER JOIN AREA AS AREA_1 ON DEPARTAMENTO.DEPTO_ID = AREA_1.DEPTO_ID WHERE (USUARIO.CORREO_USUARIO = @correo))) AND (NIVEL0.STATUS = 'Pendiente') AND (" + accum + ")";
 
-                }
+                return querieFlujoBackUp;
             }
-            result.Close();
-            if (idCambiosBack.Count > 0) { 
-                string cum = "";
-                foreach(string temp in idCambiosBack){
-                    cum += temp + " or ";
-                }
-                cum = cum.Substring(0,cum.LastIndexOf(" or "));
-                
-                String querieSQLBack = "SELECT CAMBIO.CAMBIO_ID, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, NIVEL0.FECHA_ASIGNACION FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID WHERE (CAMBIO.AREA_ID IN (SELECT AREA_1.AREA_ID FROM USUARIO INNER JOIN DEPARTAMENTO ON USUARIO.USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID OR USUARIO.USUARIO_ID = DEPARTAMENTO.BACKUP_ID INNER JOIN AREA AS AREA_1 ON DEPARTAMENTO.DEPTO_ID = AREA_1.DEPTO_ID WHERE (USUARIO.CORREO_USUARIO = @correo))) AND (NIVEL0.STATUS = 'Pendiente') AND (@idBack)";
+            else
+            {
+                accumNormal = accumNormal.Substring(0, accumNormal.LastIndexOf(" or "));
 
-                thisCommand = thisConnection.CreateCommand();
-                thisCommand.CommandText = querieSQLBack;
-                thisCommand.CommandType = CommandType.Text;
+                String querieFlujoN0Delay = "SELECT CAMBIO.CAMBIO_ID, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, NIVEL0.FECHA_ASIGNACION FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID WHERE (CAMBIO.AREA_ID IN (SELECT AREA_1.AREA_ID FROM USUARIO INNER JOIN DEPARTAMENTO ON USUARIO.USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID OR USUARIO.USUARIO_ID = DEPARTAMENTO.BACKUP_ID INNER JOIN AREA AS AREA_1 ON DEPARTAMENTO.DEPTO_ID = AREA_1.DEPTO_ID WHERE (USUARIO.CORREO_USUARIO = @correo))) AND (NIVEL0.STATUS = 'Pendiente') AND (" + accumNormal + ")";
 
-                SqlParameter mailUser_second = new SqlParameter("@correo", System.Data.SqlDbType.VarChar);
-                mailUser_second.Value = mail;
-                thisCommand.Parameters.Add(mailUser_second);
+                return querieFlujoN0Delay;
 
-                SqlParameter idBackUp = new SqlParameter("@idBack", System.Data.SqlDbType.VarChar);
-                idBackUp.Value = cum;
-                thisCommand.Parameters.Add(idBackUp);
-
-                resultBackUp = thisCommand.ExecuteReader();
-               
-            }
-            
-            return resultBackUp;
+            }        
+        }
 
     }
+
+    public String getCambiosHistBack(String mail, String userPrincipal, String lastPartQuerie)
+    {
+        String querieHistN0 = "SELECT CAMBIO.CAMBIO_ID, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, NIVEL0.FECHA_APROBACION,NIVEL0.FECHA_ASIGNACION, NIVEL0.STATUS AS STATUS_N0, CAMBIO.ESTADO_CAMBIO FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID WHERE (CAMBIO.AREA_ID IN (SELECT AREA_1.AREA_ID FROM USUARIO INNER JOIN DEPARTAMENTO ON USUARIO.USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID OR USUARIO.USUARIO_ID = DEPARTAMENTO.BACKUP_ID INNER JOIN AREA AS AREA_1 ON DEPARTAMENTO.DEPTO_ID = AREA_1.DEPTO_ID WHERE (USUARIO.CORREO_USUARIO = @correo) AND (NIVEL0.STATUS NOT IN ('Pendiente'))))";
+        String sqlPrefix = "CAMBIO.CAMBIO_ID = ";
+        String accum = "";
+        String accumNormal = "";
+
+
+        thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = querieHistN0;
+        thisCommand.CommandType = CommandType.Text;
+
+        SqlParameter mailUser = new SqlParameter("@correo", System.Data.SqlDbType.VarChar);
+        mailUser.Value = mail;
+        thisCommand.Parameters.Add(mailUser);
+
+        SqlDataReader result = thisCommand.ExecuteReader();
+
+        while (result.Read())
+        {
+            DateTime fechaAsignacion = DateTime.Parse(result["FECHA_ASIGNACION"].ToString());
+            DateTime fechaAprobacion = DateTime.Parse(result["FECHA_APROBACION"].ToString());
+            DateTime fechaCur = fechaAsignacion;
+            int daysOff = 0;
+
+            while (fechaCur <= fechaAprobacion)
+            {
+                if (!(fechaCur.DayOfWeek == DayOfWeek.Saturday || fechaCur.DayOfWeek == DayOfWeek.Sunday))
+                {
+                    daysOff += 1;
+                }
+
+                fechaCur = fechaCur.AddDays(1);
+            }
+
+            if (daysOff > 2)
+            {
+                accum += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+            }
+            else
+            {
+                accumNormal += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+            }
+        }
+
+        result.Close();
+
+
+            if (userPrincipal.Equals("False"))
+            {
+                accum = accum.Substring(0, accum.LastIndexOf(" or "));
+
+                String querieFlujoBackUp = "SELECT CAMBIO.CAMBIO_ID, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, NIVEL0.FECHA_APROBACION,NIVEL0.FECHA_ASIGNACION, NIVEL0.STATUS AS STATUS_N0, CAMBIO.ESTADO_CAMBIO FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID WHERE (CAMBIO.AREA_ID IN (SELECT AREA_1.AREA_ID FROM USUARIO INNER JOIN DEPARTAMENTO ON USUARIO.USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID OR USUARIO.USUARIO_ID = DEPARTAMENTO.BACKUP_ID INNER JOIN AREA AS AREA_1 ON DEPARTAMENTO.DEPTO_ID = AREA_1.DEPTO_ID WHERE (USUARIO.CORREO_USUARIO = @correo) AND (NIVEL0.STATUS NOT IN ('Pendiente')))) AND (" + accum + ")" + lastPartQuerie;
+
+                return querieFlujoBackUp;
+            }
+            else
+            {
+                accumNormal = accumNormal.Substring(0, accumNormal.LastIndexOf(" or "));
+
+                String querieFlujoN0 = "SELECT CAMBIO.CAMBIO_ID, AREA.NOMBRE_AREA, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, NIVEL0.FECHA_APROBACION,NIVEL0.FECHA_ASIGNACION, NIVEL0.STATUS AS STATUS_N0, CAMBIO.ESTADO_CAMBIO FROM CAMBIO INNER JOIN AREA ON CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID WHERE (CAMBIO.AREA_ID IN (SELECT AREA_1.AREA_ID FROM USUARIO INNER JOIN DEPARTAMENTO ON USUARIO.USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID OR USUARIO.USUARIO_ID = DEPARTAMENTO.BACKUP_ID INNER JOIN AREA AS AREA_1 ON DEPARTAMENTO.DEPTO_ID = AREA_1.DEPTO_ID WHERE (USUARIO.CORREO_USUARIO = @correo) AND (NIVEL0.STATUS NOT IN ('Pendiente')))) AND (" + accumNormal + ")" + lastPartQuerie;
+
+                return querieFlujoN0;
+
+            }
+
+
+    }
+
+
 
 }
