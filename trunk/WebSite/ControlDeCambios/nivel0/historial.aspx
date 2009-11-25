@@ -221,21 +221,13 @@
                             <asp:BoundField DataField="CAMBIO_ID" HeaderText="FOLIO" ReadOnly="True" 
                                 SortExpression="CAMBIO_ID" >
                             </asp:BoundField>
-<<<<<<< .mine
-                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="AREA" 
-                                SortExpression="NOMBRE_AREA" />
-=======
->>>>>>> .r110
+
                             <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE DEL CAMBIO" 
                                 SortExpression="NOMBRE_CAMBIO" >
                             </asp:BoundField>
-<<<<<<< .mine
-                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO" 
-=======
                             <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
                                 SortExpression="NOMBRE_AREA" />
                             <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
->>>>>>> .r110
                                 SortExpression="TIPO_CAMBIO" >
                             </asp:BoundField>
                             <asp:BoundField DataField="FECHA_APROBACION" HeaderText="FECHA DE APROBACION" 
