@@ -942,13 +942,13 @@ public class ManejadorCambio
 
     public String getCambiosHistBackHSE(String userPrincipal, String lastPartQuerie)
     {
-        String querieHistQA = "SELECT  CAMBIO.ESTADO_CAMBIO, CAMBIO.CAMBIO_ID, CAMBIO.NOMBRE_CAMBIO, DEPARTAMENTO.NOMBRE_DEPTO, CAMBIO.TIPO_CAMBIO, NIVEL1_QA.FECHA_APROBACION, NIVEL1_QA.FECHA_ASIGNACION,AREA.NOMBRE_AREA,NIVEL1_QA.STATUS FROM CAMBIO INNER JOIN NIVEL1_QA ON CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID INNER JOIN AREA ON NIVEL1_QA.AREA_ID = AREA.AREA_ID AND CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN DEPARTAMENTO ON DEPARTAMENTO.DEPTO_ID = AREA.DEPTO_ID AND AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID AND NIVEL1_QA.STATUS NOT IN ('Pendiente', '---------')";
+        String querieHistHSE = "SELECT  CAMBIO.ESTADO_CAMBIO, CAMBIO.CAMBIO_ID, CAMBIO.NOMBRE_CAMBIO, DEPARTAMENTO.NOMBRE_DEPTO, CAMBIO.TIPO_CAMBIO, NIVEL1_QA.FECHA_APROBACION, NIVEL1_QA.FECHA_ASIGNACION,AREA.NOMBRE_AREA,NIVEL1_QA.STATUS FROM CAMBIO INNER JOIN NIVEL1_QA ON CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID INNER JOIN AREA ON NIVEL1_QA.AREA_ID = AREA.AREA_ID AND CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN DEPARTAMENTO ON DEPARTAMENTO.DEPTO_ID = AREA.DEPTO_ID AND AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID AND NIVEL1_QA.STATUS NOT IN ('Pendiente', '---------')";
         String sqlPrefix = "CAMBIO.CAMBIO_ID = ";
         String accum = "";
         String accumNormal = "";
 
         thisCommand = thisConnection.CreateCommand();
-        thisCommand.CommandText = querieHistQA;
+        thisCommand.CommandText = querieHistHSE;
         thisCommand.CommandType = CommandType.Text;
 
         SqlDataReader result = thisCommand.ExecuteReader();
@@ -987,7 +987,7 @@ public class ManejadorCambio
         {
             accum = accum.Substring(0, accum.LastIndexOf(" or "));
 
-            String querieFlujoBackUp = querieHistQA + " WHERE (" + accum + ")" + lastPartQuerie;
+            String querieFlujoBackUp = querieHistHSE + " WHERE (" + accum + ")" + lastPartQuerie;
 
             return querieFlujoBackUp;
         }
@@ -995,7 +995,7 @@ public class ManejadorCambio
         {
             accumNormal = accumNormal.Substring(0, accumNormal.LastIndexOf(" or "));
 
-            String querieFlujoN0 = querieHistQA + " WHERE (" + accumNormal + ")" + lastPartQuerie;
+            String querieFlujoN0 = querieHistHSE + " WHERE (" + accumNormal + ")" + lastPartQuerie;
 
             return querieFlujoN0;
 
