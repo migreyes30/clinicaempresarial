@@ -940,4 +940,68 @@ public class ManejadorCambio
 
     }
 
+    public String getCambiosHistBackHSE(String userPrincipal, String lastPartQuerie)
+    {
+        String querieHistQA = "SELECT  CAMBIO.ESTADO_CAMBIO, CAMBIO.CAMBIO_ID, CAMBIO.NOMBRE_CAMBIO, DEPARTAMENTO.NOMBRE_DEPTO, CAMBIO.TIPO_CAMBIO, NIVEL1_QA.FECHA_APROBACION, NIVEL1_QA.FECHA_ASIGNACION,AREA.NOMBRE_AREA,NIVEL1_QA.STATUS FROM CAMBIO INNER JOIN NIVEL1_QA ON CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID INNER JOIN AREA ON NIVEL1_QA.AREA_ID = AREA.AREA_ID AND CAMBIO.AREA_ID = AREA.AREA_ID INNER JOIN DEPARTAMENTO ON DEPARTAMENTO.DEPTO_ID = AREA.DEPTO_ID AND AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID AND NIVEL1_QA.STATUS NOT IN ('Pendiente', '---------')";
+        String sqlPrefix = "CAMBIO.CAMBIO_ID = ";
+        String accum = "";
+        String accumNormal = "";
+
+        thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = querieHistQA;
+        thisCommand.CommandType = CommandType.Text;
+
+        SqlDataReader result = thisCommand.ExecuteReader();
+
+        while (result.Read())
+        {
+            DateTime fechaAsignacion = DateTime.Parse(result["FECHA_ASIGNACION"].ToString());
+            DateTime fechaAprobacion = DateTime.Parse(result["FECHA_APROBACION"].ToString());
+            DateTime fechaCur = fechaAsignacion;
+            int daysOff = 0;
+
+            while (fechaCur <= fechaAprobacion)
+            {
+                if (!(fechaCur.DayOfWeek == DayOfWeek.Saturday || fechaCur.DayOfWeek == DayOfWeek.Sunday))
+                {
+                    daysOff += 1;
+                }
+
+                fechaCur = fechaCur.AddDays(1);
+            }
+
+            if (daysOff > 2)
+            {
+                accum += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+            }
+            else
+            {
+                accumNormal += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+            }
+        }
+
+        result.Close();
+
+
+        if (userPrincipal.Equals("False"))
+        {
+            accum = accum.Substring(0, accum.LastIndexOf(" or "));
+
+            String querieFlujoBackUp = querieHistQA + " WHERE (" + accum + ")" + lastPartQuerie;
+
+            return querieFlujoBackUp;
+        }
+        else
+        {
+            accumNormal = accumNormal.Substring(0, accumNormal.LastIndexOf(" or "));
+
+            String querieFlujoN0 = querieHistQA + " WHERE (" + accumNormal + ")" + lastPartQuerie;
+
+            return querieFlujoN0;
+
+        }
+
+
+    }
+
 }
