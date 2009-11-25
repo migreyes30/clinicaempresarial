@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-//using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
 
 public partial class nivel1hse : System.Web.UI.Page
 {
@@ -15,11 +15,38 @@ public partial class nivel1hse : System.Web.UI.Page
         }
         usuarioSesion.Text = Session["user"].ToString();
 
+		selectFlujoNormalOrBackUPHSE();
+		
     }
+	
+	public void selectFlujoNormalOrBackUPHSE()
+    {
+
+        try
+        {
+
+            SqlDataSourceHSE.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+            SqlDataSourceHSE.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+            ManejadorCambio mostrarBackUp = new ManejadorCambio();
+
+            SqlDataSourceHSE.SelectCommand = mostrarBackUp.getCambiosPendientesBackHSE(Session["userPrincipal"].ToString());
+
+        }
+        catch (Exception)
+        {
+
+        }
+    }
+	
     protected void Button1_Click(object sender, EventArgs e)
     {
         Session["user"] = null;
         Session["perfil"] = null;
+        Session["correo"] = null;
+        Session["depto"] = null;
+        Session["userPrincipal"] = null;
         Response.Redirect("../index.aspx");
     }
     protected void GridView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -29,9 +56,8 @@ public partial class nivel1hse : System.Web.UI.Page
     }
     protected void Button6_Click(object sender, EventArgs e)
     {
-        Response.Redirect("nivel1hse.aspx");
-    }
 
+    }
     protected void Button2_Click(object sender, EventArgs e)
     {
         Response.Redirect("historial.aspx");

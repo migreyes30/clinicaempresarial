@@ -137,13 +137,13 @@
                                             <asp:Label ID="Label9" runat="server" Font-Names="Arial Narrow" 
                                                 Font-Size="Medium" Text="Nombre de Cambio"></asp:Label>
                                         </td>
+                                         <td align="left" width="180">
+                                            <asp:Label ID="Label11" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium" Text="Departamento"></asp:Label>
+                                        </td>
                                         <td align="left" width="180">
                                             <asp:Label ID="Label10" runat="server" Font-Names="Arial Narrow" 
                                                 Font-Size="Medium" Text="Área"></asp:Label>
-                                        </td>
-                                        <td align="left" width="180">
-                                            <asp:Label ID="Label11" runat="server" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium" Text="Fecha de Aprobación"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
@@ -153,20 +153,34 @@
                                         <td align="left">
                                             <asp:TextBox ID="TextBox4" runat="server" Width="300px"></asp:TextBox>
                                         </td>
-                                        <td align="left">
-                                            <asp:DropDownList ID="DropDownList9" runat="server" 
-                                                DataSourceID="SqlDataSource1" DataTextField="NOMBRE_AREA" 
-                                                DataValueField="AREA_ID">
-                                            </asp:DropDownList>
-                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                                       <td align="left">
+                                              <asp:DropDownList ID="DropDownList10" runat="server" AutoPostBack="True" 
+                                                DataSourceID="SqlDataSource2" DataTextField="NOMBRE_DEPTO" 
+                                                DataValueField="DEPTO_ID" >
+                                                <asp:ListItem Value="" Selected="True" Enabled="true">Todos</asp:ListItem>
+                                            </asp:DropDownList>                                            
+                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
                                                 ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
                                                 ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                
-                                                SelectCommand="SELECT [NOMBRE_AREA], [AREA_ID] FROM [AREA] ORDER BY [NOMBRE_AREA]">
+                                                SelectCommand="SELECT [DEPTO_ID], [NOMBRE_DEPTO] FROM [DEPARTAMENTO]" 
+                                              >
                                             </asp:SqlDataSource>
                                         </td>
                                         <td align="left">
-                                            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
+                                <asp:DropDownList ID="DropDownList9" runat="server"
+                                                DataSourceID="SqlDataSource1" DataTextField="NOMBRE_AREA" AutoPostBack="True"
+                                                DataValueField="AREA_ID" >
+                                                <asp:ListItem Value="" Selected="True" Enabled="true">Todos</asp:ListItem>
+                                </asp:DropDownList>
+                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
+                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
+                                                SelectCommand="SELECT [AREA_ID], [NOMBRE_AREA], [DEPTO_ID] FROM [AREA] WHERE ([DEPTO_ID] = ?)">
+                                                <SelectParameters>
+                                                    <asp:ControlParameter ControlID="DropDownList10" DefaultValue="" Name="DEPTO_ID" 
+                                                        PropertyName="SelectedValue" Type="Int32" />
+                                                </SelectParameters>
+                                            </asp:SqlDataSource>
                                         </td>
                                     </tr>
                                     <tr>
@@ -210,58 +224,38 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <asp:Label ID="Label14" runat="server" ForeColor="White"></asp:Label>
-&nbsp;
-                                            <asp:Label ID="Label15" runat="server" ForeColor="White"></asp:Label>
-&nbsp;
-                                            <asp:Label ID="Label16" runat="server" ForeColor="White"></asp:Label>
-&nbsp;
-                                            <asp:Label ID="Label17" runat="server" ForeColor="White"></asp:Label>
-&nbsp;
-                                            <asp:Label ID="Label18" runat="server" ForeColor="White"></asp:Label>
-&nbsp;
-                                            <asp:Label ID="Label19" runat="server" ForeColor="White"></asp:Label>
-                                        </td>
-                                    </tr>
-                                    <tr>
                                         <td align="center">
                     <asp:GridView ID="GridListaNivelCero" runat="server" AllowPaging="True" 
                         AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
-                        DataSourceID="NivelCeroDataSource" 
-                        EmptyDataText="There are no data records to display." 
+                        DataSourceID="NivelHSEDataSource" 
+                        EmptyDataText="Busque por campo o presione el boton Aceptar para ver todo el Historial" 
                         onselectedindexchanged="GridView1_SelectedIndexChanged1" CellPadding="4" Font-Names="Arial Narrow" 
                                                 Font-Size="Medium" Width="880px" ForeColor="#333333" GridLines="None" 
                                                 PageSize="30">
                         <RowStyle BackColor="#EFF3FB" />
                         <Columns>
-                            <asp:CommandField ShowSelectButton="True" >
-                            <HeaderStyle BackColor="#F9F8F4" />
-                            </asp:CommandField>
-                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="FOLIO" 
+                            <asp:CommandField ShowSelectButton="True" />
+                             <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" 
                                 SortExpression="CAMBIO_ID" >
-                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="ESTADO_CAMBIO" HeaderText="ESTADO" 
-                                SortExpression="ESTADO_CAMBIO" >
-                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE DEL CAMBIO" 
+                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE_CAMBIO" 
                                 SortExpression="NOMBRE_CAMBIO" >
-                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO" 
-                                SortExpression="TIPO_CAMBIO" >
-                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="FECHA_APROBACION" HeaderText="FECHA" 
-                                SortExpression="FECHA_APROBACION" >
-                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="ÁREA" 
+							<asp:BoundField DataField="NOMBRE_DEPTO" HeaderText="NOMBRE_DEPTO" 
+                                SortExpression="NOMBRE_DEPTO" />
+                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
                                 SortExpression="NOMBRE_AREA" >
-                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
                             </asp:BoundField>
+                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
+                                SortExpression="TIPO_CAMBIO" >
+                            </asp:BoundField>
+                            <asp:BoundField DataField="FECHA_APROBACION" HeaderText="FECHA_APROBACION" 
+                                SortExpression="FECHA_APROBACION" > 
+                            </asp:BoundField>
+							<asp:BoundField DataField="STATUS" HeaderText="STATUS_HSE" 
+                                SortExpression="STATUS" />
+                            <asp:BoundField DataField="ESTADO_CAMBIO" HeaderText="ESTADO_CAMBIO" 
+                                SortExpression="ESTADO_CAMBIO" />
                         </Columns>
                         <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
@@ -278,63 +272,7 @@
                         <tr>
                             <td align="center">
                                 <br />
-                    <asp:SqlDataSource ID="NivelCeroDataSource" runat="server" 
-                        ConnectionString="<%$ ConnectionStrings:ControlCambiosConnectionString1 %>" 
-                        DeleteCommand="DELETE FROM [NIVEL0] WHERE [NIVEL0_ID] = @NIVEL0_ID" 
-                        InsertCommand="INSERT INTO [NIVEL0] ([STATUS], [AREA_ID], [FECHA_ASIGNACION], [FECHA_APROBACION], [COMENTARIOS], [CAMBIO_ID]) VALUES (@STATUS, @AREA_ID, @FECHA_ASIGNACION, @FECHA_APROBACION, @COMENTARIOS, @CAMBIO_ID)" 
-                        
-                        ProviderName="<%$ ConnectionStrings:ControlCambiosConnectionString1.ProviderName %>" 
-                        SelectCommand="
-
-SELECT     CAMBIO.ESTADO_CAMBIO, NIVEL1_HSE.CAMBIO_ID, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, CAMBIO.FECHA_APROBACION, AREA.NOMBRE_AREA
-                        FROM         CAMBIO INNER JOIN
-                        NIVEL1_HSE ON CAMBIO.CAMBIO_ID = NIVEL1_HSE.CAMBIO_ID INNER JOIN                      
-                        AREA ON NIVEL1_HSE.AREA_ID = AREA.AREA_ID AND NIVEL1_HSE.STATUS NOT IN ('Pendiente', '---------')
-                        
-                        WHERE	
-                        
-                      NIVEL1_HSE.CAMBIO_ID LIKE '%'+@FOLIO+'%' AND
-                      CAMBIO.NOMBRE_CAMBIO LIKE '%'+@NOMBRE+'%' AND
-                      AREA.AREA_ID LIKE '%'+@AREA+'%' AND
-                      CAMBIO.ESTADO_CAMBIO LIKE '%'+@ESTADO+'%' AND
-                      CAMBIO.TIPO_CAMBIO LIKE '%'+@TIPO+'%'                                                
-
-                      "
-                       UpdateCommand="UPDATE [NIVEL0] SET [STATUS] = @STATUS, [AREA_ID] = @AREA_ID, [FECHA_ASIGNACION] = @FECHA_ASIGNACION, [FECHA_APROBACION] = @FECHA_APROBACION, [COMENTARIOS] = @COMENTARIOS, [CAMBIO_ID] = @CAMBIO_ID WHERE [NIVEL0_ID] = @NIVEL0_ID">
-                        <SelectParameters>                                                   
-                            <asp:ControlParameter ControlID="Label14" Name="FOLIO" PropertyName="Text" 
-                            Type="String" ConvertEmptyStringToNull="False" />
-                            <asp:ControlParameter ControlID="Label15" Name="ESTADO" PropertyName="Text" 
-                            Type="String" ConvertEmptyStringToNull="False" />
-                            <asp:ControlParameter ControlID="Label16" Name="NOMBRE" PropertyName="Text" 
-                            Type="String" ConvertEmptyStringToNull="False" />
-                            <asp:ControlParameter ControlID="Label18" Name="AREA" PropertyName="Text" 
-                            Type="String" ConvertEmptyStringToNull="False" />
-                            <asp:ControlParameter ControlID="Label19" Name="TIPO" PropertyName="Text" 
-                            Type="String" ConvertEmptyStringToNull="False" />                                                        
-                        </SelectParameters>                                    
-
-                        <DeleteParameters>
-                            <asp:Parameter Name="NIVEL0_ID" Type="Int32" />
-                        </DeleteParameters>
-                        <InsertParameters>
-                            <asp:Parameter Name="STATUS" Type="String" />
-                            <asp:Parameter Name="AREA_ID" Type="Int32" />
-                            <asp:Parameter Name="FECHA_ASIGNACION" Type="DateTime" />
-                            <asp:Parameter Name="FECHA_APROBACION" Type="DateTime" />
-                            <asp:Parameter Name="COMENTARIOS" Type="String" />
-                            <asp:Parameter Name="CAMBIO_ID" Type="Int32" />
-                        </InsertParameters>
-                        <UpdateParameters>
-                            <asp:Parameter Name="STATUS" Type="String" />
-                            <asp:Parameter Name="AREA_ID" Type="Int32" />
-                            <asp:Parameter Name="FECHA_ASIGNACION" Type="DateTime" />
-                            <asp:Parameter Name="FECHA_APROBACION" Type="DateTime" />
-                            <asp:Parameter Name="COMENTARIOS" Type="String" />
-                            <asp:Parameter Name="CAMBIO_ID" Type="Int32" />
-                            <asp:Parameter Name="NIVEL0_ID" Type="Int32" />
-                        </UpdateParameters>
-                    </asp:SqlDataSource>
+                    <asp:SqlDataSource ID="NivelHSEDataSource" runat="server" />
                             </td>
                         </tr>
                     </table>
