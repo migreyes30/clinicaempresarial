@@ -327,7 +327,7 @@
                                         <td align="left">
                                             
                                             <asp:Button ID="Button7" runat="server" onclick="Button7_Click" 
-                                                Text="Aceptar" CausesValidation="true" />
+                                                Text="Aceptar" CausesValidation="true" style="height: 26px" />
                                             &nbsp;&nbsp;&nbsp;&nbsp;
                                             
                                             <asp:Button ID="Button8" runat="server" 

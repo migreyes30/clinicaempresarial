@@ -118,6 +118,13 @@ public partial class cambios : System.Web.UI.Page
             ManejadorCambio miManejador = new ManejadorCambio();
             miManejador.rechazarN1HSE(TextBoxComentario.Text, Int32.Parse(Label25.Text));
 
+            /************* Llamada a la funcion para enviar mail a Admin ****
+
+            miManejador.rechazadoCambio(miManejador.getMailAdmin(),usuarioSesion.Text, Label25.Text);
+
+            /***************************************/
+
+
             Label24.Text = "Dato Insertado!!!";
             Button7.Visible = false;
             Button8.Visible = false;

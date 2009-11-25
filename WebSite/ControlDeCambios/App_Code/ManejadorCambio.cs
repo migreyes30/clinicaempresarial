@@ -17,17 +17,52 @@ public class ManejadorCambio
 
 
     public ManejadorCambio()
-	{
+    {
 
         thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ToString());
         thisConnection.Open();
         //thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");        
 
-	}
+    }
 
-    public void mailRechazar()
+
+    
+    /******** METODO QUE INCLUYE EL SP. ESTE SE MANDA LLAMAR CADA VEZ QUE LE DAMOS ACEPTAR EN TODOS LOS NIVELES *******/
+
+    public void nuevoCambio(String eMail)
     {
-        
+        SqlCommand insertando = new SqlCommand("exec master.dbo.xp_smtp_sendmail @FROM = N'proficy@talisman.internal.pg.com', @FROM_NAME = N'Control de cambios', @TO = N'"+eMail+"', @subject = N'Nuevo Cambio', @message = N'Nuevo Cambio. Entra al sistema y revisa tus nuevos cambio por aprobar' @type = N'text/html', @server = N'smtpgw.pg.com'", thisConnection);
+        insertando.ExecuteNonQuery();
+    }
+
+    /**************************/
+
+
+
+
+    /******** METODO QUE INCLUYE EL SP. ESTE SE MANDA MAIL A ADMIN CADA VEZ QUE LE DAMOS CANCELAR EN TODOS LOS NIVELES *******/
+    public void rechazadoCambio(String eMail, String usuario, String cambioId)
+    {
+        SqlCommand insertando = new SqlCommand("exec master.dbo.xp_smtp_sendmail @FROM = N'proficy@talisman.internal.pg.com', @FROM_NAME = N'Control de cambios', @TO = N'" + eMail + "', @subject = N'Nuevo Cambio', @message = N'El usuario "+usuario+" rechazó el cambio "+cambioId+"' @type = N'text/html', @server = N'smtpgw.pg.com'", thisConnection);
+        insertando.ExecuteNonQuery();
+    }
+    /**************************/
+
+
+    public String getMailAdmin()
+    {
+        SqlCommand thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = "SELECT CORREO_USUARIO FROM USUARIO WHERE PERFIL_USUARIO = 'admin' AND PRINCIPAL = 'True'";
+        SqlDataReader thisReader = thisCommand.ExecuteReader();
+
+        thisReader.Read();
+
+        mail = thisReader["CORREO"].ToString();
+
+        thisReader.Close();
+
+        return mail;
+
     }
 
     public String getMailNivel2(String area_soporte)
@@ -100,12 +135,6 @@ public class ManejadorCambio
 
 
     }
-/*
-    public String[] historialCambiosDatos(int cambioId)
-    {
-
-    }
-    */
 
     public String[] cambiosDatos(int cambioID)
     {
@@ -319,9 +348,11 @@ public class ManejadorCambio
 
                         libera = false;
 
-                        //SendEmail correo = new SendEmail();
-
-                        //correo.NuevoCambio(getMailNivel2(areaSopID.ToString()), "CAMBIO");
+                        /*********    ENVIANDO EMAIL    *************
+                         
+                        nuevoCambio(getMailNivel2(areaSopID.ToString()));                        
+                                                  
+                        /*********    ENVIANDO EMAIL    *************/
 
                     }
                 }
@@ -396,11 +427,12 @@ public class ManejadorCambio
                         checkArea.ExecuteNonQuery();
 
                         libera = false;
-
-                        //SendEmail correo = new SendEmail();
-
-                        //correo.NuevoCambio(getMailNivel2(areaSopID.ToString()),"CAMBIO");
-
+                        
+                        /*********    ENVIANDO EMAIL    *************
+                         
+                        nuevoCambio(getMailNivel2(areaSopID.ToString()));                        
+                                                  
+                        /*********    ENVIANDO EMAIL    *************/
                     }
                 }
                 areaexist.Close();

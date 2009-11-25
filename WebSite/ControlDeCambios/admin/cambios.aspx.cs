@@ -131,17 +131,11 @@ public partial class cambios : System.Web.UI.Page
                     Session["cambioAceptado"] = false;
 
                     /*********    ENVIANDO EMAIL    *************
+                                        
+                        miManejador.nuevoCambio(miManejador.getMailUser(DropDownList4.SelectedValue));
 
-                        String email;
-
-                        email = miManejador.getMailUser(DropDownList4.SelectedValue);
-
-                        SendEmail correo = new SendEmail();
-
-                        correo.NuevoCambio(email,TextBox1.Text);                
-
-                    *********************/
-
+                    /********************************************/
+                    
                 }
                 else
                 {
