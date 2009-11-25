@@ -1,4 +1,6 @@
 
+CREATE PROCEDURE MANDARCORREOS
+AS 
 CREATE TABLE #NIVELES(
 	CORREO_USUARIO VARCHAR(50),
 	NOMBRE_USUARIO VARCHAR(50),
@@ -79,7 +81,7 @@ INSERT INTO #NIVELES(CORREO_USUARIO, NOMBRE_USUARIO, NOMBRE_CAMBIO, CAMBIO_ID, F
 	DECLARE @NOMBRE_USUARIO NVARCHAR(50)
 	DECLARE @NOMBRE_CAMBIO NVARCHAR(50)
 	DECLARE @CAMBIO_ID INT
-	DECLARE @FECHA_ASIGNACION DATETIME 
+	DECLARE @FECHA_ASIGNACION DATETIME
 	DECLARE @PRINCIPAL BIT
 
 DECLARE CSOURCE CURSOR FOR
@@ -102,7 +104,7 @@ OPEN CSOURCE
 		WHILE (@FECHA_CUR <= GETDATE())
 		BEGIN
 			
-			IF(NOT(DATEPART(weekday, GETDATE()) = 1 OR DATEPART(weekday, GETDATE()) = 7))
+			IF(NOT(DATEPART(weekday, @FECHA_CUR) = 1 OR DATEPART(weekday, @FECHA_CUR) = 7))
 			BEGIN
 				SET @COUNT = @COUNT + 1
 			END
@@ -111,20 +113,32 @@ OPEN CSOURCE
 			
 		END
 		
-		IF (@COUNT > 2 AND @PRINCIPAL = '0')
+		IF ((@COUNT > 2 AND @PRINCIPAL = '0') OR (@COUNT <= 2 AND @PRINCIPAL = '1'))
+		BEGIN
+			---Manda correo magicamente
+			/*
+			exec master.dbo.xp_smtp_sendmail
+			@FROM = N'proficy@talisman.internal.pg.com',
+			@FROM_NAME = N'Sistema de Control de cambios',
+			@TO = @CORREO_USUARIO, --Destinatario
+			@subject = 'Control de Cambios’ + @NOMBRE_CAMBIO, --Asunto
+			@message = @NOMBRE_USUARIO + ':\n\nSe le notifica que el siguinte cambio \n' + @CAMBIO_ID + ' - '
+				+ @NOMBRE_CAMBIO + ' necesita ser revisado por usted \n Gracias.\n\n Atte. Servicio de Sistemas de Cambio";
+			@type = N'text/html',
+			@server = N'smtpgw.pg.com',
+			*/
+			
+			PRINT ('SE LE MANDA CORREO: ' + @CORREO_USUARIO)
+			PRINT @COUNT
+		END
+		
+		/*IF 
 		BEGIN
 			---Manda correo magicamente
 			PRINT ('SE LE MANDA CORREO: ' + @CORREO_USUARIO)
 			PRINT @COUNT
 		END
-		
-		IF (@COUNT <= 2 AND @PRINCIPAL = '1')
-		BEGIN
-			---Manda correo magicamente
-			PRINT ('SE LE MANDA CORREO: ' + @CORREO_USUARIO)
-			PRINT @COUNT
-		END
-		
+		*/
 		SET @COUNT = 0
 		FETCH NEXT FROM CSOURCE INTO @CORREO_USUARIO, @NOMBRE_USUARIO, @NOMBRE_CAMBIO, @CAMBIO_ID, @FECHA_ASIGNACION, @PRINCIPAL
     END
@@ -133,3 +147,5 @@ OPEN CSOURCE
 
 
 DROP TABLE #NIVELES;
+
+GO
