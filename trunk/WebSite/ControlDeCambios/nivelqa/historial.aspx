@@ -230,7 +230,9 @@
                         DataSourceID="Nivel1QAHistDataSource" 
                         EmptyDataText="Busque por campo o presione el boton Aceptar para ver todo el Historial" 
                         onselectedindexchanged="GridView1_SelectedIndexChanged1" CellPadding="4" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium" Width="880px" PageSize="30">
+                                                Font-Size="Medium" Width="880px" PageSize="30" ForeColor="#333333" 
+                                                GridLines="None">
+                        <RowStyle BackColor="#EFF3FB" />
                         <Columns>                            
                             <asp:CommandField ShowSelectButton="True" />
                             <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" 
