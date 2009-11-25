@@ -58,13 +58,13 @@
                     <br />
     
     
-        <table style="width: 300px;" cellpadding="4" cellspacing="4" border="0">
+        <table cellpadding="4" cellspacing="4" border="0" width="400">
             <tr>
                 <td  align="right">
                     <asp:Label ID="Label1" runat="server" Text="Usuario" Font-Names="Arial Narrow"></asp:Label>
                 </td>
                 <td align="left">
-                    <asp:TextBox ID="user" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="user" runat="server" Width="250px"></asp:TextBox>
                 </td>
             </tr>
             <tr>

@@ -208,42 +208,60 @@
                                     </tr>
                                     <tr>
                                         <td>
+                    <asp:GridView ID="GridListaNivelCero" runat="server" AllowPaging="True" 
+                        AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
+                        DataSourceID="NivelCeroHistDataSource" 
+                        EmptyDataText="Busque por campo o presione el boton Aceptar para ver todo el Historial" 
+                        onselectedindexchanged="GridView1_SelectedIndexChanged1" CellPadding="4" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium" Width="880px" PageSize="30" ForeColor="#333333" 
+                                                GridLines="None">
+                        <RowStyle BackColor="#EFF3FB" />
+                        <Columns>
+                            <asp:CommandField ShowSelectButton="True" />
+                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="FOLIO" ReadOnly="True" 
+                                SortExpression="CAMBIO_ID" >
+                            </asp:BoundField>
+<<<<<<< .mine
+                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="AREA" 
+                                SortExpression="NOMBRE_AREA" />
+=======
+>>>>>>> .r110
+                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE DEL CAMBIO" 
+                                SortExpression="NOMBRE_CAMBIO" >
+                            </asp:BoundField>
+<<<<<<< .mine
+                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO" 
+=======
+                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
+                                SortExpression="NOMBRE_AREA" />
+                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
+>>>>>>> .r110
+                                SortExpression="TIPO_CAMBIO" >
+                            </asp:BoundField>
+                            <asp:BoundField DataField="FECHA_APROBACION" HeaderText="FECHA DE APROBACION" 
+                                SortExpression="FECHA_APROBACION" >
+                            </asp:BoundField>
+                            <asp:BoundField DataField="STATUS_N0" HeaderText="ESTADO NIVEL0" 
+                                SortExpression="STATUS_N0" >
+                            </asp:BoundField>
+                            <asp:BoundField DataField="ESTADO_CAMBIO" HeaderText="ESTADO DEL CAMBIO" 
+                                SortExpression="ESTADO_CAMBIO" />
+                        </Columns>
+                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <EditRowStyle BackColor="#2461BF" />
+                        <AlternatingRowStyle BackColor="White" />
+                    </asp:GridView>
+                    
                     <asp:SqlDataSource ID="NivelCeroHistDataSource" runat="server">
                     </asp:SqlDataSource>
                                         </td>
                                     </tr>
                                     <tr>
                                         <td align="center">
-                    <asp:GridView ID="GridListaNivelCero" runat="server" AllowPaging="True" 
-                        AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
-                        DataSourceID="NivelCeroHistDataSource" 
-                        EmptyDataText="Busque por campo o presione el boton Aceptar para ver todo el Historial" 
-                        onselectedindexchanged="GridView1_SelectedIndexChanged1" CellPadding="4" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium" Width="880px" PageSize="30">
-                        <Columns>
-                            <asp:CommandField ShowSelectButton="True" />
-                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" ReadOnly="True" 
-                                SortExpression="CAMBIO_ID" >
-                            </asp:BoundField>
-                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE_CAMBIO" 
-                                SortExpression="NOMBRE_CAMBIO" >
-                            </asp:BoundField>
-                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE_AREA" 
-                                SortExpression="NOMBRE_AREA" />
-                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
-                                SortExpression="TIPO_CAMBIO" >
-                            </asp:BoundField>
-                            <asp:BoundField DataField="FECHA_APROBACION" HeaderText="FECHA_APROBACION" 
-                                SortExpression="FECHA_APROBACION" >
-                            </asp:BoundField>
-                            <asp:BoundField DataField="STATUS_N0" HeaderText="STATUS_N0" 
-                                SortExpression="STATUS_N0" >
-                            </asp:BoundField>
-                            <asp:BoundField DataField="ESTADO_CAMBIO" HeaderText="ESTADO_CAMBIO" 
-                                SortExpression="ESTADO_CAMBIO" />
-                        </Columns>
-                    </asp:GridView>
-                                        </td>
+                                            &nbsp;</td>
                                     </tr>
                                 </table>
                             </td>

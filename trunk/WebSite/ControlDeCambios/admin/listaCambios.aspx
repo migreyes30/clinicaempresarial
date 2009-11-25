@@ -124,7 +124,7 @@
                                             <table width="850">
                                                 <tr>
                                                     <td bgcolor="White" width="500">
-                                                        <table cellpadding="4" cellspacing="4" width="500">
+                                                        <table cellpadding="4" cellspacing="4" width="650">
                                                             <tr>
                                                                 <td bgcolor="#F9F9F7" width="150">
                                                                     <asp:Label ID="Label31" runat="server" Font-Bold="True" 
@@ -133,7 +133,7 @@
                                                                 <td>
                                                                     <asp:TextBox ID="TextBox1" runat="server" BorderColor="#F6F5F0" 
                                                                         BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial Narrow" 
-                                                                        Font-Size="Medium" ReadOnly="True" Width="300px"></asp:TextBox>
+                                                                        Font-Size="Medium" ReadOnly="True" Width="450px"></asp:TextBox>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -203,16 +203,20 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
+                                                                <td bgcolor="#F9F9F7">
+                                                                    <asp:Label ID="Label40" runat="server" Font-Bold="True" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium" Text="Imagen"></asp:Label>
+                                                                </td>
                                                                 <td>
-                                                                    &nbsp;</td>
-                                                                <td>
-                                                                    &nbsp;</td>
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" onclick="LinkButton1_Click" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"><asp:Label ID="Label39" runat="server"></asp:Label>
+</asp:LinkButton>
+                                                                </td>
                                                             </tr>
                                                         </table>
                                                     </td>
                                                     <td align="center">
-                                                        <asp:LinkButton ID="LinkButton1" runat="server" onclick="LinkButton1_Click"><asp:Label ID="Label39" runat="server"></asp:Label></asp:LinkButton>
-                                                    </td>
+                                                        &nbsp;</td>
                                                 </tr>
                                             </table>
                                             

@@ -103,14 +103,12 @@
                                 <table cellpadding="0" cellspacing="0" style="width: 100%; height: 29px;">
                                     <tr>
                                         <td class="style16">
-                                <asp:Label ID="Label5" runat="server" Text="Agregar Comentario" Font-Bold="True" 
-                                    Font-Names="Arial" Font-Size="Large"></asp:Label>
-                                        </td>
+                                            &nbsp;</td>
                                         <td>
 &nbsp;&nbsp;&nbsp;
                                             <asp:Label ID="Label23" runat="server" Font-Names="Arial Narrow" 
                                                 Font-Size="Large" Text="Folio:"></asp:Label>
-&nbsp;<asp:Label ID="Label25" runat="server" Text="Label"></asp:Label>
+&nbsp;<asp:Label ID="Label25" runat="server" Font-Bold="True" Font-Names="Arial Narrow" Font-Size="Large" ForeColor="Red"></asp:Label>
                                         </td>
                                     </tr>
                                 </table>
@@ -120,92 +118,76 @@
                             <td>
                                 <table cellpadding="4" style="width:100%;">
                                     <tr>
-                                        <td class="style14" align="left" bgcolor="#F9F9F7">
-                                            <br />
-                                            <asp:FormView ID="FormView1" runat="server" DataSourceID="SqlDataSource1" 
-                                                BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" 
-                                                CellPadding="3" GridLines="Vertical">
-                                                <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-                                                <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
-                                                <EditItemTemplate>
-                                                    NOMBRE_CAMBIO:
-                                                    <asp:TextBox ID="NOMBRE_CAMBIOTextBox" runat="server" 
-                                                        Text='<%# Bind("NOMBRE_CAMBIO") %>' />
-                                                    <br />
-                                                    TIPO_CAMBIO:
-                                                    <asp:TextBox ID="TIPO_CAMBIOTextBox" runat="server" 
-                                                        Text='<%# Bind("TIPO_CAMBIO") %>' />
-                                                    <br />
-                                                    NOMBRE_AREA:
-                                                    <asp:TextBox ID="NOMBRE_AREATextBox" runat="server" 
-                                                        Text='<%# Bind("NOMBRE_AREA") %>' />
-                                                    <br />
-                                                    FECHA_ASIGNACION:
-                                                    <asp:TextBox ID="FECHA_ASIGNACIONTextBox" runat="server" 
-                                                        Text='<%# Bind("FECHA_ASIGNACION") %>' />
-                                                    <br />
-                                                    <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" 
-                                                        CommandName="Update" Text="Update" />
-                                                    &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" 
-                                                        CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                                                </EditItemTemplate>
-                                                <InsertItemTemplate>
-                                                    NOMBRE_CAMBIO:
-                                                    <asp:TextBox ID="NOMBRE_CAMBIOTextBox" runat="server" 
-                                                        Text='<%# Bind("NOMBRE_CAMBIO") %>' />
-                                                    <br />
-                                                    TIPO_CAMBIO:
-                                                    <asp:TextBox ID="TIPO_CAMBIOTextBox" runat="server" 
-                                                        Text='<%# Bind("TIPO_CAMBIO") %>' />
-                                                    <br />
-                                                    NOMBRE_AREA:
-                                                    <asp:TextBox ID="NOMBRE_AREATextBox" runat="server" 
-                                                        Text='<%# Bind("NOMBRE_AREA") %>' />
-                                                    <br />
-                                                    FECHA_ASIGNACION:
-                                                    <asp:TextBox ID="FECHA_ASIGNACIONTextBox" runat="server" 
-                                                        Text='<%# Bind("FECHA_ASIGNACION") %>' />
-                                                    <br />
-                                                    <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" 
-                                                        CommandName="Insert" Text="Insert" />
-                                                    &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" 
-                                                        CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                                                </InsertItemTemplate>
-                                                <ItemTemplate>
-                                                    NOMBRE_CAMBIO:
-                                                    <asp:Label ID="NOMBRE_CAMBIOLabel" runat="server" 
-                                                        Text='<%# Bind("NOMBRE_CAMBIO") %>' />
-                                                    <br />
-                                                    TIPO_CAMBIO:
-                                                    <asp:Label ID="TIPO_CAMBIOLabel" runat="server" 
-                                                        Text='<%# Bind("TIPO_CAMBIO") %>' />
-                                                    <br />
-                                                    NOMBRE_AREA:
-                                                    <asp:Label ID="NOMBRE_AREALabel" runat="server" 
-                                                        Text='<%# Bind("NOMBRE_AREA") %>' />
-                                                    <br />
-                                                    FECHA_ASIGNACION:
-                                                    <asp:Label ID="FECHA_ASIGNACIONLabel" runat="server" 
-                                                        Text='<%# Bind("FECHA_ASIGNACION") %>' />
-                                                    <br />
-                                                </ItemTemplate>
-                                                            
-                                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                                                <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
-                                                <EditRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
-                                                            
-                                            </asp:FormView>
-                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="select NOMBRE_CAMBIO, TIPO_CAMBIO, AREA.NOMBRE_AREA, NIVEL1_HSE.FECHA_ASIGNACION  from CAMBIO, NIVEL1_HSE,  AREA
- where CAMBIO.CAMBIO_ID = ? and CAMBIO.CAMBIO_ID = NIVEL1_HSE.CAMBIO_ID and AREA.AREA_ID = CAMBIO.AREA_ID;">
-                                                <SelectParameters>
-                                                    <asp:ControlParameter ControlID="Label25" Name="CAMBIO_ID" 
-                                                        PropertyName="Text" Type="Int32" />
-                                                </SelectParameters>
-                        
-                                            </asp:SqlDataSource>
+                                        <td class="style14" align="left">
+                                                        <table cellpadding="4" cellspacing="4" width="650">
+                                                            <tr>
+                                                                <td bgcolor="#F9F9F7">
+                                                                    <asp:Label ID="Label51" runat="server" Text="Nombre de cambio" Font-Bold="True" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:TextBox ID="TextBox1" runat="server" BorderColor="#F2EFE9" 
+                                                                        BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial Narrow" 
+                                                                        Font-Size="Medium" ReadOnly="True" Width="400px"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td bgcolor="#F9F9F7">
+                                                                    <asp:Label ID="Label52" runat="server" Text="Tipo de cambio" Font-Bold="True" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:TextBox ID="TextBox2" runat="server" BorderColor="#F2EFE9" 
+                                                                        BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial Narrow" 
+                                                                        Font-Size="Medium" ReadOnly="True" Width="300px"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td bgcolor="#F9F9F7">
+                                                                    <asp:Label ID="Label53" runat="server" Text="Departamento" Font-Bold="True" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:TextBox ID="TextBox3" runat="server" BorderColor="#F2EFE9" 
+                                                                        BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial Narrow" 
+                                                                        Font-Size="Medium" ReadOnly="True" Width="300px"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td bgcolor="#F9F9F7">
+                                                                    <asp:Label ID="Label31" runat="server" Text="Área" Font-Bold="True" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:TextBox ID="TextBox4" runat="server" BorderColor="#F2EFE9" 
+                                                                        BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial Narrow" 
+                                                                        Font-Size="Medium" ReadOnly="True" Width="300px"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td bgcolor="#F9F9F7">
+                                                                    <asp:Label ID="Label32" runat="server" Text="Fecha Asignación" Font-Bold="True" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:TextBox ID="TextBox5" runat="server" BorderColor="#F2EFE9" 
+                                                                        BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial Narrow" 
+                                                                        Font-Size="Medium" ReadOnly="True" Width="300px"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="150" bgcolor="#F9F9F7">
+                                                                    <asp:Label ID="Label34" runat="server" Text="Imagen" Font-Bold="True" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
+                                                                </td>
+                                                                <td>
+                                                        <asp:LinkButton ID="LinkButton2" runat="server" onclick="LinkButton1_Click" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"><asp:Label ID="Label33" runat="server"></asp:Label>
+</asp:LinkButton>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <br />
                                             
                                         </td>
 
@@ -216,8 +198,7 @@
                                                 Font-Names="Arial Narrow" Font-Size="Large"></asp:Label>
                                             &nbsp;
 &nbsp;&nbsp;
-                                            <asp:LinkButton ID="LinkButton1" runat="server" onclick="LinkButton1_Click"><asp:Label ID="Label50" runat="server" Text="Label"></asp:Label></asp:LinkButton>
-                                        </td>
+                                            </td>
                                     </tr>
                                     <tr>
                                         <td class="style14" bgcolor="White" align="left">

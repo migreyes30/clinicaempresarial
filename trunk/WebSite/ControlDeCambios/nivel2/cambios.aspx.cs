@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class cambios : System.Web.UI.Page
 {
@@ -11,7 +12,8 @@ public partial class cambios : System.Web.UI.Page
     SqlConnection thisConnection;
     SqlCommand thisCommand;
     Int32 folio;
-    int area_soporte;    
+    int area_soporte;
+    String[] datos;
 
     Int32[] areasSoporte = new Int32[6];
 
@@ -26,7 +28,25 @@ public partial class cambios : System.Web.UI.Page
         Label25.Text = Request.QueryString["cambioID"];
 
 
-        thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
+        try
+        {
+            ManejadorCambio miManejador = new ManejadorCambio();
+            datos = miManejador.cambiosHSE(Int32.Parse(Label25.Text));
+
+            TextBox1.Text = datos[0];
+            TextBox2.Text = datos[1];
+            TextBox3.Text = datos[2];
+            TextBox4.Text = datos[3];
+            Label28.Text = datos[4];
+            TextBox5.Text = datos[5];
+        }
+        catch (SqlException)
+        {
+            Label24.Text = "ERROR";
+        }
+
+
+        thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ToString());        
         thisConnection.Open();
 
         SqlCommand thisCommand = thisConnection.CreateCommand();
@@ -122,5 +142,9 @@ public partial class cambios : System.Web.UI.Page
     protected void Button3_Click(object sender, EventArgs e)
     {
         Response.Redirect("nivel2.aspx");
+    }
+    protected void LinkButton1_Click(object sender, EventArgs e)
+    {
+
     }
 }

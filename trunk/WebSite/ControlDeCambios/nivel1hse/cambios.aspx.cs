@@ -42,7 +42,7 @@ public partial class cambios : System.Web.UI.Page
         }
         catch (SqlException)
         {
-            Label26.Text = "ERROR";
+            Label24.Text = "ERROR";
         }
 
 

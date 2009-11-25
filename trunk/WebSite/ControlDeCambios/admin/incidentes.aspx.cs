@@ -5,11 +5,14 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.Configuration;
 
 public partial class admin_incidentes : System.Web.UI.Page
 {
     SqlConnection thisConnection;
-    SqlCommand thisCommand;
+    //SqlCommand thisCommand;
+
+//    SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ToString());
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -19,7 +22,8 @@ public partial class admin_incidentes : System.Web.UI.Page
         }
         usuarioSesion.Text = Session["user"].ToString();        
 
-        thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
+        //thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
+        thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ToString());
         thisConnection.Open();
 
         if (Session["cambioAceptado"].Equals(false))
@@ -33,39 +37,38 @@ public partial class admin_incidentes : System.Web.UI.Page
     {
         Session["user"] = null;
         Session["perfil"] = null;
-        thisConnection.Close();
+        //thisConnection.Close();
         Response.Redirect("../index.aspx");
     }
     protected void Button6_Click(object sender, EventArgs e)
     {
-        thisConnection.Close();
+        //thisConnection.Close();
         Response.Redirect("reporte.aspx");
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
-        thisConnection.Close();
+        //thisConnection.Close();
         Session["cambioAceptado"] = true;
         Response.Redirect("cambios.aspx");
     }
     protected void Button3_Click(object sender, EventArgs e)
     {
-        thisConnection.Close();
+        //thisConnection.Close();
         Response.Redirect("lista.aspx");
     }
     protected void Button4_Click(object sender, EventArgs e)
     {
-        thisConnection.Close();
+        //thisConnection.Close();
         Session["cambioAceptado"] = true;
         Response.Redirect("incidentes.aspx");        
     }
     protected void Button5_Click(object sender, EventArgs e)
     {
-        thisConnection.Close();
+        //thisConnection.Close();
         Response.Redirect("usuarios.aspx");
     }
     protected void Button7_Click(object sender, EventArgs e)
     {
-
         try
         {
             if (Session["cambioAceptado"].Equals(true))
@@ -78,7 +81,7 @@ public partial class admin_incidentes : System.Web.UI.Page
                 
                 insertando.ExecuteNonQuery();
                 Label11.Text = "Dato Insertado!!!";
-                thisConnection.Close();
+                //thisConnection.Close();
                 Session["cambioAceptado"] = false;
                 Button7.Visible = false;
                 Button8.Visible = true;
@@ -105,7 +108,7 @@ public partial class admin_incidentes : System.Web.UI.Page
     }
     protected void Button8_Click(object sender, EventArgs e)
     {
-        thisConnection.Close();
+        //thisConnection.Close();
         Session["cambioAceptado"] = true;
         Response.Redirect("incidentes.aspx");
     }

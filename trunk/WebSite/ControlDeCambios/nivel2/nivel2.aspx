@@ -109,8 +109,9 @@
                         DataSourceID="SqlDataSourceQA" 
                         onselectedindexchanged="GridView1_SelectedIndexChanged" 
                         AllowSorting="True" CellPadding="4" Font-Names="Arial Narrow" 
-                        Font-Size="Medium" Width="880px">
+                        Font-Size="Medium" Width="880px" DataKeyNames="CAMBIO_ID">
                         <Columns>
+                            <asp:CommandField ShowSelectButton="True" />
                             <asp:BoundField DataField="STATUS" HeaderText="STATUS" 
                                 SortExpression="STATUS" />
                             <asp:BoundField DataField="FECHA_ASIGNACION" HeaderText="FECHA_ASIGNACION" 
