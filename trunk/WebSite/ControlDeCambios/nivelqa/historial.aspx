@@ -231,7 +231,7 @@
                         EmptyDataText="Busque por campo o presione el boton Aceptar para ver todo el Historial" 
                         onselectedindexchanged="GridView1_SelectedIndexChanged1" CellPadding="4" Font-Names="Arial Narrow" 
                                                 Font-Size="Medium" Width="880px" PageSize="30">
-                        <Columns>
+                        <Columns>                            
                             <asp:CommandField ShowSelectButton="True" />
                             <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" 
                                 SortExpression="CAMBIO_ID" >
@@ -255,8 +255,14 @@
                             <asp:BoundField DataField="ESTADO_CAMBIO" HeaderText="ESTADO_CAMBIO" 
                                 SortExpression="ESTADO_CAMBIO" />
                         </Columns>
+                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <EditRowStyle BackColor="#2461BF" />
+                        <AlternatingRowStyle BackColor="White" />
                     </asp:GridView>
-                                        </td>
+                                      </td>
                                     </tr>
                                 </table>
                             </td>

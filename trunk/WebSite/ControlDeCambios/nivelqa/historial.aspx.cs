@@ -73,19 +73,4 @@ public partial class nivel0_historial : System.Web.UI.Page
     {
 		selectFlujoNormalOrBackUP(TextBox3.Text,TextBox4.Text,DropDownList9.SelectedValue,DropDownList7.Text,DropDownList8.Text,DropDownList10.SelectedValue);
     }
-
-    protected void DropDownListUser_DataBound(object sender, EventArgs e)
-    {
-    }
-
-    protected void DropDownList10_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-    }
-
-
-    protected void DropDownList9_SelectedIndexChanged(object sender, EventArgs e)
-    {
-
-    }
 }
