@@ -4,9 +4,11 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class admin_usuarios : System.Web.UI.Page
 {
+    //SqlConnection thisConnection;
     SqlConnection thisConnection;
     SqlCommand thisCommand;
     int user1 = 0, user2 = 0;
@@ -19,8 +21,9 @@ public partial class admin_usuarios : System.Web.UI.Page
         }
         usuarioSesion.Text = Session["user"].ToString();
 
-        thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
+        thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ToString());
         thisConnection.Open();
+//        thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");        
 //        administradores();
 
     }

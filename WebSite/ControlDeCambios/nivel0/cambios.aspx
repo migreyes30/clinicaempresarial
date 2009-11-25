@@ -48,9 +48,7 @@
         
                             </td>
                             <td align="right" width="100">
-    <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Salir" BackColor="#F9F9F7" 
-                                    BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="2px" Width="50px" />
-                            </td>
+                                &nbsp;</td>
                         </tr>
                         <tr>
                             <td align="right">
@@ -72,7 +70,9 @@
             <tr>
                 <td align="center" 
                     
-                    style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0">
+                    
+                    style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0" 
+                    bgcolor="#0B479D" height="25" width="180">
                     <asp:Button ID="Button6" runat="server" Text="Cambios" BackColor="#0B479D" 
                         BorderColor="White" BorderStyle="Solid" ForeColor="White" Width="180px" 
                         BorderWidth="1px" Font-Overline="False" Font-Strikeout="False" 
@@ -80,7 +80,9 @@
                 </td>
                 <td align="center" 
                     
-                    style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0">
+                    
+                    style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0" 
+                    bgcolor="#0B479D" width="180">
                     <asp:Button ID="Button2" runat="server" Text="Historial" BackColor="#0B479D" 
                         BorderColor="White" BorderStyle="Solid" ForeColor="White" Width="180px" 
                         BorderWidth="1px" Height="25px" onclick="Button2_Click" />
@@ -135,7 +137,7 @@
                                             <table width="850">
                                                 <tr>
                                                     <td width="500">
-                                                        <table cellpadding="4" cellspacing="4" style="width:100%;">
+                                                        <table cellpadding="4" cellspacing="4" width="600">
                                                             <tr>
                                                                 <td bgcolor="#F9F9F7" width="150">
                                                                     <asp:Label ID="Label31" runat="server" Font-Bold="True" 
@@ -144,7 +146,7 @@
                                                                 <td>
                                                                     <asp:TextBox ID="TextBox1" runat="server" BorderColor="#F4F3EE" 
                                                                         BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial Narrow" 
-                                                                        Font-Size="Medium" ReadOnly="True" Width="300px"></asp:TextBox>
+                                                                        Font-Size="Medium" ReadOnly="True" Width="400px"></asp:TextBox>
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -181,16 +183,20 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
+                                                                <td bgcolor="#F9F9F7">
+                                                                    <asp:Label ID="Label37" runat="server" Font-Bold="True" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium" Text="Imagen"></asp:Label>
+                                                                </td>
                                                                 <td>
-                                                                    &nbsp;</td>
-                                                                <td>
-                                                                    &nbsp;</td>
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" onclick="LinkButton1_Click" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"><asp:Label ID="Label35" runat="server"></asp:Label>
+</asp:LinkButton>
+                                                                </td>
                                                             </tr>
                                                         </table>
                                                     </td>
                                                     <td>
-                                                        <asp:LinkButton ID="LinkButton1" runat="server" onclick="LinkButton1_Click"><asp:Label ID="Label35" runat="server"></asp:Label></asp:LinkButton>
-                                                    </td>
+                                                        &nbsp;</td>
                                                 </tr>
                                             </table>
                                             </td>

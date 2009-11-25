@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
 using System.Globalization;
+using System.Configuration;
 
 public partial class admin : System.Web.UI.Page
 {
@@ -21,10 +22,11 @@ public partial class admin : System.Web.UI.Page
         }
         usuarioSesion.Text = Session["user"].ToString();
 
-        thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
+        thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ToString());
+
         thisConnection.Open();
 
-        DateTime inicio = DateTime.Parse("01/11/2009");
+        DateTime inicio = DateTime.Parse("01/11/2008");
         DateTime fin = DateTime.Now.ToUniversalTime();
 
         asignacionValores(inicio, fin);

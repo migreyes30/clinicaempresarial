@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class nivel0_cambioHistorial : System.Web.UI.Page
 {
@@ -22,7 +23,7 @@ public partial class nivel0_cambioHistorial : System.Web.UI.Page
         usuarioSesion.Text = Session["user"].ToString();
         Label25.Text = Request.QueryString["cambioID"];
 
-        thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
+        thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ToString());        
         thisConnection.Open();
 
         SqlCommand thisCommand = thisConnection.CreateCommand();

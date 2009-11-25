@@ -29,19 +29,45 @@ public partial class nivel0 : System.Web.UI.Page
         try
         {
 
+<<<<<<< .mine
+=======
             NivelCeroDataSource.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+>>>>>>> .r110
 
+<<<<<<< .mine
+            NivelCeroDataSource.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+=======
             NivelCeroDataSource.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+>>>>>>> .r110
 
+<<<<<<< .mine
+            NivelCeroDataSource.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+=======
             ManejadorCambio mostrarBackUp = new ManejadorCambio();
+>>>>>>> .r110
 
+<<<<<<< .mine
+            ManejadorCambio mostrarBackUp = new ManejadorCambio();
+=======
+            NivelCeroDataSource.SelectCommand = mostrarBackUp.getCambiosPendientesBack(Session["correo"].ToString(), Session["userPrincipal"].ToString());
+>>>>>>> .r110
+
+<<<<<<< .mine
             NivelCeroDataSource.SelectCommand = mostrarBackUp.getCambiosPendientesBack(Session["correo"].ToString(), Session["userPrincipal"].ToString());
 
+            NivelCeroDataSource.SelectParameters.Add("correo", System.Data.DbType.String, Session["correo"].ToString());
+
+        }catch(Exception){
+
+        }
+
+=======
             NivelCeroDataSource.SelectParameters.Add("correo", System.Data.DbType.String, Session["correo"].ToString());
         }
         catch(Exception) { 
             
         }
+>>>>>>> .r110
     }
 
     protected void Button1_Click(object sender, EventArgs e)
@@ -59,7 +85,7 @@ public partial class nivel0 : System.Web.UI.Page
     }
     protected void GridView1_SelectedIndexChanged1(object sender, EventArgs e)
     {
-        Session["cambioID"] = ((System.Web.UI.WebControls.GridView)sender).SelectedValue;
+        Session["cambioID"] = ((System.Web.UI.WebControls.GridView)sender).SelectedValue;        
         Response.Redirect("cambios.aspx?cambioID=" + ((System.Web.UI.WebControls.GridView)sender).SelectedValue);
     }
     protected void Button2_Click(object sender, EventArgs e)

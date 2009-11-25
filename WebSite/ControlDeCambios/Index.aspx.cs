@@ -1,10 +1,12 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
-//using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
+
 
 public partial class _Default : System.Web.UI.Page 
 {    
@@ -14,14 +16,12 @@ public partial class _Default : System.Web.UI.Page
     String correo_sesion;
     String user_principal;
     SqlConnection thisConnection;
+    
 
     protected void Page_Load(object sender, EventArgs e)
     {
-
-        
-        thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
-        thisConnection.Open();
-
+        thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ToString());
+        thisConnection.Open();                
 
     }
     protected void Button1_Click(object sender, EventArgs e)
@@ -36,7 +36,7 @@ public partial class _Default : System.Web.UI.Page
 
     public void login(String user, String pass)
     {
-        Boolean correcto = false;        
+        Boolean correcto = false;
 
         try
         {

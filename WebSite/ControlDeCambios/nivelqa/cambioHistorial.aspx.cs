@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class nivel0_cambioHistorial : System.Web.UI.Page
 {
@@ -11,7 +12,7 @@ public partial class nivel0_cambioHistorial : System.Web.UI.Page
     String usuario;
     String perfil;
     SqlConnection thisConnection;
-
+    String[] datos;
 
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -21,10 +22,30 @@ public partial class nivel0_cambioHistorial : System.Web.UI.Page
         }
         usuarioSesion.Text = Session["user"].ToString();
         Label25.Text = Request.QueryString["cambioID"];
-        Label50.Text = Request.QueryString["cambioID"];
+        //Label50.Text = Request.QueryString["cambioID"];
         Session["cambioID"] = Request.QueryString["cambioID"];
 
-        thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
+
+        try
+        {
+            ManejadorCambio miManejador = new ManejadorCambio();
+            datos = miManejador.cambiosHSE(Int32.Parse(Label25.Text));
+
+            TextBox1.Text = datos[0];
+            TextBox2.Text = datos[1];
+            TextBox3.Text = datos[2];
+            TextBox4.Text = datos[3];
+            Label33.Text = datos[4];
+            TextBox5.Text = datos[5];
+        }
+        catch (SqlException)
+        {
+            Label25.Text = "ERROR";
+        }
+
+
+
+        thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ToString());                
         thisConnection.Open();
 
         SqlCommand thisCommand = thisConnection.CreateCommand();

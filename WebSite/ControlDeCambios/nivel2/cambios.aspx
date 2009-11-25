@@ -49,7 +49,8 @@
                             </td>
                             <td align="right" width="100">
     <asp:Button ID="Button1" runat="server" onclick="Button1_Click" Text="Salir" BackColor="#F9F9F7" 
-                                    BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="2px" Width="50px" />
+                                    BorderColor="#CCCCCC" BorderStyle="Solid" BorderWidth="2px" Width="50px" 
+                                    style="height: 26px" />
                             </td>
                         </tr>
                         <tr>
@@ -131,7 +132,77 @@
                             <td>
                                 <table cellpadding="4" style="width:100%;">
                                     <tr>
-                                        <td class="style14" align="left" bgcolor="#F9F9F7">
+                                        <td class="style14" align="left">
+                                                        <table cellpadding="4" cellspacing="4" width="650">
+                                                            <tr>
+                                                                <td bgcolor="#F9F9F7">
+                                                                    <asp:Label ID="Label51" runat="server" Text="Nombre de cambio" Font-Bold="True" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:TextBox ID="TextBox1" runat="server" BorderColor="#F2EFE9" 
+                                                                        BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial Narrow" 
+                                                                        Font-Size="Medium" ReadOnly="True" Width="400px"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td bgcolor="#F9F9F7">
+                                                                    <asp:Label ID="Label52" runat="server" Text="Tipo de cambio" Font-Bold="True" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:TextBox ID="TextBox2" runat="server" BorderColor="#F2EFE9" 
+                                                                        BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial Narrow" 
+                                                                        Font-Size="Medium" ReadOnly="True" Width="300px"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td bgcolor="#F9F9F7">
+                                                                    <asp:Label ID="Label53" runat="server" Text="Departamento" Font-Bold="True" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:TextBox ID="TextBox3" runat="server" BorderColor="#F2EFE9" 
+                                                                        BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial Narrow" 
+                                                                        Font-Size="Medium" ReadOnly="True" Width="300px"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td bgcolor="#F9F9F7">
+                                                                    <asp:Label ID="Label31" runat="server" Text="Área" Font-Bold="True" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:TextBox ID="TextBox4" runat="server" BorderColor="#F2EFE9" 
+                                                                        BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial Narrow" 
+                                                                        Font-Size="Medium" ReadOnly="True" Width="300px"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td bgcolor="#F9F9F7">
+                                                                    <asp:Label ID="Label32" runat="server" Text="Fecha Asignación" Font-Bold="True" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
+                                                                </td>
+                                                                <td>
+                                                                    <asp:TextBox ID="TextBox5" runat="server" BorderColor="#F2EFE9" 
+                                                                        BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial Narrow" 
+                                                                        Font-Size="Medium" ReadOnly="True" Width="300px"></asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td width="150" bgcolor="#F9F9F7">
+                                                                    <asp:Label ID="Label34" runat="server" Text="Imagen" Font-Bold="True" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
+                                                                </td>
+                                                                <td>
+                                                        <asp:LinkButton ID="LinkButton2" runat="server" onclick="LinkButton1_Click" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"><asp:Label ID="Label33" runat="server"></asp:Label>
+</asp:LinkButton>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                        <br />
+                                            <br />
                                             <asp:FormView ID="FormView1" runat="server" DataSourceID="SqlDataSource1" 
                                                 BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" 
                                                 CellPadding="3" GridLines="Vertical">

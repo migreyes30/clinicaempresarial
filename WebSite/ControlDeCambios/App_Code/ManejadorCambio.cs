@@ -4,6 +4,7 @@ using System.Web;
 using System.Data.SqlClient;
 using System.Data;
 using System.Globalization;
+using System.Configuration;
 
 /// <summary>
 /// Summary description for ManejadorCambio
@@ -14,16 +15,19 @@ public class ManejadorCambio
     SqlCommand thisCommand;
     String mail;
 
-	public ManejadorCambio()
+
+    public ManejadorCambio()
 	{
-        thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
+
+        thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ToString());
         thisConnection.Open();
+        //thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");        
 
 	}
 
     public void mailRechazar()
     {
-
+        
     }
 
     public String getMailNivel2(String area_soporte)
@@ -96,6 +100,12 @@ public class ManejadorCambio
 
 
     }
+/*
+    public String[] historialCambiosDatos(int cambioId)
+    {
+
+    }
+    */
 
     public String[] cambiosDatos(int cambioID)
     {
@@ -148,6 +158,34 @@ public class ManejadorCambio
 
         return campos;
     }
+    /*
+    public String[] cambiosN2(int cambioID)
+    {
+        
+    }
+    */
+    public String[] cambiosQA(int cambioID)
+    {
+        String[] campos = new String[6];
+        SqlCommand thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = "SELECT     CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, DEPARTAMENTO.NOMBRE_DEPTO, AREA.NOMBRE_AREA, CAMBIO.ARCHIVO, CAMBIO.CAMBIO_ID, NIVEL1_QA.FECHA_ASIGNACION FROM         AREA INNER JOIN CAMBIO ON AREA.AREA_ID = CAMBIO.AREA_ID INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID INNER JOIN NIVEL1_QA ON AREA.AREA_ID = NIVEL1_QA.AREA_ID AND CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID WHERE     (CAMBIO.CAMBIO_ID = '" + cambioID + "')";
+        SqlDataReader thisReader = thisCommand.ExecuteReader();
+
+        if (thisReader.Read())
+        {
+            campos[0] = thisReader["NOMBRE_CAMBIO"].ToString();
+            campos[1] = thisReader["TIPO_CAMBIO"].ToString();
+            campos[2] = thisReader["NOMBRE_DEPTO"].ToString();
+            campos[3] = thisReader["NOMBRE_AREA"].ToString();
+            campos[4] = thisReader["ARCHIVO"].ToString();
+            campos[5] = thisReader["FECHA_ASIGNACION"].ToString();
+        }
+
+        thisReader.Close();
+
+        return campos;
+    }
+
 
 
     public String[] cambiosHSE(int cambioID)
@@ -208,8 +246,9 @@ public class ManejadorCambio
             " VALUES ('" + (folio) + "', 'Pendiente', '" + areaID + "')", thisConnection);
         insertando.ExecuteNonQuery();
 
-
+        //*****************************************
         //mandarCorreo("jessyc48@yahoo.com", "jessyc48@yahoo.com", "mi prueba", "prueba");
+        //*****************************************
 
     }
 

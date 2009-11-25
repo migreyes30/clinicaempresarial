@@ -102,40 +102,94 @@
                         AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
                         DataSourceID="NivelCeroDataSource" 
                         EmptyDataText="No tienes cambios por aprobar" 
+<<<<<<< .mine
+                        onselectedindexchanged="GridView1_SelectedIndexChanged1" CellPadding="4" 
+                        Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" 
+                        ForeColor="#333333" GridLines="None">
+                        <RowStyle BackColor="#EFF3FB" />
+=======
                         onselectedindexchanged="GridView1_SelectedIndexChanged" CellPadding="4" 
                          Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" 
                          ForeColor="#333333" GridLines="None" PageSize="30">
+>>>>>>> .r110
                         <Columns>
+<<<<<<< .mine
+                            <asp:CommandField ShowSelectButton="True" />
+                            <asp:BoundField DataField="CAMBIO_ID" HeaderText="FOLIO" ReadOnly="True" 
+=======
                             <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" >
                             <HeaderStyle BackColor="#F9F8F4" />
                             </asp:CommandField>
                             <asp:BoundField DataField="CAMBIO_ID" HeaderText="FOLIO" ReadOnly="True" 
+>>>>>>> .r110
                                 SortExpression="CAMBIO_ID" >
+<<<<<<< .mine
+                            <HeaderStyle HorizontalAlign="Left" />
+                            <ItemStyle HorizontalAlign="Left" />
+=======
                              <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
+>>>>>>> .r110
                             </asp:BoundField>
+<<<<<<< .mine
+                            <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE DEL CAMBIO" 
+                                SortExpression="NOMBRE_CAMBIO" >
+                            <HeaderStyle HorizontalAlign="Left" />
+                            <ItemStyle HorizontalAlign="Left" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="NOMBRE_AREA" HeaderText="AREA" 
+=======
                             <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE CAMBIO" 
                                 SortExpression="NOMBRE_CAMBIO" >
                              <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
                             </asp:BoundField>
                             <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE AREA" 
+>>>>>>> .r110
                                 SortExpression="NOMBRE_AREA" >
+<<<<<<< .mine
+                            <HeaderStyle HorizontalAlign="Left" />
+                            <ItemStyle HorizontalAlign="Left" />
+=======
                              <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
+>>>>>>> .r110
                             </asp:BoundField>
+<<<<<<< .mine
+                            <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO" 
+=======
                             <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
+>>>>>>> .r110
                                 SortExpression="TIPO_CAMBIO" >
+<<<<<<< .mine
+                            <HeaderStyle HorizontalAlign="Left" />
+                            <ItemStyle HorizontalAlign="Left" />
+=======
                             <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
+>>>>>>> .r110
                             </asp:BoundField>
                             <asp:BoundField DataField="FECHA_ASIGNACION" HeaderText="FECHA ASIGNACION" 
                                 SortExpression="FECHA_ASIGNACION" >
+<<<<<<< .mine
+                            <HeaderStyle HorizontalAlign="Left" />
+                            <ItemStyle HorizontalAlign="Left" />
+=======
                              <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
+>>>>>>> .r110
                             </asp:BoundField>
                         </Columns>
+<<<<<<< .mine
+                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <EditRowStyle BackColor="#2461BF" />
+                        <AlternatingRowStyle BackColor="White" />
+=======
                          <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                         <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                         <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                         <EditRowStyle BackColor="#2461BF" />
                         <AlternatingRowStyle BackColor="White" />
+>>>>>>> .r110
                     </asp:GridView>
                     <asp:SqlDataSource runat="server" ID="NivelCeroDataSource">
                     </asp:SqlDataSource>

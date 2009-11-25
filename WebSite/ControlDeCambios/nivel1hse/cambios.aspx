@@ -121,7 +121,7 @@
 &nbsp;&nbsp;&nbsp;
                                             <asp:Label ID="Label23" runat="server" Font-Names="Arial Narrow" 
                                                 Font-Size="Large" Text="Folio:"></asp:Label>
-&nbsp;<asp:Label ID="Label25" runat="server" Text="Label"></asp:Label>
+&nbsp;<asp:Label ID="Label25" runat="server" Font-Bold="True" Font-Names="Arial Narrow" Font-Size="Large" ForeColor="Red"></asp:Label>
                                         </td>
                                     </tr>
                                 </table>
@@ -132,25 +132,23 @@
                                 <table cellpadding="4" style="width:100%;">
                                     <tr>
                                         <td class="style14" align="left">
-                                            <br />
                                             <table width="850">
                                                 <tr>
                                                     <td width="500">
-                                                        <br />
-                                                        <table cellpadding="4" cellspacing="4" width="500">
+                                                        <table cellpadding="4" cellspacing="4" width="650">
                                                             <tr>
-                                                                <td>
+                                                                <td bgcolor="#F9F9F7">
                                                                     <asp:Label ID="Label28" runat="server" Text="Nombre de cambio" Font-Bold="True" 
                                                                         Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
                                                                 </td>
                                                                 <td>
                                                                     <asp:TextBox ID="TextBox1" runat="server" BorderColor="#F2EFE9" 
                                                                         BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial Narrow" 
-                                                                        Font-Size="Medium" ReadOnly="True" Width="300px"></asp:TextBox>
+                                                                        Font-Size="Medium" ReadOnly="True" Width="400px"></asp:TextBox>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>
+                                                                <td bgcolor="#F9F9F7">
                                                                     <asp:Label ID="Label29" runat="server" Text="Tipo de cambio" Font-Bold="True" 
                                                                         Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
                                                                 </td>
@@ -161,7 +159,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>
+                                                                <td bgcolor="#F9F9F7">
                                                                     <asp:Label ID="Label30" runat="server" Text="Departamento" Font-Bold="True" 
                                                                         Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
                                                                 </td>
@@ -172,7 +170,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>
+                                                                <td bgcolor="#F9F9F7">
                                                                     <asp:Label ID="Label31" runat="server" Text="Área" Font-Bold="True" 
                                                                         Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
                                                                 </td>
@@ -183,7 +181,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td>
+                                                                <td bgcolor="#F9F9F7">
                                                                     <asp:Label ID="Label32" runat="server" Text="Fecha Asignación" Font-Bold="True" 
                                                                         Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
                                                                 </td>
@@ -194,71 +192,45 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td width="150">
-                                                                    &nbsp;</td>
+                                                                <td width="150" bgcolor="#F9F9F7">
+                                                                    <asp:Label ID="Label34" runat="server" Text="Imagen" Font-Bold="True" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
+                                                                </td>
                                                                 <td>
-                                                                    &nbsp;</td>
+                                                        <asp:LinkButton ID="LinkButton1" runat="server" onclick="LinkButton1_Click" 
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"><asp:Label ID="Label33" runat="server"></asp:Label>
+</asp:LinkButton>
+                                                                </td>
                                                             </tr>
                                                         </table>
                                                         <br />
                                                     </td>
-                                                    <td align="center">
-                                                        <asp:LinkButton ID="LinkButton1" runat="server" onclick="LinkButton1_Click"><asp:Label ID="Label33" runat="server"></asp:Label></asp:LinkButton>
-                                                    </td>
                                                 </tr>
                                             </table>
-                                            <br />
                                         </td>
 
                                     </tr>
                                     <tr>
-                                        <td class="style14" align="left" bgcolor="#F9F9F7">
+                                        <td class="style14" align="left">
                                           
-                                            <asp:Label ID="Label26" runat="server" Font-Bold="True" 
-                                                Font-Names="Arial Narrow" Font-Size="Medium" 
-                                                Text="Comentarios Jefe de Departamento"></asp:Label>
-                                                                                      
-                                        </tr>
-                                    <tr>
-                                        <td class="style14" align="left" bgcolor="#F9F9F7">
-                                          
-                                            <asp:FormView ID="FormView2" runat="server" BackColor="White" 
-                                                BorderColor="#3366CC" BorderStyle="None" BorderWidth="1px" CellPadding="4" 
-                                                DataSourceID="SqlDataSource2" GridLines="Both">
-                                                <FooterStyle BackColor="#99CCCC" ForeColor="#003399" />
-                                                <RowStyle BackColor="White" ForeColor="#003399" />
-                                                <EditItemTemplate>
-                                                    COMENTARIOS:
-                                                    <asp:TextBox ID="COMENTARIOSTextBox" runat="server" 
-                                                        Text='<%# Bind("COMENTARIOS") %>' />
-                                                    <br />
-                                                    <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" 
-                                                        CommandName="Update" Text="Update" />
-                                                    &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" 
-                                                        CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                                                </EditItemTemplate>
-                                                <InsertItemTemplate>
-                                                    COMENTARIOS:
-                                                    <asp:TextBox ID="COMENTARIOSTextBox" runat="server" 
-                                                        Text='<%# Bind("COMENTARIOS") %>' />
-                                                    <br />
-                                                    <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" 
-                                                        CommandName="Insert" Text="Insert" />
-                                                    &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" 
-                                                        CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                                                </InsertItemTemplate>
-                                                <ItemTemplate>
-                                                    COMENTARIOS:
-                                                    <asp:Label ID="COMENTARIOSLabel" runat="server" 
-                                                        Text='<%# Bind("COMENTARIOS") %>' />
-                                                    <br />
-                                                </ItemTemplate>
-                                                <PagerStyle BackColor="#99CCCC" ForeColor="#003399" HorizontalAlign="Left" />
-                                                <HeaderStyle BackColor="#003399" Font-Bold="True" ForeColor="#CCCCFF" />
-                                                <EditRowStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />
-                                            </asp:FormView>
-                                          
-                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
+                                            <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
+                                                CellPadding="4" DataSourceID="SqlDataSource1" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium" ForeColor="#333333" GridLines="None">
+                                                <RowStyle BackColor="#EFF3FB" />
+                                                <Columns>
+                                                    <asp:BoundField DataField="COMENTARIOS" 
+                                                        HeaderText="Comentarios Jefe de Departamento" SortExpression="COMENTARIOS">
+                                                    <HeaderStyle HorizontalAlign="Left" Width="900px" />
+                                                    </asp:BoundField>
+                                                </Columns>
+                                                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                                <EditRowStyle BackColor="#2461BF" />
+                                                <AlternatingRowStyle BackColor="White" />
+                                            </asp:GridView>
+                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
                                                 ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
                                                 ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
                                                 SelectCommand="SELECT [COMENTARIOS] FROM [NIVEL0] WHERE ([CAMBIO_ID] = ?)">
@@ -270,51 +242,30 @@
                                                                                       
                                         </tr>
                                     <tr>
-                                        <td class="style14" align="left" bgcolor="#F9F9F7">
+                                        <td class="style14" align="left">
                                           
-                                            <asp:Label ID="Label27" runat="server" Font-Bold="True" 
-                                                Font-Names="Arial Narrow" Font-Size="Medium" Text="Comentarios QA"></asp:Label>
-                                                                                      
-                                        </tr>
+                                            &nbsp;</tr>
                                     <tr>
-                                        <td class="style14" align="left" bgcolor="#F9F9F7">
+                                        <td class="style14" align="left">
                                           
-                                            <asp:FormView ID="FormView3" runat="server" BackColor="White" 
-                                                BorderColor="#CC9966" BorderStyle="None" BorderWidth="1px" CellPadding="4" 
-                                                DataSourceID="SqlDataSource4" GridLines="Both">
-                                                <FooterStyle BackColor="#FFFFCC" ForeColor="#330099" />
-                                                <RowStyle BackColor="White" ForeColor="#330099" />
-                                                <EditItemTemplate>
-                                                    COMENTARIOS:
-                                                    <asp:TextBox ID="COMENTARIOSTextBox" runat="server" 
-                                                        Text='<%# Bind("COMENTARIOS") %>' />
-                                                    <br />
-                                                    <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" 
-                                                        CommandName="Update" Text="Update" />
-                                                    &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" 
-                                                        CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                                                </EditItemTemplate>
-                                                <InsertItemTemplate>
-                                                    COMENTARIOS:
-                                                    <asp:TextBox ID="COMENTARIOSTextBox" runat="server" 
-                                                        Text='<%# Bind("COMENTARIOS") %>' />
-                                                    <br />
-                                                    <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" 
-                                                        CommandName="Insert" Text="Insert" />
-                                                    &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" 
-                                                        CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                                                </InsertItemTemplate>
-                                                <ItemTemplate>
-                                                    COMENTARIOS:
-                                                    <asp:Label ID="COMENTARIOSLabel" runat="server" 
-                                                        Text='<%# Bind("COMENTARIOS") %>' />
-                                                    <br />
-                                                </ItemTemplate>
-                                                <PagerStyle BackColor="#FFFFCC" ForeColor="#330099" HorizontalAlign="Center" />
-                                                <HeaderStyle BackColor="#990000" Font-Bold="True" ForeColor="#FFFFCC" />
-                                                <EditRowStyle BackColor="#FFCC66" Font-Bold="True" ForeColor="#663399" />
-                                            </asp:FormView>
-                                            <asp:SqlDataSource ID="SqlDataSource4" runat="server" 
+                                            <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" 
+                                                CellPadding="4" DataSourceID="SqlDataSource2" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium" ForeColor="#333333" GridLines="None">
+                                                <RowStyle BackColor="#EFF3FB" />
+                                                <Columns>
+                                                    <asp:BoundField DataField="COMENTARIOS" HeaderText="Comentarios QA" 
+                                                        SortExpression="COMENTARIOS">
+                                                    <HeaderStyle HorizontalAlign="Left" Width="900px" />
+                                                    </asp:BoundField>
+                                                </Columns>
+                                                <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                                <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                                                <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                                                <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                                                <EditRowStyle BackColor="#2461BF" />
+                                                <AlternatingRowStyle BackColor="White" />
+                                            </asp:GridView>
+                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
                                                 ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
                                                 ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
                                                 SelectCommand="SELECT [COMENTARIOS] FROM [NIVEL1_QA] WHERE ([CAMBIO_ID] = ?)">
@@ -326,27 +277,48 @@
                                                                                       
                                         </tr>
                                     <tr>
-                                        <td class="style14" align="left" bgcolor="#F9F9F7">
+                                        <td class="style14" align="left">
+                                          
+                                            &nbsp;</tr>
+                                    <tr>
+                                        <td class="style14" align="left">
+                                          
+                                            <asp:Label ID="Label27" runat="server" Font-Bold="True" 
+                                                Font-Names="Arial Narrow" Font-Size="Medium" 
+                                                Text="Coloque sus comentarios"></asp:Label>
+                                                                                      
+                                        </tr>
+                                    <tr>
+                                        <td class="style14" align="left">
                                           
                                             <asp:TextBox ID="TextBoxComentario" Width="523px" Rows="4" runat="server" 
                                                 Height="95px" TextMode="MultiLine" ></asp:TextBox>
                                                                                       
                                         </tr>
                                     <tr>
-                                        <td class="style14" bgcolor="#F9F9F7" align="left">
+                                        <td class="style14" align="left">
+                                          
+                                            <asp:Label ID="Label35" runat="server" Font-Bold="True" 
+                                                Font-Names="Arial Narrow" Font-Size="Medium" 
+                                                Text="Elija las Áreas de Soporte necesarias"></asp:Label>
+                                                                                      
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="style14" align="left">
+                                            <asp:CheckBoxList ID="CheckBoxList1" runat="server" 
+                                                DataSourceID="SqlDataSource3" DataTextField="NOMBRE_AREA_SOPORTE" 
+                                                DataValueField="AREA_SOPORTE_ID" Font-Names="Arial Narrow">
+                                            </asp:CheckBoxList>
                                             <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
                                                 ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
                                                 ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
                                                 SelectCommand="SELECT [AREA_SOPORTE_ID], [NOMBRE_AREA_SOPORTE] FROM [AREAS_SOPORTE]">
                                             </asp:SqlDataSource>
-                                            <asp:CheckBoxList ID="CheckBoxList1" runat="server" 
-                                                DataSourceID="SqlDataSource3" DataTextField="NOMBRE_AREA_SOPORTE" 
-                                                DataValueField="AREA_SOPORTE_ID">
-                                            </asp:CheckBoxList>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="style14" bgcolor="#F9F9F7" align="left">
+                                        <td class="style14" align="left">
                                             &nbsp;</td>
                                     </tr>
                                 </table>
@@ -366,10 +338,10 @@
                                             <br />
                                             <br />
                                             <br />
-                                            <asp:Label ID="Label24" runat="server"></asp:Label>
+                                            <asp:Label ID="Label24" runat="server" Font-Names="Arial Narrow"></asp:Label>
                                             <asp:ValidationSummary id="valSummary" runat="server"
                                             HeaderText="Errors:"
-                                            ShowSummary="true" DisplayMode="List" />
+                                            ShowSummary="true" DisplayMode="List" Font-Names="Arial Narrow" />
                                         </td>
                                     </tr>
                                 </table>
