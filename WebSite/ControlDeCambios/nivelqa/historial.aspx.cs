@@ -68,7 +68,6 @@ public partial class nivel0_historial : System.Web.UI.Page
     {
         Session["cambioID"] = ((System.Web.UI.WebControls.GridView)sender).SelectedValue;
         Response.Write("<script type='text/javascript'>window.open('cambioHistorial.aspx?cambioID=" + ((System.Web.UI.WebControls.GridView)sender).SelectedValue + "','_blank');</script>");
-        //Response.Redirect("cambioHistorial.aspx?cambioID=" + ((System.Web.UI.WebControls.GridView)sender).SelectedValue);
     }
     protected void Button7_Click(object sender, EventArgs e)
     {
