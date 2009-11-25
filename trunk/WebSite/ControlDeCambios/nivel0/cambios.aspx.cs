@@ -100,19 +100,21 @@ public partial class cambios : System.Web.UI.Page
     {        
         try
         {        
-            ManejadorCambio miManejador = new ManejadorCambio();
-            miManejador.pasarNUno(TextBoxComentario.Text, Int32.Parse(Label25.Text));
-            Label24.Text = "Dato Insertado!!!";
-            Button7.Visible = false;
-            Button8.Visible = false;
-            Button3.Visible = true;
+           ManejadorCambio miManejador = new ManejadorCambio();
+           miManejador.pasarNUno(TextBoxComentario.Text, Int32.Parse(Label25.Text));
+           Label24.Text = "Dato Insertado!!!";
+           Button7.Visible = false;
+           Button8.Visible = false;
+           Button3.Visible = true;
 
-            /*SendEmail correo = new SendEmail();
-
-            correo.NuevoCambio(miManejador.getMailQA(), cambioNombre);
-
-            correo.NuevoCambio(miManejador.getMailHSE(), cambioNombre);*/
-        }catch(SqlException){
+           /*********    ENVIANDO EMAIL    *************
+           
+           miManejador.nuevoCambio(miManejador.getMailHSE());
+           miManejador.nuevoCambio(miManejador.getMailQA());
+              
+           /********************************************/
+        }
+        catch(SqlException){
 
          
             Label24.Text = "Error con la base de datos";
@@ -139,7 +141,12 @@ public partial class cambios : System.Web.UI.Page
             miManejador.rechazarNCero(TextBoxComentario.Text, Int32.Parse(Label25.Text));
             Label24.Text = "Se ha rechazado correctamente";
 
-            miManejador.mailRechazar();
+            /************* Llamada a la funcion para enviar mail a Admin ****
+
+            miManejador.rechazadoCambio(miManejador.getMailAdmin(),usuarioSesion.Text, Label25.Text);
+
+            /***************************************/
+
             Button7.Visible = false;
             Button8.Visible = false;
             Button3.Visible = true;
