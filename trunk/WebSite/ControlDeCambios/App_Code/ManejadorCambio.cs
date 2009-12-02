@@ -1075,4 +1075,148 @@ public class ManejadorCambio
 
     }
 
+    public String getCambiosPendientesBackN2(String mail, String userPrincipal)
+    {
+        String querieFlujoNormal = "SELECT     NIVEL2.STATUS, NIVEL2.FECHA_ASIGNACION, CAMBIO.CAMBIO_ID, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO FROM         NIVEL2 INNER JOIN AREAS_SOPORTE ON NIVEL2.AREA_SOPORTE_ID = AREAS_SOPORTE.AREA_SOPORTE_ID INNER JOIN CAMBIO ON NIVEL2.CAMBIO_ID = CAMBIO.CAMBIO_ID WHERE     (NIVEL2.STATUS = 'Pendiente') AND (AREAS_SOPORTE.BACKUP_ID = (SELECT USUARIO_ID FROM  USUARIO WHERE (CORREO_USUARIO = @correo)) OR AREAS_SOPORTE.REPONSABLE_ID = (SELECT USUARIO_ID FROM  USUARIO WHERE (CORREO_USUARIO = @correo)))";
+        String sqlPrefix = "CAMBIO.CAMBIO_ID = ";
+        String accum = "";
+        String accumNormal = "";
+
+
+        thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = querieFlujoNormal;
+        thisCommand.CommandType = CommandType.Text;
+
+        SqlParameter mailUser = new SqlParameter("@correo", System.Data.SqlDbType.VarChar);
+        mailUser.Value = mail;
+        thisCommand.Parameters.Add(mailUser);
+
+        SqlDataReader result = thisCommand.ExecuteReader();
+
+        while (result.Read())
+        {
+            DateTime fechaAsignacion = DateTime.Parse(result["FECHA_ASIGNACION"].ToString());
+            DateTime fechaCur = fechaAsignacion;
+            int daysOff = 0;
+
+            while (fechaCur <= DateTime.Now.ToUniversalTime())
+            {
+                if (!(fechaCur.DayOfWeek == DayOfWeek.Saturday || fechaCur.DayOfWeek == DayOfWeek.Sunday))
+                {
+                    daysOff += 1;
+                }
+
+                fechaCur = fechaCur.AddDays(1);
+            }
+
+            if (daysOff > 2)
+            {
+                accum += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+            }
+            else
+            {
+                accumNormal += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+            }
+        }
+
+        result.Close();
+
+        if (accum.Equals(""))
+        {
+            return querieFlujoNormal;
+
+        }
+        else
+        {
+
+            if (userPrincipal.Equals("False"))
+            {
+                accum = accum.Substring(0, accum.LastIndexOf(" or "));
+
+                String querieFlujoBackUp = querieFlujoNormal + " AND (" + accum + ")";
+
+                return querieFlujoBackUp;
+            }
+            else
+            {
+                accumNormal = accumNormal.Substring(0, accumNormal.LastIndexOf(" or "));
+
+                String querieFlujoN0Delay = querieFlujoNormal + " AND (" + accumNormal + ")";
+
+                return querieFlujoN0Delay;
+
+            }
+        }
+
+    }
+
+    public String getCambiosHistBackN2(String mail, String userPrincipal, String lastPartQuerie)
+    {
+        String querieHistN2 = "SELECT    CAMBIO.ESTADO_CAMBIO,NIVEL2.FECHA_APROBACION,NIVEL2.STATUS, NIVEL2.FECHA_ASIGNACION, CAMBIO.CAMBIO_ID,CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO FROM NIVEL2 INNER JOIN AREAS_SOPORTE ON NIVEL2.AREA_SOPORTE_ID = AREAS_SOPORTE.AREA_SOPORTE_ID INNER JOIN CAMBIO ON NIVEL2.CAMBIO_ID = CAMBIO.CAMBIO_ID WHERE     (NIVEL2.STATUS <> 'Pendiente') AND (AREAS_SOPORTE.BACKUP_ID = (SELECT USUARIO_ID FROM  USUARIO WHERE (CORREO_USUARIO = @correo)) OR AREAS_SOPORTE.REPONSABLE_ID = (SELECT USUARIO_ID FROM  USUARIO WHERE (CORREO_USUARIO = @correo)))";
+        String sqlPrefix = "CAMBIO.CAMBIO_ID = ";
+        String accum = "";
+        String accumNormal = "";
+
+
+        thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = querieHistN2;
+        thisCommand.CommandType = CommandType.Text;
+
+        SqlParameter mailUser = new SqlParameter("@correo", System.Data.SqlDbType.VarChar);
+        mailUser.Value = mail;
+        thisCommand.Parameters.Add(mailUser);
+
+        SqlDataReader result = thisCommand.ExecuteReader();
+
+        while (result.Read())
+        {
+            DateTime fechaAsignacion = DateTime.Parse(result["FECHA_ASIGNACION"].ToString());
+            DateTime fechaAprobacion = DateTime.Parse(result["FECHA_APROBACION"].ToString());
+            DateTime fechaCur = fechaAsignacion;
+            int daysOff = 0;
+
+            while (fechaCur <= fechaAprobacion)
+            {
+                if (!(fechaCur.DayOfWeek == DayOfWeek.Saturday || fechaCur.DayOfWeek == DayOfWeek.Sunday))
+                {
+                    daysOff += 1;
+                }
+
+                fechaCur = fechaCur.AddDays(1);
+            }
+
+            if (daysOff > 2)
+            {
+                accum += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+            }
+            else
+            {
+                accumNormal += sqlPrefix + result["CAMBIO_ID"].ToString() + " or ";
+            }
+        }
+
+        result.Close();
+
+
+        if (userPrincipal.Equals("False"))
+        {
+            accum = accum.Substring(0, accum.LastIndexOf(" or "));
+
+            String querieFlujoBackUp = querieHistN2 + " AND (" + accum + ")" + lastPartQuerie;
+
+            return querieFlujoBackUp;
+        }
+        else
+        {
+            accumNormal = accumNormal.Substring(0, accumNormal.LastIndexOf(" or "));
+
+            String querieFlujoN0 = querieHistN2 + " AND (" + accumNormal + ")" + lastPartQuerie;
+
+            return querieFlujoN0;
+
+        }
+
+
+    }
+
 }
