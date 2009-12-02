@@ -240,7 +240,28 @@ public class ManejadorCambio
         return campos;
     }
 
+    public String[] cambiosN2(int cambioID)
+    {
+        String[] campos = new String[6];
+        
+        SqlCommand thisCommand = thisConnection.CreateCommand();
+        thisCommand.CommandText = "SELECT     CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, DEPARTAMENTO.NOMBRE_DEPTO, AREA.NOMBRE_AREA, CAMBIO.ARCHIVO, CAMBIO.CAMBIO_ID, NIVEL1_HSE.FECHA_ASIGNACION FROM         AREA INNER JOIN CAMBIO ON AREA.AREA_ID = CAMBIO.AREA_ID INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID INNER JOIN NIVEL1_HSE ON AREA.AREA_ID = NIVEL1_HSE.AREA_ID AND CAMBIO.CAMBIO_ID = NIVEL1_HSE.CAMBIO_ID WHERE     (CAMBIO.CAMBIO_ID = '" + cambioID + "')";
+        SqlDataReader thisReader = thisCommand.ExecuteReader();
 
+        if (thisReader.Read())
+        {
+            campos[0] = thisReader["NOMBRE_CAMBIO"].ToString();
+            campos[1] = thisReader["TIPO_CAMBIO"].ToString();
+            campos[2] = thisReader["NOMBRE_DEPTO"].ToString();
+            campos[3] = thisReader["NOMBRE_AREA"].ToString();
+            campos[4] = thisReader["ARCHIVO"].ToString();
+            campos[5] = thisReader["FECHA_ASIGNACION"].ToString();
+        }
+
+        thisReader.Close();
+
+        return campos;
+    }
 
       public void pasarNCero(int folio, String nombreCambio, String tipoCambio, String areaID, String fechaRealizacion, String fileUpload1, byte[] imageFile)
       {
