@@ -49,7 +49,7 @@ public partial class nivel0_historial : System.Web.UI.Page
 
     private string crearLastPartQuerieSearch(String folioSearch,String cambioName,String area,String estado,String tipo) {
 
-        string resultquerie = "AND (CAMBIO.CAMBIO_ID LIKE '%" + folioSearch + "%') AND (CAMBIO.NOMBRE_CAMBIO LIKE '%" + cambioName + "%') AND (AREA.AREA_ID LIKE '%" + area + "%') AND (CAMBIO.ESTADO_CAMBIO LIKE '%" + estado + "%') AND (CAMBIO.TIPO_CAMBIO LIKE '%" + tipo + "%')";
+        string resultquerie = " AND (CAMBIO.CAMBIO_ID LIKE '%" + folioSearch + "%') AND (CAMBIO.NOMBRE_CAMBIO LIKE '%" + cambioName + "%') AND (AREA.AREA_ID LIKE '%" + area + "%') AND (CAMBIO.ESTADO_CAMBIO LIKE '%" + estado + "%') AND (CAMBIO.TIPO_CAMBIO LIKE '%" + tipo + "%')";
     
 
         return resultquerie;
@@ -79,8 +79,6 @@ public partial class nivel0_historial : System.Web.UI.Page
     {
         Session["cambioID"] = ((System.Web.UI.WebControls.GridView)sender).SelectedValue;
         Response.Write("<script type='text/javascript'>window.open('cambioHistorial.aspx?cambioID=" + ((System.Web.UI.WebControls.GridView)sender).SelectedValue + "','_blank');</script>");
-
-//        Response.Redirect("cambioHistorial.aspx?cambioID=" + ((System.Web.UI.WebControls.GridView)sender).SelectedValue);
     }
     protected void Button7_Click(object sender, EventArgs e)
     {

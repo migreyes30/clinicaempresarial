@@ -64,7 +64,7 @@
                     <asp:Label ID="Label1" runat="server" Text="Usuario" Font-Names="Arial Narrow"></asp:Label>
                 </td>
                 <td align="left">
-                    <asp:TextBox ID="user" runat="server" Width="250px"></asp:TextBox>
+                    <asp:TextBox ID="user" runat="server" Width="134px"></asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -73,7 +73,7 @@
                         Font-Names="Arial Narrow"></asp:Label>
                 </td>
                 <td align="left">
-                    <asp:TextBox ID="pass" runat="server" TextMode="Password"></asp:TextBox>
+                    <asp:TextBox ID="pass" runat="server" TextMode="Password" Width="133px"></asp:TextBox>
                 </td>
             </tr>
             <tr>

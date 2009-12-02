@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using Microsoft.VisualBasic;
 using System.Configuration;
+using System.Collections;
 
 public partial class nivel1qa : System.Web.UI.Page
 {

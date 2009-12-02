@@ -39,6 +39,7 @@ public partial class nivel0 : System.Web.UI.Page
 
             NivelCeroDataSource.SelectCommand = mostrarBackUp.getCambiosPendientesBack(Session["correo"].ToString(), Session["userPrincipal"].ToString());
 
+            NivelCeroDataSource.SelectParameters.Clear();
 
             NivelCeroDataSource.SelectParameters.Add("correo", System.Data.DbType.String, Session["correo"].ToString());
         }
