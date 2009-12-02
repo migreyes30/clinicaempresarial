@@ -105,13 +105,14 @@
                     style="border-bottom-style: solid; border-bottom-width: thin; border-bottom-color: #C0C0C0">
                     <br />
                     <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
-                        AutoGenerateColumns="False" 
-                        DataSourceID="SqlDataSourceQA" 
+                        AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID"
+                        DataSourceID="SqlDataSourceN2" 
                         onselectedindexchanged="GridView1_SelectedIndexChanged" 
+                        EmptyDataText="No tienes cambios por aprobar" 
                         AllowSorting="True" CellPadding="4" Font-Names="Arial Narrow" 
-                        Font-Size="Medium" Width="880px" DataKeyNames="CAMBIO_ID">
+                        Font-Size="Medium" Width="880px">
                         <Columns>
-                            <asp:CommandField ShowSelectButton="True" />
+                             <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
                             <asp:BoundField DataField="STATUS" HeaderText="STATUS" 
                                 SortExpression="STATUS" />
                             <asp:BoundField DataField="FECHA_ASIGNACION" HeaderText="FECHA_ASIGNACION" 
@@ -126,18 +127,7 @@
                     </asp:GridView>
                     <br />
                     <br />
-                    <asp:SqlDataSource ID="SqlDataSourceQA" runat="server" 
-                        ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                        ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                        
-                        
-                        
-                        SelectCommand="SELECT NIVEL2.STATUS, NIVEL2.FECHA_ASIGNACION, NIVEL2.CAMBIO_ID, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO FROM NIVEL2 INNER JOIN AREAS_SOPORTE ON NIVEL2.AREA_SOPORTE_ID = AREAS_SOPORTE.AREA_SOPORTE_ID INNER JOIN CAMBIO ON NIVEL2.CAMBIO_ID = CAMBIO.CAMBIO_ID WHERE (NIVEL2.STATUS = 'Pendiente') AND (AREAS_SOPORTE.REPONSABLE_ID = (SELECT USUARIO_ID FROM USUARIO WHERE (NOMBRE_USUARIO = ?))) OR (NIVEL2.STATUS = 'Pendiente') AND (AREAS_SOPORTE.BACKUP_ID = (SELECT USUARIO_ID FROM USUARIO AS USUARIO_1 WHERE (NOMBRE_USUARIO = ?)))" >
-                         <SelectParameters>
-                             <asp:ControlParameter ControlID="usuarioSesion" DbType="String" Name="user" 
-                                 PropertyName="Text" />
-                             <asp:ControlParameter ControlID="usuarioSesion" Name="?" PropertyName="Text" />
-                        </SelectParameters>
+                    <asp:SqlDataSource ID="SqlDataSourceN2" runat="server">
                     </asp:SqlDataSource>
                     <br />
     
