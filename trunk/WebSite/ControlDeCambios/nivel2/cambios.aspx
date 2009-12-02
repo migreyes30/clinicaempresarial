@@ -191,13 +191,12 @@
                                                             </tr>
                                                             <tr>
                                                                 <td width="150" bgcolor="#F9F9F7">
-                                                                    <asp:Label ID="Label34" runat="server" Text="" Font-Bold="True" 
+                                                                    <asp:Label ID="Label34" runat="server" Text="Imagen" Font-Bold="True" 
                                                                         Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
                                                                 </td>
                                                                 <td>
                                                         <asp:LinkButton ID="LinkButton2" runat="server" onclick="LinkButton1_Click" 
-                                                                        Font-Names="Arial Narrow" Font-Size="Medium"><asp:Label ID="Label33" runat="server"></asp:Label>
-</asp:LinkButton>
+                                                                        Font-Names="Arial Narrow" Font-Size="Medium"><asp:Label ID="Label33" runat="server"></asp:Label></asp:LinkButton>
                                                                 </td>
                                                             </tr>
                                                         </table>

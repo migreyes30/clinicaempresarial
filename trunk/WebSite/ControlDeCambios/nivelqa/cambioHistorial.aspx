@@ -133,7 +133,7 @@
                                                                 <td>
                                                                     <asp:TextBox ID="TextBox1" runat="server" BorderColor="#F2EFE9" 
                                                                         BorderStyle="Solid" BorderWidth="1px" Font-Names="Arial Narrow" 
-                                                                        Font-Size="Medium" ReadOnly="True" Width="400px"></asp:TextBox>
+                                                                        Font-Size="Medium" ReadOnly="True" Width="400px" ></asp:TextBox>
                                                                 </td>
                                                             </tr>
                                                             <tr>

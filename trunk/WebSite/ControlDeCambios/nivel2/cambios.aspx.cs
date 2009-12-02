@@ -37,7 +37,7 @@ public partial class cambios : System.Web.UI.Page
             TextBox2.Text = datos[1];
             TextBox3.Text = datos[2];
             TextBox4.Text = datos[3];
-            Label28.Text = datos[4];
+            Label33.Text = datos[4];
             TextBox5.Text = datos[5];
         }
         catch (SqlException)
@@ -153,6 +153,6 @@ public partial class cambios : System.Web.UI.Page
     }
     protected void LinkButton1_Click(object sender, EventArgs e)
     {
-
+        Response.Write("<script type='text/javascript'>window.open('imagenCambioN2.aspx?cambioID=" + Session["cambioID"] + "','_blank');</script>");
     }
 }
