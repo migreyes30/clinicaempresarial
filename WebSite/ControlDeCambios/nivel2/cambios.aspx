@@ -191,7 +191,7 @@
                                                             </tr>
                                                             <tr>
                                                                 <td width="150" bgcolor="#F9F9F7">
-                                                                    <asp:Label ID="Label34" runat="server" Text="Imagen" Font-Bold="True" 
+                                                                    <asp:Label ID="Label34" runat="server" Text="" Font-Bold="True" 
                                                                         Font-Names="Arial Narrow" Font-Size="Medium"></asp:Label>
                                                                 </td>
                                                                 <td>
@@ -203,91 +203,6 @@
                                                         </table>
                                                         <br />
                                             <br />
-                                            <asp:FormView ID="FormView1" runat="server" DataSourceID="SqlDataSource1" 
-                                                BackColor="White" BorderColor="#999999" BorderStyle="None" BorderWidth="1px" 
-                                                CellPadding="3" GridLines="Vertical">
-                                                <FooterStyle BackColor="#CCCCCC" ForeColor="Black" />
-                                                <RowStyle BackColor="#EEEEEE" ForeColor="Black" />
-                                                <EditItemTemplate>
-                                                    NOMBRE_CAMBIO:
-                                                    <asp:TextBox ID="NOMBRE_CAMBIOTextBox" runat="server" 
-                                                        Text='<%# Bind("NOMBRE_CAMBIO") %>' />
-                                                    <br />
-                                                    TIPO_CAMBIO:
-                                                    <asp:TextBox ID="TIPO_CAMBIOTextBox" runat="server" 
-                                                        Text='<%# Bind("TIPO_CAMBIO") %>' />
-                                                    <br />
-                                                    NOMBRE_DEPTO:
-                                                    <asp:TextBox ID="NOMBRE_DEPTOTextBox" runat="server" 
-                                                        Text='<%# Bind("NOMBRE_DEPTO") %>' />
-                                                    <br />
-                                                    NOMBRE_AREA:
-                                                    <asp:TextBox ID="NOMBRE_AREATextBox" runat="server" 
-                                                        Text='<%# Bind("NOMBRE_AREA") %>' />
-                                                    <br />
-                                                    FECHA_ASIGNACION:
-                                                    <asp:TextBox ID="FECHA_ASIGNACIONTextBox" runat="server" 
-                                                        Text='<%# Bind("FECHA_ASIGNACION") %>' />
-                                                    <br />
-                                                    <asp:LinkButton ID="UpdateButton" runat="server" CausesValidation="True" 
-                                                        CommandName="Update" Text="Update" />
-                                                    &nbsp;<asp:LinkButton ID="UpdateCancelButton" runat="server" 
-                                                        CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                                                </EditItemTemplate>
-                                                <InsertItemTemplate>
-                                                    NOMBRE_CAMBIO:
-                                                    <asp:TextBox ID="NOMBRE_CAMBIOTextBox" runat="server" 
-                                                        Text='<%# Bind("NOMBRE_CAMBIO") %>' />
-                                                    <br />
-                                                    TIPO_CAMBIO:
-                                                    <asp:TextBox ID="TIPO_CAMBIOTextBox" runat="server" 
-                                                        Text='<%# Bind("TIPO_CAMBIO") %>' />
-                                                    <br />
-                                                    NOMBRE_DEPTO:
-                                                    <asp:TextBox ID="NOMBRE_DEPTOTextBox" runat="server" 
-                                                        Text='<%# Bind("NOMBRE_DEPTO") %>' />
-                                                    <br />
-                                                    NOMBRE_AREA:
-                                                    <asp:TextBox ID="NOMBRE_AREATextBox" runat="server" 
-                                                        Text='<%# Bind("NOMBRE_AREA") %>' />
-                                                    <br />
-                                                    FECHA_ASIGNACION:
-                                                    <asp:TextBox ID="FECHA_ASIGNACIONTextBox" runat="server" 
-                                                        Text='<%# Bind("FECHA_ASIGNACION") %>' />
-                                                    <br />
-                                                    <asp:LinkButton ID="InsertButton" runat="server" CausesValidation="True" 
-                                                        CommandName="Insert" Text="Insert" />
-                                                    &nbsp;<asp:LinkButton ID="InsertCancelButton" runat="server" 
-                                                        CausesValidation="False" CommandName="Cancel" Text="Cancel" />
-                                                </InsertItemTemplate>
-                                                <ItemTemplate>
-                                                    NOMBRE_CAMBIO:
-                                                    <asp:Label ID="NOMBRE_CAMBIOLabel" runat="server" 
-                                                        Text='<%# Bind("NOMBRE_CAMBIO") %>' />
-                                                    <br />
-                                                    TIPO_CAMBIO:
-                                                    <asp:Label ID="TIPO_CAMBIOLabel" runat="server" 
-                                                        Text='<%# Bind("TIPO_CAMBIO") %>' />
-                                                    <br />
-                                                    NOMBRE_DEPTO:
-                                                    <asp:Label ID="NOMBRE_DEPTOLabel" runat="server" 
-                                                        Text='<%# Bind("NOMBRE_DEPTO") %>' />
-                                                    <br />
-                                                    NOMBRE_AREA:
-                                                    <asp:Label ID="NOMBRE_AREALabel" runat="server" 
-                                                        Text='<%# Bind("NOMBRE_AREA") %>' />
-                                                    <br />
-                                                    FECHA_ASIGNACION:
-                                                    <asp:Label ID="FECHA_ASIGNACIONLabel" runat="server" 
-                                                        Text='<%# Bind("FECHA_ASIGNACION") %>' />
-                                                    <br />
-                                                </ItemTemplate>
-                                                            
-                                                <PagerStyle BackColor="#999999" ForeColor="Black" HorizontalAlign="Center" />
-                                                <HeaderStyle BackColor="#000084" Font-Bold="True" ForeColor="White" />
-                                                <EditRowStyle BackColor="#008A8C" Font-Bold="True" ForeColor="White" />
-                                                            
-                                            </asp:FormView>
                                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
                                                 ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
                                                 ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
