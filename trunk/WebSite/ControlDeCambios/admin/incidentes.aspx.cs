@@ -74,7 +74,9 @@ public partial class admin_incidentes : System.Web.UI.Page
             if (Session["cambioAceptado"].Equals(true))
             {
                 CultureInfo MyCultureInfo = new CultureInfo("es-MX");
-                DateTime MyDateTime = DateTime.Parse(TextBox2.Text, MyCultureInfo);
+                String fechaIncidente = DropDownList6.SelectedValue + "/" + DropDownList7.SelectedValue
+                           + "/" + DropDownList8.SelectedValue;
+                DateTime MyDateTime = DateTime.Parse(fechaIncidente, MyCultureInfo);
                 CultureInfo culture = new CultureInfo("en-US");
                 SqlCommand insertando = new SqlCommand("INSERT INTO INCIDENTES  (NOMBRE_INCIDENTE, DESCRIPCION_INCIDENTE, FECHA_INCIDENTE, AREA_ID)" +
                 "VALUES ('" + TextBox1.Text + "', '" + TextBox3.Text + "', '" + MyDateTime.ToString("d", culture) + "', '" + DropDownList2.SelectedValue + "')", thisConnection);

@@ -21,7 +21,7 @@
         }
         .style15
         {
-            width: 144px;
+            width: 118px;
         }
         .style16
         {
@@ -154,14 +154,61 @@
                                         </td>
                                         <td align="left">
                                         
-                                        <asp:RangeValidator id="valRange" runat="server"
-                                            ControlToValidate="TextBox4"
-                                            MaximumValue="31/12/2015"
-                                            MinimumValue="1/1/1998"
-                                            Type="Date"
-                                            ErrorMessage="* La fecha de Recepci&oacute;n es requerida en el formato DD/MM/YYYY" 
-                                            Display="dynamic">*</asp:RangeValidator>
-                                            <asp:TextBox ID="TextBox4" runat="server" Width="200px"></asp:TextBox>
+                                            <asp:DropDownList ID="DropDownList6" runat="server">
+                                                <asp:ListItem Selected="True">1</asp:ListItem>
+                                                <asp:ListItem>2</asp:ListItem>
+                                                <asp:ListItem>3</asp:ListItem>
+                                                <asp:ListItem>4</asp:ListItem>
+                                                <asp:ListItem>5</asp:ListItem>
+                                                <asp:ListItem>6</asp:ListItem>
+                                                <asp:ListItem>7</asp:ListItem>
+                                                <asp:ListItem>8</asp:ListItem>
+                                                <asp:ListItem>9</asp:ListItem>
+                                                <asp:ListItem>10</asp:ListItem>
+                                                <asp:ListItem>11</asp:ListItem>
+                                                <asp:ListItem>12</asp:ListItem>
+                                                <asp:ListItem>13</asp:ListItem>
+                                                <asp:ListItem>14</asp:ListItem>
+                                                <asp:ListItem>15</asp:ListItem>
+                                                <asp:ListItem>16</asp:ListItem>
+                                                <asp:ListItem>17</asp:ListItem>
+                                                <asp:ListItem>18</asp:ListItem>
+                                                <asp:ListItem>19</asp:ListItem>
+                                                <asp:ListItem>20</asp:ListItem>
+                                                <asp:ListItem>21</asp:ListItem>
+                                                <asp:ListItem>22</asp:ListItem>
+                                                <asp:ListItem>23</asp:ListItem>
+                                                <asp:ListItem>24</asp:ListItem>
+                                                <asp:ListItem>25</asp:ListItem>
+                                                <asp:ListItem>26</asp:ListItem>
+                                                <asp:ListItem>27</asp:ListItem>
+                                                <asp:ListItem>28</asp:ListItem>
+                                                <asp:ListItem>29</asp:ListItem>
+                                                <asp:ListItem>30</asp:ListItem>
+                                                <asp:ListItem>31</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <asp:DropDownList ID="DropDownList7" runat="server">
+                                                <asp:ListItem Selected="True" Value="01">ENE</asp:ListItem>
+                                                <asp:ListItem Value="02">FEB</asp:ListItem>
+                                                <asp:ListItem Value="03">MAR</asp:ListItem>
+                                                <asp:ListItem Value="04">ABR</asp:ListItem>
+                                                <asp:ListItem Value="05">MAY</asp:ListItem>
+                                                <asp:ListItem Value="06">JUN</asp:ListItem>
+                                                <asp:ListItem Value="07">JUL</asp:ListItem>
+                                                <asp:ListItem Value="08">AGO</asp:ListItem>
+                                                <asp:ListItem Value="09">SEP</asp:ListItem>
+                                                <asp:ListItem Value="10">OCT</asp:ListItem>
+                                                <asp:ListItem Value="11">NOV</asp:ListItem>
+                                                <asp:ListItem Value="12">DIC</asp:ListItem>
+                                            </asp:DropDownList>
+                                            <asp:DropDownList ID="DropDownList8" runat="server">
+                                                <asp:ListItem>2009</asp:ListItem>
+                                                <asp:ListItem Selected="True">2010</asp:ListItem>
+                                                <asp:ListItem>2011</asp:ListItem>
+                                                <asp:ListItem>2012</asp:ListItem>
+                                                <asp:ListItem>2013</asp:ListItem>
+                                                <asp:ListItem>2014</asp:ListItem>
+                                            </asp:DropDownList>
                                         </td>
                                     </tr>
                                     <tr>
