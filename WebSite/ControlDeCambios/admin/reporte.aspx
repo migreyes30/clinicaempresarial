@@ -16,7 +16,7 @@
         }
         .style3
         {
-            width: 94px;
+            width: 116px;
         }
         .style4
         {
@@ -141,8 +141,7 @@
                                     <tr>
                                         <td class="style2" align="left">
                                             <asp:DropDownList ID="DropDownList1" runat="server">
-                                                <asp:ListItem Value="00" Selected="True">Todos</asp:ListItem>
-                                                <asp:ListItem Value="01">ENE</asp:ListItem>
+                                                <asp:ListItem Value="01" Selected="True">ENE</asp:ListItem>
                                                 <asp:ListItem Value="02">FEB</asp:ListItem>
                                                 <asp:ListItem Value="03">MAR</asp:ListItem>
                                                 <asp:ListItem Value="04">ABR</asp:ListItem>
@@ -157,8 +156,8 @@
                                             </asp:DropDownList>
                                             <asp:DropDownList ID="DropDownList2" runat="server" 
                                                 >
-                                                <asp:ListItem Selected="True" Value="00">--</asp:ListItem>
-                                                <asp:ListItem>2009</asp:ListItem>
+                                                <asp:ListItem Selected="True">2009</asp:ListItem>
+                                                <asp:ListItem>2014</asp:ListItem>
                                                 <asp:ListItem>2010</asp:ListItem>
                                                 <asp:ListItem>2011</asp:ListItem>
                                                 <asp:ListItem>2012</asp:ListItem>
@@ -167,8 +166,7 @@
                                         </td>
                                         <td class="style2" align="left">
                                             <asp:DropDownList ID="DropDownList3" runat="server">
-                                                <asp:ListItem Selected="True" Value="00">Todos</asp:ListItem>
-                                                <asp:ListItem Value="01">ENE</asp:ListItem>
+                                                <asp:ListItem Selected="True" Value="01">ENE</asp:ListItem>
                                                 <asp:ListItem Value="02">FEB</asp:ListItem>
                                                 <asp:ListItem Value="03">MAR</asp:ListItem>
                                                 <asp:ListItem Value="04">ABR</asp:ListItem>
@@ -182,20 +180,21 @@
                                                 <asp:ListItem Value="12">DIC</asp:ListItem>
                                             </asp:DropDownList>
                                             <asp:DropDownList ID="DropDownList4" runat="server">
-                                                <asp:ListItem Selected="True" Value="00">--</asp:ListItem>
                                                 <asp:ListItem>2009</asp:ListItem>
-                                                <asp:ListItem>2010</asp:ListItem>
+                                                <asp:ListItem Selected="True">2010</asp:ListItem>
                                                 <asp:ListItem>2011</asp:ListItem>
                                                 <asp:ListItem>2012</asp:ListItem>
                                                 <asp:ListItem>2013</asp:ListItem>
                                             </asp:DropDownList>
                                         </td>
                                         <td class="style3">
-                                            <asp:Button ID="Button7" runat="server" Text="Aceptar" 
-                                                onclick="Button7_Click" />
+                                            <asp:CheckBox ID="CheckBox1" runat="server" AutoPostBack="true"
+                                                oncheckedchanged="CheckBox1_CheckedChanged" Text="Todos" />
                                         </td>
-                                        <td>
-                                            &nbsp;</td>
+                                        <td align="left">
+                                            <asp:Button ID="Button7" runat="server" Text="Aceptar" 
+                                                onclick="Button7_Click" Height="26px" />
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="style2">

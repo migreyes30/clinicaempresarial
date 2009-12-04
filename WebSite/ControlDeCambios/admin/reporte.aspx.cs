@@ -26,8 +26,8 @@ public partial class admin : System.Web.UI.Page
 
         thisConnection.Open();
 
-        DateTime inicio = DateTime.Parse("01/11/2008");
-        DateTime fin = DateTime.Now.ToUniversalTime();
+        DateTime inicio = DateTime.Parse("01/01/2009");
+        DateTime fin = DateTime.Now.ToUniversalTime().AddYears(1);
 
         asignacionValores(inicio, fin);
                                    
@@ -41,7 +41,7 @@ public partial class admin : System.Web.UI.Page
     }
     protected void Button6_Click(object sender, EventArgs e)
     {
-        Response.Redirect("index.aspx");
+        Response.Redirect("reporte.aspx");
     }
     protected void Button2_Click(object sender, EventArgs e)
     {
@@ -57,10 +57,9 @@ public partial class admin : System.Web.UI.Page
     }
     protected void Button7_Click(object sender, EventArgs e)
     {
-        DateTime inicio = DateTime.Parse("01/11/2009");
-        DateTime fin = DateTime.Now.ToUniversalTime();
-        if (!(DropDownList1.SelectedValue.Equals("00") || DropDownList2.Equals("00") ||
-            DropDownList3.SelectedValue.Equals("00") || DropDownList4.Equals("00")))
+        DateTime inicio = DateTime.Parse("01/01/2009");
+        DateTime fin = DateTime.Now.ToUniversalTime().AddYears(1);
+        if (!CheckBox1.Checked)
         {
             inicio = DateTime.Parse("01/" + DropDownList1.SelectedValue + "/" + DropDownList2.SelectedValue);
             Int32 monthEnd = Int32.Parse(DropDownList3.SelectedValue);
@@ -302,5 +301,22 @@ public partial class admin : System.Web.UI.Page
             querie += "GROUP BY DEPARTAMENTO.DEPTO_ID;";
         }
         return querie;
+    }
+    protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+    {
+        if (CheckBox1.Checked)
+        {
+            DropDownList1.Enabled = false;
+            DropDownList2.Enabled = false;
+            DropDownList3.Enabled = false;
+            DropDownList4.Enabled = false;
+        }
+        else
+        {
+            DropDownList1.Enabled = true;
+            DropDownList2.Enabled = true;
+            DropDownList3.Enabled = true;
+            DropDownList4.Enabled = true;
+        }
     }
 }

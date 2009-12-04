@@ -118,7 +118,9 @@ public partial class cambios : System.Web.UI.Page
                     string file_system_name = folio + "." + extension_file;
 
                     ManejadorCambio miManejador = new ManejadorCambio();
-                    miManejador.pasarNCero(folio, TextBox1.Text, DropDownList1.SelectedItem.Value, DropDownList5.SelectedValue, TextBox4.Text, file_system_name, imageSize);
+                    String fechaCambio = DropDownList6.SelectedValue + "/" + DropDownList7.SelectedValue
+                           + "/" + DropDownList8.SelectedValue;
+                    miManejador.pasarNCero(folio, TextBox1.Text, DropDownList1.SelectedItem.Value, DropDownList5.SelectedValue, fechaCambio, file_system_name, imageSize);
 
                     Label24.Text = "Dato Insertado!!!";
                     // Asignar color al mensaje de exito
@@ -135,7 +137,7 @@ public partial class cambios : System.Web.UI.Page
                         miManejador.nuevoCambio(miManejador.getMailUser(DropDownList4.SelectedValue));
 
                     /********************************************/
-                    
+
                 }
                 else
                 {
@@ -167,10 +169,17 @@ public partial class cambios : System.Web.UI.Page
             Label24.ForeColor = System.Drawing.Color.Red;
 
         }
+        catch (FormatException)
+        {
+            // Asignar mensaje de error
+            Label24.Text = "* La fecha no es valida";
+            // Asignar color al mensaje de error
+            Label24.ForeColor = System.Drawing.Color.Red;
+        }
         catch (Exception)
         {
             // Asignar mensaje de error
-            Label24.Text = "* Error al guardar archivo ene l servidor";
+            Label24.Text = "* Error al guardar archivo en el servidor";
             // Asignar color al mensaje de error
             Label24.ForeColor = System.Drawing.Color.Red;
         }
