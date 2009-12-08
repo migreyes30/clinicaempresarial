@@ -151,16 +151,11 @@
                                             <asp:DropDownList ID="DropDownList9" runat="server" 
                                                 DataSourceID="SqlDataSource1" DataTextField="NOMBRE_AREA" 
                                                 DataValueField="AREA_ID" style="margin-bottom: 0px" >
-                                                <asp:ListItem Value="" Selected="True" Enabled="true">Todos</asp:ListItem>
+                                                <asp:ListItem Value="" Selected="True" Enabled="true"></asp:ListItem>
                                             </asp:DropDownList>
-                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT AREA.AREA_ID, AREA.NOMBRE_AREA, DEPARTAMENTO.DEPTO_ID FROM AREA INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE (DEPARTAMENTO.DEPTO_ID = (SELECT DEPTO_ID FROM DEPARTAMENTO AS DEPARTAMENTO_1 WHERE (RESPONSABLE_ID = (SELECT USUARIO_ID FROM USUARIO WHERE (CORREO_USUARIO = ?))) OR (BACKUP_ID = (SELECT USUARIO_ID FROM USUARIO AS USUARIO_1 WHERE (CORREO_USUARIO = ?)))))">
-                        <SelectParameters>
-                            <asp:SessionParameter DbType="String" Name="correo_a" SessionField="correo" />
-                            <asp:SessionParameter DbType="String" Name="correo_b" SessionField="correo" />
-                        </SelectParameters>
+                                            <asp:CheckBox ID="CheckBox1" runat="server" Text="Todas" AutoPostBack="true"
+                                                oncheckedchanged="CheckBox1_CheckedChanged" />
+                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server">
                                             </asp:SqlDataSource>
                                         </td>
                                         <td align="left">
@@ -212,9 +207,7 @@
                         AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
                         DataSourceID="NivelCeroHistDataSource" 
                         EmptyDataText="Busque por campo o presione el boton Aceptar para ver todo el Historial" 
-                        onselectedindexchanged="GridView1_SelectedIndexChanged1" CellPadding="4" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium" Width="880px" PageSize="30" ForeColor="#333333" 
-                                                GridLines="None">
+                        onselectedindexchanged="GridView1_SelectedIndexChanged1" CellPadding="4" Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" ForeColor="#333333" PageSize="30" BorderColor="#E7E7FF">
                         <RowStyle BackColor="#EFF3FB" />
                         <Columns>
                             <asp:CommandField ShowSelectButton="True" />

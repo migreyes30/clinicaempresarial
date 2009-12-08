@@ -18,6 +18,7 @@ public partial class nivel0_historial : System.Web.UI.Page
             Response.Redirect("../index.aspx");
         }
         usuarioSesion.Text = Session["user"].ToString();
+        selectAreas();
 
     }
 
@@ -82,7 +83,41 @@ public partial class nivel0_historial : System.Web.UI.Page
     }
     protected void Button7_Click(object sender, EventArgs e)
     {
-        selectFlujoNormalOrBackUP(TextBox3.Text,TextBox4.Text,DropDownList9.SelectedValue,DropDownList7.Text,DropDownList8.Text);
+        string AreasTodas = "";
+        if(CheckBox1.Checked == false){
+            AreasTodas = DropDownList9.SelectedValue;
+        }
+        selectFlujoNormalOrBackUP(TextBox3.Text,TextBox4.Text,AreasTodas,DropDownList7.Text,DropDownList8.Text);
     }
 
+    protected void CheckBox1_CheckedChanged(object sender, EventArgs e)
+    {
+        if (CheckBox1.Checked == true)
+        {
+           DropDownList9.Enabled = false;
+        }
+        else {
+            DropDownList9.Enabled = true;
+        }
+    }
+
+    public void selectAreas()
+    {
+
+        try
+        {
+
+            SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+            SqlDataSource1.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+            SqlDataSource1.SelectCommand = "SELECT AREA.AREA_ID, AREA.NOMBRE_AREA, DEPARTAMENTO.DEPTO_ID FROM AREA INNER JOIN DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID WHERE (DEPARTAMENTO.DEPTO_ID = (SELECT DEPTO_ID FROM DEPARTAMENTO AS DEPARTAMENTO_1 WHERE (RESPONSABLE_ID = (SELECT USUARIO_ID FROM USUARIO WHERE (CORREO_USUARIO = '"+Session["correo"]+"'))) OR (BACKUP_ID = (SELECT USUARIO_ID FROM USUARIO AS USUARIO_1 WHERE (CORREO_USUARIO = '"+Session["correo"]+"')))))";
+
+        }
+        catch (Exception)
+        {
+
+        }
+
+    }
 }
