@@ -146,7 +146,7 @@
                                                 Font-Size="Small" Text="Nombre del Cambio"></asp:Label>
                                         </td>
                                         <td class="style2" align="left">
-                                            <asp:TextBox ID="TextBox1" runat="server" Width="234px"></asp:TextBox>
+                                            <asp:TextBox ID="TextBox1" runat="server" Width="234px" AutoPostBack="True" OnTextChanged="reset_Error_Message"></asp:TextBox>
                                         </td>
                                         <td class="style15" align="left" bgcolor="#F9F9F7">
                                             <asp:Label ID="Label12" runat="server" Text="Fecha Realización" 
@@ -154,7 +154,7 @@
                                         </td>
                                         <td align="left">
                                         
-                                            <asp:DropDownList ID="DropDownList6" runat="server">
+                                            <asp:DropDownList ID="DropDownList6" runat="server" AutoPostBack="True" OnSelectedIndexChanged="reset_Error_Message">
                                                 <asp:ListItem Selected="True">1</asp:ListItem>
                                                 <asp:ListItem>2</asp:ListItem>
                                                 <asp:ListItem>3</asp:ListItem>
@@ -187,7 +187,7 @@
                                                 <asp:ListItem>30</asp:ListItem>
                                                 <asp:ListItem>31</asp:ListItem>
                                             </asp:DropDownList>
-                                            <asp:DropDownList ID="DropDownList7" runat="server">
+                                            <asp:DropDownList ID="DropDownList7" runat="server" AutoPostBack="True" OnSelectedIndexChanged="reset_Error_Message">
                                                 <asp:ListItem Selected="True" Value="01">ENE</asp:ListItem>
                                                 <asp:ListItem Value="02">FEB</asp:ListItem>
                                                 <asp:ListItem Value="03">MAR</asp:ListItem>
@@ -201,7 +201,7 @@
                                                 <asp:ListItem Value="11">NOV</asp:ListItem>
                                                 <asp:ListItem Value="12">DIC</asp:ListItem>
                                             </asp:DropDownList>
-                                            <asp:DropDownList ID="DropDownList8" runat="server">
+                                            <asp:DropDownList ID="DropDownList8" runat="server" AutoPostBack="True" OnSelectedIndexChanged="reset_Error_Message">
                                                 <asp:ListItem>2009</asp:ListItem>
                                                 <asp:ListItem Selected="True">2010</asp:ListItem>
                                                 <asp:ListItem>2011</asp:ListItem>
@@ -217,7 +217,7 @@
                                                 Font-Size="Small" Text="Tipo"></asp:Label>
                                         </td>
                                         <td class="style2" align="left">
-                                            <asp:DropDownList ID="DropDownList1" runat="server">
+                                            <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" OnSelectedIndexChanged="reset_Error_Message">
                                                 <asp:ListItem>Cambio</asp:ListItem>
                                                 <asp:ListItem>Kaizen</asp:ListItem>
                                             </asp:DropDownList>
@@ -240,7 +240,7 @@
 
                                         
                                             <asp:FileUpload ID="FileUpload1" runat="server" style="margin-left: 0px" 
-                                                Width="200px"/>
+                                                Width="200px" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -252,13 +252,10 @@
                                             <asp:DropDownList ID="DropDownList4" runat="server" AutoPostBack="True" 
                                                 DataSourceID="SqlDataSource1" DataTextField="NOMBRE_DEPTO" 
                                                 DataValueField="DEPTO_ID" 
-                                                onselectedindexchanged="DropDownList4_SelectedIndexChanged">
-                                                
+                                                onselectedindexchanged="DropDownList4_SelectedIndexChanged"
+                                                 OnDataBound="DropDownList4_SelectedIndexChanged" >
                                             </asp:DropDownList>
-                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT [DEPTO_ID], [NOMBRE_DEPTO] FROM [DEPARTAMENTO]">
+                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" >
                                             </asp:SqlDataSource>
                                             
                                         </td>
@@ -275,17 +272,10 @@
                                         <td class="style2" align="left">
                                 <asp:DropDownList ID="DropDownList5" runat="server" AutoPostBack="True" 
                                                 DataSourceID="SqlDataSource2" DataTextField="NOMBRE_AREA" 
-                                                DataValueField="AREA_ID" 
-                                                >
+                                                DataValueField="AREA_ID" OnSelectedIndexChanged="reset_Error_Message">
                                 </asp:DropDownList>
-                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT [AREA_ID], [NOMBRE_AREA], [DEPTO_ID] FROM [AREA] WHERE ([DEPTO_ID] = ?)">
-                                                <SelectParameters>
-                                                    <asp:ControlParameter ControlID="DropDownList4" DefaultValue="" Name="DEPTO_ID" 
-                                                        PropertyName="SelectedValue" Type="Int32" />
-                                                </SelectParameters>
+                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" >
+
                                             </asp:SqlDataSource>
                                         </td>
                                         <td class="style15" bgcolor="#F9F9F7" align="left">
