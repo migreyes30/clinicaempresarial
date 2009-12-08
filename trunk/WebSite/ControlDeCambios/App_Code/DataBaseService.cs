@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.Services;
 using System.Data.SqlClient;
+using System.Configuration;
 
 /// <summary>
 /// Summary description for DataBaseService
@@ -44,7 +45,7 @@ public class DataBaseService : System.Web.Services.WebService {
 
         try
         {
-            SqlConnection thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
+            SqlConnection thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ToString());
             thisConnection.Open();
             
             SqlCommand thisCommand = thisConnection.CreateCommand();
