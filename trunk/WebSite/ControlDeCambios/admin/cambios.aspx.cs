@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 
 public partial class cambios : System.Web.UI.Page
@@ -21,10 +22,10 @@ public partial class cambios : System.Web.UI.Page
         {
             Response.Redirect("../index.aspx");
         }
-        usuarioSesion.Text = Session["user"].ToString();        
+        usuarioSesion.Text = Session["user"].ToString();
 
 
-        thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
+        thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ToString());
         thisConnection.Open();
 
 
@@ -37,6 +38,7 @@ public partial class cambios : System.Web.UI.Page
             folio = (int)thisReader["Last"]+1;
             Label22.Text = folio.ToString();
             Session["folio"] = folio;
+            selectDeptos();
         }
 
         if (Session["cambioAceptado"].Equals(false))
@@ -52,6 +54,27 @@ public partial class cambios : System.Web.UI.Page
        
 
     }
+
+    public void selectDeptos()
+    {
+
+        try
+        {
+
+            SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+            SqlDataSource1.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+            SqlDataSource1.SelectCommand = "SELECT [DEPTO_ID], [NOMBRE_DEPTO] FROM [DEPARTAMENTO]";
+
+        }
+        catch (Exception)
+        {
+
+        }
+
+    }
+
     protected void Button1_Click(object sender, EventArgs e)
     {
         Session["user"] = null;
@@ -90,8 +113,17 @@ public partial class cambios : System.Web.UI.Page
 
     protected void DropDownList4_SelectedIndexChanged(object sender, EventArgs e)
     {
-        
+
+        SqlDataSource2.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+        SqlDataSource2.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+        SqlDataSource2.SelectCommand = "SELECT [AREA_ID], [NOMBRE_AREA], [DEPTO_ID] FROM [AREA] WHERE ([DEPTO_ID] =" + DropDownList4.SelectedValue + ")";
+
+        Label24.Text = "";
+
     }
+
     protected void DropDownList5_SelectedIndexChanged(object sender, EventArgs e)
     {
 
@@ -150,21 +182,19 @@ public partial class cambios : System.Web.UI.Page
                 throw new System.ArgumentException("* El cambio ya ha sido agregado");
             }
         }
-        catch (SqlException ee)
+        catch (SqlException)
         {
 
-            //Label24.Text = "* Error con la base de datos";
-            Label24.Text = ee.Message;
+            Label24.Text = "* Error con la base de datos";
             // Asignar color al mensaje de error
             Label24.ForeColor = System.Drawing.Color.Red;
-            //Response.Redirect("cambios.aspx");
 
         }
         // capturar el error por subir un archivo que no es imagen
         catch (ArgumentException e1)
         {
             // Asignar mensaje de error
-            Label24.Text = e1.Message;
+            Label24.Text = "* Error con servidor";
             // Asignar color al mensaje de error
             Label24.ForeColor = System.Drawing.Color.Red;
 
@@ -209,4 +239,10 @@ public partial class cambios : System.Web.UI.Page
         Session["cambioAceptado"] = true;
         Response.Redirect("cambios.aspx");
     }
+
+    protected void reset_Error_Message(object sender, EventArgs e)
+    {
+        Label24.Text = "";
+    }
+
 }
