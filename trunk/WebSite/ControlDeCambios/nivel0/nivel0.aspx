@@ -102,39 +102,24 @@
                         AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
                         DataSourceID="NivelCeroDataSource" 
                         EmptyDataText="No tienes cambios por aprobar" 
-                        onselectedindexchanged="GridView1_SelectedIndexChanged" CellPadding="4" 
-                         Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" 
-                         ForeColor="#333333" GridLines="None" PageSize="30">
-
+                        onselectedindexchanged="GridView1_SelectedIndexChanged" CellPadding="4" Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" ForeColor="#333333" PageSize="30" BorderColor="#E7E7FF">
                         <Columns>
                             <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" >
-                            <HeaderStyle BackColor="#F9F8F4" />
                             </asp:CommandField>
                             <asp:BoundField DataField="CAMBIO_ID" HeaderText="FOLIO" ReadOnly="True" 
                                 SortExpression="CAMBIO_ID" >
-                             <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
-
                             </asp:BoundField>
                             <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE CAMBIO" 
                                 SortExpression="NOMBRE_CAMBIO" >
-                             <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
                             </asp:BoundField>
                             <asp:BoundField DataField="NOMBRE_AREA" HeaderText="NOMBRE AREA" 
-
                                 SortExpression="NOMBRE_AREA" >
-                             <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
-
                             </asp:BoundField>
                             <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
-
                                 SortExpression="TIPO_CAMBIO" >
-                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
-
                             </asp:BoundField>
                             <asp:BoundField DataField="FECHA_ASIGNACION" HeaderText="FECHA ASIGNACION" 
                                 SortExpression="FECHA_ASIGNACION" >
-                             <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
-
                             </asp:BoundField>
                         </Columns>
                          <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />

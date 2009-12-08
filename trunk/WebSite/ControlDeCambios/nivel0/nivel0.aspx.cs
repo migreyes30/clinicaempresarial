@@ -12,10 +12,8 @@ public partial class nivel0 : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
         if (Session["user"] == null)
         {
-
             Response.Redirect("index.aspx");
         }
         usuarioSesion.Text = Session["user"].ToString();
