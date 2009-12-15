@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class nivel0_cambioHistorial : System.Web.UI.Page
 {
@@ -22,6 +23,7 @@ public partial class nivel0_cambioHistorial : System.Web.UI.Page
             Response.Redirect("../index.aspx");
         }
         usuarioSesion.Text = Session["user"].ToString();
+        show_cambios();
         Label25.Text = Request.QueryString["cambioID"];
         Session["cambioID"] = Request.QueryString["cambioID"];
         
@@ -62,6 +64,9 @@ public partial class nivel0_cambioHistorial : System.Web.UI.Page
     {
         Session["user"] = null;
         Session["perfil"] = null;
+        Session["correo"] = null;
+        Session["depto"] = null;
+        Session["userPrincipal"] = null; 
         Response.Redirect("../index.aspx");
 
     }
@@ -73,4 +78,30 @@ public partial class nivel0_cambioHistorial : System.Web.UI.Page
     {
         Response.Write("<script type='text/javascript'>window.open('imagenCambio.aspx?cambioID=" + Session["cambioID"] + "','_blank');</script>");
     }
+
+    protected void show_cambios()
+    {
+
+        SqlDataSource2.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+        SqlDataSource2.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+
+        SqlDataSource3.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+        SqlDataSource3.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+
+        SqlDataSource4.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+        SqlDataSource4.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+
+        SqlDataSource5.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+        SqlDataSource5.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+
+    }
+
 }

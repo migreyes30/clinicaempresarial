@@ -155,8 +155,7 @@
                                             </asp:DropDownList>
                                             <asp:CheckBox ID="CheckBox1" runat="server" Text="Todas" AutoPostBack="true"
                                                 oncheckedchanged="CheckBox1_CheckedChanged" />
-                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server">
-                                            </asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" />
                                         </td>
                                         <td align="left">
                                             &nbsp;</td>
@@ -206,7 +205,7 @@
                     <asp:GridView ID="GridListaNivelCero" runat="server" AllowPaging="True" 
                         AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
                         DataSourceID="NivelCeroHistDataSource" 
-                        EmptyDataText="Busque por campo o presione el boton Aceptar para ver todo el Historial" 
+                        EmptyDataText="Busque por campo y presione el boton Aceptar para ver el Historial" 
                         onselectedindexchanged="GridView1_SelectedIndexChanged1" CellPadding="4" Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" ForeColor="#333333" PageSize="30" BorderColor="#E7E7FF">
                         <RowStyle BackColor="#EFF3FB" />
                         <Columns>
@@ -240,8 +239,7 @@
                         <AlternatingRowStyle BackColor="White" />
                     </asp:GridView>
                     
-                    <asp:SqlDataSource ID="NivelCeroHistDataSource" runat="server">
-                    </asp:SqlDataSource>
+                    <asp:SqlDataSource ID="NivelCeroHistDataSource" runat="server" />
                                         </td>
                                     </tr>
                                     <tr>

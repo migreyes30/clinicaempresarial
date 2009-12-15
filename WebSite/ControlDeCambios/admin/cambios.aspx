@@ -255,8 +255,7 @@
                                                 onselectedindexchanged="DropDownList4_SelectedIndexChanged"
                                                  OnDataBound="DropDownList4_SelectedIndexChanged" >
                                             </asp:DropDownList>
-                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" >
-                                            </asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" />
                                             
                                         </td>
                                         <td class="style15" bgcolor="#F9F9F7" align="left">
@@ -274,9 +273,7 @@
                                                 DataSourceID="SqlDataSource2" DataTextField="NOMBRE_AREA" 
                                                 DataValueField="AREA_ID" OnSelectedIndexChanged="reset_Error_Message">
                                 </asp:DropDownList>
-                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" >
-
-                                            </asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" />
                                         </td>
                                         <td class="style15" bgcolor="#F9F9F7" align="left">
                                             &nbsp;</td>

@@ -20,9 +20,9 @@ public partial class admin_incidentes : System.Web.UI.Page
         {
             Response.Redirect("../index.aspx");
         }
-        usuarioSesion.Text = Session["user"].ToString();        
+        usuarioSesion.Text = Session["user"].ToString();
+        selectDeptos();
 
-        //thisConnection = new SqlConnection(@"Network Library=DBMSSOCN;Data Source=localhost,2798;database=ControlCambios;User id=sa;Password=oracle;");
         thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ToString());
         thisConnection.Open();
 
@@ -37,6 +37,9 @@ public partial class admin_incidentes : System.Web.UI.Page
     {
         Session["user"] = null;
         Session["perfil"] = null;
+        Session["correo"] = null;
+        Session["depto"] = null;
+        Session["userPrincipal"] = null;
         //thisConnection.Close();
         Response.Redirect("../index.aspx");
     }
@@ -79,7 +82,7 @@ public partial class admin_incidentes : System.Web.UI.Page
                 DateTime MyDateTime = DateTime.Parse(fechaIncidente, MyCultureInfo);
                 CultureInfo culture = new CultureInfo("en-US");
                 SqlCommand insertando = new SqlCommand("INSERT INTO INCIDENTES  (NOMBRE_INCIDENTE, DESCRIPCION_INCIDENTE, FECHA_INCIDENTE, AREA_ID)" +
-                "VALUES ('" + TextBox1.Text + "', '" + TextBox3.Text + "', '" + MyDateTime.ToString("d", culture) + "', '" + DropDownList2.SelectedValue + "')", thisConnection);
+                "VALUES ('" + TextBox1.Text + "', '" + TextBox3.Text + "', '" + MyDateTime.ToString("d", culture) + "', '" + DropDownList5.SelectedValue + "')", thisConnection);
                 
                 insertando.ExecuteNonQuery();
                 Label11.Text = "Dato Insertado!!!";
@@ -114,4 +117,36 @@ public partial class admin_incidentes : System.Web.UI.Page
         Session["cambioAceptado"] = true;
         Response.Redirect("incidentes.aspx");
     }
+
+    public void selectDeptos()
+    {
+
+        try
+        {
+
+            SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+            SqlDataSource1.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+            SqlDataSource1.SelectCommand = "SELECT [DEPTO_ID], [NOMBRE_DEPTO] FROM [DEPARTAMENTO]";
+
+        }
+        catch (Exception)
+        {
+
+        }
+
+    }
+
+    protected void DropDownList4_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
+        SqlDataSource2.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+        SqlDataSource2.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+        SqlDataSource2.SelectCommand = "SELECT [AREA_ID], [NOMBRE_AREA], [DEPTO_ID] FROM [AREA] WHERE ([DEPTO_ID] =" + DropDownList4.SelectedValue + ")";
+
+    }
+
 }

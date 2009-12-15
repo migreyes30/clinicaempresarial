@@ -109,8 +109,7 @@
                         DataSourceID="SqlDataSourceN2" 
                         onselectedindexchanged="GridView1_SelectedIndexChanged" 
                         EmptyDataText="No tienes cambios por aprobar" 
-                        AllowSorting="True" CellPadding="4" Font-Names="Arial Narrow" 
-                        Font-Size="Medium" Width="880px">
+                        AllowSorting="True" CellPadding="4" Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" ForeColor="#333333" PageSize="30" BorderColor="#E7E7FF">
                         <Columns>
                              <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
                             <asp:BoundField DataField="STATUS" HeaderText="STATUS" 
@@ -124,11 +123,16 @@
                             <asp:BoundField DataField="TIPO_CAMBIO" HeaderText="TIPO_CAMBIO" 
                                 SortExpression="TIPO_CAMBIO" />
                         </Columns>
+                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <EditRowStyle BackColor="#2461BF" />
+                        <AlternatingRowStyle BackColor="White" />
                     </asp:GridView>
                     <br />
                     <br />
-                    <asp:SqlDataSource ID="SqlDataSourceN2" runat="server">
-                    </asp:SqlDataSource>
+                    <asp:SqlDataSource ID="SqlDataSourceN2" runat="server" />
                     <br />
     
                     <br />

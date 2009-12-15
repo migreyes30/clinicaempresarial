@@ -15,6 +15,11 @@
         {
             width: 592px;
         }
+        .style17
+        {
+            width: 592px;
+            height: 216px;
+        }
         </style>
 </head>
 <body>
@@ -200,7 +205,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="style14" bgcolor="White" align="center">
+                                        <td class="style17" bgcolor="White" align="center">
                                             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
                                                 DataSourceID="SqlDataSource2" CellPadding="4" Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" ForeColor="#333333" PageSize="30" BorderColor="#E7E7FF">
                                                 <RowStyle BackColor="#EFF3FB" />

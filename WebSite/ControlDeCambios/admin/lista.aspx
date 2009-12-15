@@ -11,6 +11,10 @@
         {
             width: 317px;
         }
+        .style2
+        {
+            height: 30px;
+        }
         </style>
 </head>
 
@@ -116,21 +120,19 @@
                             <td bgcolor="#F7F7F3">
                                 <table cellpadding="4" style="width:100%;">
                                     <tr>
-                                        <td align="left" width="180">
+                                        <td align="left" width="180" class="style2">
                                             <asp:Label ID="Label8" runat="server" Font-Names="Arial Narrow" 
                                                 Font-Size="Medium" Text="Folio"></asp:Label>
                                         </td>
-                                        <td align="left" width="360">
+                                        <td align="left" width="360" class="style2">
                                             <asp:Label ID="Label9" runat="server" Font-Names="Arial Narrow" 
                                                 Font-Size="Medium" Text="Nombre de Cambio"></asp:Label>
                                         </td>
-                                        <td align="left" width="180">
+                                        <td align="left" width="180" class="style2">
                                             <asp:Label ID="Label10" runat="server" Font-Names="Arial Narrow" 
                                                 Font-Size="Medium" Text="Tipo de Cambio"></asp:Label>
                                         </td>
-                                        <td align="left" width="180">
-                                            <asp:Label ID="Label11" runat="server" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium" Text="Fecha"></asp:Label>
+                                        <td align="left" width="180" class="style2">
                                         </td>
                                     </tr>
                                     <tr>
@@ -148,8 +150,7 @@
                                             </asp:DropDownList>
                                         </td>
                                         <td align="left">
-                                            <asp:TextBox ID="TextBox5" runat="server"></asp:TextBox>
-                                        </td>
+                                            &nbsp;</td>
                                     </tr>
                                     </table>
                             </td>
@@ -264,32 +265,7 @@
                         </tr>
                         <tr>
                             <td align="center">
-                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                                    ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                    ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                    
-                                    SelectCommand="SELECT     CAMBIO.CAMBIO_ID, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, CAMBIO.ESTADO_CAMBIO, NIVEL0.STATUS AS NIVEL0, 
-                      NIVEL1_HSE.STATUS AS HSE, NIVEL1_QA.STATUS AS QA, NIVEL2_STATUS.STATUS AS NIVEL2
-FROM         CAMBIO INNER JOIN
-                      NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID INNER JOIN
-                      NIVEL1_HSE ON CAMBIO.CAMBIO_ID = NIVEL1_HSE.CAMBIO_ID INNER JOIN
-                      NIVEL1_QA ON CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID INNER JOIN
-                      NIVEL2_STATUS ON CAMBIO.CAMBIO_ID = NIVEL2_STATUS.CAMBIO_ID
-                      
-                      WHERE 
-                      CAMBIO.CAMBIO_ID LIKE '%' + ? + '%'
-                    AND CAMBIO.NOMBRE_CAMBIO LIKE '%' + ? + '%'
-                    AND CAMBIO.TIPO_CAMBIO LIKE '%' + ? + '%'
-                    AND CAMBIO.ESTADO_CAMBIO LIKE '%' + ? + '%'
-                    AND NIVEL0.STATUS LIKE '%' + ? + '%'
-                    AND NIVEL1_HSE.STATUS LIKE '%' + ? + '%'
-                    AND NIVEL1_QA.STATUS LIKE '%' + ? + '%'
-                    AND NIVEL2_STATUS.STATUS LIKE '%' + ? + '%'
-                      
-                      
-                      "
-                      
-                    >
+                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" >
                     
                 <SelectParameters>
                     <asp:ControlParameter ControlID="Label17" Name="FOLIO" PropertyName="Text" 
@@ -309,15 +285,13 @@ FROM         CAMBIO INNER JOIN
                     <asp:ControlParameter ControlID="Label24" Name="EDO_N2" PropertyName="Text" 
                     Type="String" ConvertEmptyStringToNull="False" />
                 </SelectParameters>
-                    
-                    
-                                </asp:SqlDataSource>
+            </asp:SqlDataSource>
                                 <asp:GridView ID="GridView1" runat="server" AllowPaging="True" 
                                     AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
                                     DataSourceID="SqlDataSource1" Width="880px" CellPadding="4" 
                                     Font-Names="Arial Narrow" Font-Size="Medium" HorizontalAlign="Left" 
                                     PageSize="30" onselectedindexchanged="GridView1_SelectedIndexChanged" 
-                                    ForeColor="#333333" GridLines="None">
+                                    ForeColor="#333333">
                                     <RowStyle BackColor="#EFF3FB" />
                                     <Columns>
                                         

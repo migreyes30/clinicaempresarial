@@ -6,10 +6,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class cambios : System.Web.UI.Page
 {
-
     SqlConnection thisConnection;
     SqlCommand thisCommand;
     Int32 folio;
@@ -26,6 +26,7 @@ public partial class cambios : System.Web.UI.Page
 
 
         Label25.Text = Request.QueryString["cambioID"];
+        Session["cambioID"] = Request.QueryString["cambioID"];
 
         try
         {
@@ -38,6 +39,11 @@ public partial class cambios : System.Web.UI.Page
             TextBox4.Text = datos[3];
             Label28.Text = datos[4];
             TextBox5.Text = datos[5];
+
+            show_nivel_0();
+            show_nivel_1_HSE();
+            show_areas_soporte();
+
         }
         catch (SqlException)
         {
@@ -50,6 +56,9 @@ public partial class cambios : System.Web.UI.Page
     {
         Session["user"] = null;
         Session["perfil"] = null;
+        Session["correo"] = null;
+        Session["depto"] = null;
+        Session["userPrincipal"] = null;
         Response.Redirect("../index.aspx");
         thisConnection.Close();
 
@@ -72,8 +81,8 @@ public partial class cambios : System.Web.UI.Page
     }
     protected void Button7_Click(object sender, EventArgs e)
     {        
-//        try
-//        {           
+        try
+        {           
 
             for (int i = 0; i < 6; i++)
             {
@@ -91,12 +100,11 @@ public partial class cambios : System.Web.UI.Page
             Button8.Visible = false;
             Button3.Visible = true;
 
-//        }catch(SqlException){
+        }catch(SqlException){
 
-            //Response.Redirect("cambios.aspx");
-//            Label24.Text = "Error con la base de datos";
+            Label24.Text = "Error con la base de datos";
 
-//        }
+        }
 
     }
 
@@ -116,7 +124,7 @@ public partial class cambios : System.Web.UI.Page
             ManejadorCambio miManejador = new ManejadorCambio();
             miManejador.rechazarN1QA(TextBoxComentario.Text, Int32.Parse(Label25.Text));
 
-            /************* Llamada a la funcion para enviar mail a Admin ****
+            /************* Llamada a la funcion para enviar mail a Admin ****/
 
             miManejador.rechazadoCambio(miManejador.getMailAdmin(),usuarioSesion.Text, Label25.Text);
 
@@ -145,4 +153,65 @@ public partial class cambios : System.Web.UI.Page
     {
         Response.Write("<script type='text/javascript'>window.open('imagenCambioN1_QA.aspx?cambioID=" + Session["cambioID"] + "','_blank');</script>");
     }
+
+    public void show_nivel_0()
+    {
+
+        try
+        {
+
+            SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+            SqlDataSource1.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+            SqlDataSource1.SelectCommand = "SELECT [COMENTARIOS] FROM [NIVEL0] WHERE ([CAMBIO_ID] = " + Session["cambioID"].ToString() + ")";
+
+        }
+        catch (Exception)
+        {
+
+        }
+
+    }
+
+    public void show_nivel_1_HSE()
+    {
+
+        try
+        {
+
+            SqlDataSource2.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+            SqlDataSource2.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+            SqlDataSource2.SelectCommand = "SELECT [COMENTARIOS] FROM [NIVEL1_HSE] WHERE ([CAMBIO_ID] = " + Session["cambioID"].ToString() + ")";
+
+        }
+        catch (Exception)
+        {
+
+        }
+
+    }
+
+    public void show_areas_soporte()
+    {
+
+        try
+        {
+
+            SqlDataSource2.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+            SqlDataSource2.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+            SqlDataSource2.SelectCommand = "SELECT [AREA_SOPORTE_ID], [NOMBRE_AREA_SOPORTE] FROM [AREAS_SOPORTE]";
+
+        }
+        catch (Exception)
+        {
+
+        }
+
+    }
+
 }

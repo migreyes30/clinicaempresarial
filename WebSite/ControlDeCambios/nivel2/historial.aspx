@@ -167,11 +167,12 @@
                                     </tr>
                                     <tr>
                                         <td align="left">
-                                            <asp:Label ID="Label20" runat="server" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium" Text="Área"></asp:Label>
+                                            <asp:Label ID="Label1" runat="server" Font-Names="Arial Narrow" 
+                                                Font-Size="Medium" Text="Departamento"></asp:Label>
                                         </td>
                                         <td align="left">
-                                            &nbsp;</td>
+                                            <asp:Label ID="Label20" runat="server" Font-Names="Arial Narrow" Font-Size="Medium" Text="Área"></asp:Label>    
+                                        </td>
                                         <td align="left">
                                             &nbsp;</td>
                                         <td align="left">
@@ -180,18 +181,23 @@
                                     <tr>
                                         <td align="left">
                                             <asp:DropDownList ID="DropDownList9" runat="server" 
-                                                DataSourceID="SqlDataSource1" DataTextField="NOMBRE_AREA" 
-                                                DataValueField="AREA_ID">
+                                                DataSourceID="SqlDataSource1" DataTextField="NOMBRE_DEPTO" 
+                                                DataValueField="DEPTO_ID"   onselectedindexchanged="DropDownList1_SelectedIndexChanged"
+                                                 OnDataBound="DropDownList1_SelectedIndexChanged">
                                             </asp:DropDownList>
-                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                
-                                                SelectCommand="SELECT [AREA_ID], [NOMBRE_AREA] FROM [AREA] ORDER BY [AREA_ID]">
-                                            </asp:SqlDataSource>
+                                              <asp:CheckBox ID="CheckBox1" runat="server" Text="Todos" AutoPostBack="true" 
+                                                    OnCheckedChanged="CheckBox1_CheckedChanged_n2" /> 
+                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" />
                                         </td>
                                         <td align="left">
-                                            &nbsp;</td>
+                                            <asp:DropDownList ID="DropDownList1" runat="server" 
+                                                DataSourceID="SqlDataSource2" DataTextField="NOMBRE_AREA" AutoPostBack="True"
+                                                DataValueField="AREA_ID" Enabled="true">
+                                            </asp:DropDownList>
+                                            <asp:CheckBox ID="CheckBox2" runat="server" Text="Todos" AutoPostBack="true" 
+                                                oncheckedchanged="CheckBox2_CheckedChanged" />  
+                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" />
+                                        </td>
                                         <td align="left">
                                             &nbsp;</td>
                                         <td align="right">
@@ -207,9 +213,10 @@
                     <asp:GridView ID="GridListaNivelCero" runat="server" AllowPaging="True" 
                         AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
                         DataSourceID="NivelDosDataSource" 
-                        EmptyDataText="Busque por campo o presione el boton Aceptar para ver todo el Historial" 
+                        EmptyDataText="Busque por campo y presione el boton Aceptar para ver el Historial" 
                         onselectedindexchanged="GridView1_SelectedIndexChanged1" CellPadding="4" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium" Width="880px">
+                                                Font-Size="Medium" Width="880px" ForeColor="#333333" 
+                                                PageSize="30" BorderColor="#E7E7FF">
                         <Columns>
                             <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" />
                             <asp:BoundField DataField="CAMBIO_ID" HeaderText="CAMBIO_ID" 
@@ -227,6 +234,12 @@
                                 SortExpression="ESTADO_CAMBIO" >
                             </asp:BoundField>
                         </Columns>
+                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
+                        <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
+                        <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                        <EditRowStyle BackColor="#2461BF" />
+                        <AlternatingRowStyle BackColor="White" />
                     </asp:GridView>
                                         </td>
                                     </tr>
@@ -236,8 +249,7 @@
                         <tr>
                             <td align="center">
                                 <br />
-                    <asp:SqlDataSource ID="NivelDosDataSource" runat="server" >
-                    </asp:SqlDataSource>
+                    <asp:SqlDataSource ID="NivelDosDataSource" runat="server" />
                             </td>
                         </tr>
                     </table>

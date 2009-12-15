@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Configuration;
 
 public partial class lista : System.Web.UI.Page
 {
@@ -15,6 +16,7 @@ public partial class lista : System.Web.UI.Page
         }
 
         usuarioSesion.Text = Session["user"].ToString();
+        show_cambios();
 
         if (Request.QueryString["folio"] == null)
         {
@@ -29,12 +31,16 @@ public partial class lista : System.Web.UI.Page
         Label22.Text = Request.QueryString["edoQA"];
         Label23.Text = Request.QueryString["edoHSE"];
         Label24.Text = Request.QueryString["edoN2"];
+        
 
     }
     protected void Button1_Click(object sender, EventArgs e)
     {
         Session["user"] = null;
-        Session["perfil"] = null;        
+        Session["perfil"] = null;
+        Session["correo"] = null;
+        Session["depto"] = null;
+        Session["userPrincipal"] = null;      
         Response.Redirect("../index.aspx");
         
     }
@@ -80,4 +86,27 @@ public partial class lista : System.Web.UI.Page
     {
 
     }
+
+    protected void show_cambios()
+    {
+
+        SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+        SqlDataSource1.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+        String searchQuerie = crearLastPartQuerieSearch(TextBox6.Text, TextBox4.Text, DropDownList1.SelectedValue, DropDownList5.SelectedValue, DropDownList6.SelectedValue, DropDownList8.SelectedValue, DropDownList7.SelectedValue, DropDownList9.SelectedValue);
+
+        SqlDataSource1.SelectCommand = "SELECT CAMBIO.CAMBIO_ID, CAMBIO.NOMBRE_CAMBIO, CAMBIO.TIPO_CAMBIO, CAMBIO.ESTADO_CAMBIO, NIVEL0.STATUS AS NIVEL0, NIVEL1_HSE.STATUS AS HSE, NIVEL1_QA.STATUS AS QA, NIVEL2_STATUS.STATUS AS NIVEL2 FROM CAMBIO INNER JOIN NIVEL0 ON CAMBIO.CAMBIO_ID = NIVEL0.CAMBIO_ID INNER JOIN NIVEL1_HSE ON CAMBIO.CAMBIO_ID = NIVEL1_HSE.CAMBIO_ID INNER JOIN NIVEL1_QA ON CAMBIO.CAMBIO_ID = NIVEL1_QA.CAMBIO_ID INNER JOIN NIVEL2_STATUS ON CAMBIO.CAMBIO_ID = NIVEL2_STATUS.CAMBIO_ID " + searchQuerie;
+
+    }
+
+    private string crearLastPartQuerieSearch(String folioSearch, String cambioName, String n0, String estado, String tipo, String n1_hse, String n1_qa, String n2)
+    {
+
+        string resultquerie = "WHERE (CAMBIO.CAMBIO_ID LIKE '%" + folioSearch + "%') AND (CAMBIO.NOMBRE_CAMBIO LIKE '%" + cambioName + "%') AND (CAMBIO.ESTADO_CAMBIO LIKE '%" + estado + "%') AND (CAMBIO.TIPO_CAMBIO LIKE '%" + tipo + "%') AND (NIVEL0.STATUS LIKE '%" + n0 + "%') AND (NIVEL1_HSE.STATUS LIKE '%" + n1_hse + "%') AND (NIVEL1_QA.STATUS LIKE '%" + n1_qa + "%') AND (NIVEL2_STATUS.STATUS LIKE '%" + n2 + "%')";
+
+        return resultquerie;
+
+    }
+
 }

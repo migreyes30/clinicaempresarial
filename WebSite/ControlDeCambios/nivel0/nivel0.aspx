@@ -130,8 +130,7 @@
                         <AlternatingRowStyle BackColor="White" />
 
                     </asp:GridView>
-                    <asp:SqlDataSource runat="server" ID="NivelCeroDataSource">
-                    </asp:SqlDataSource>
+                    <asp:SqlDataSource runat="server" ID="NivelCeroDataSource" />
                     <br />
                 </td>
             </tr>

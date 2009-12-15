@@ -165,8 +165,6 @@
                                                 onselectedindexchanged="DropDownList2_SelectedIndexChanged">
                                             </asp:DropDownList>
                                             <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
                                                 SelectCommand="SELECT [NOMBRE_DEPTO], [DEPTO_ID] FROM [DEPARTAMENTO]">
                                             </asp:SqlDataSource>
                                         </td>
@@ -183,8 +181,6 @@
                                                 onselectedindexchanged="DropDownList3_SelectedIndexChanged">
                                             </asp:DropDownList>
                                             <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
                                                 SelectCommand="SELECT [AREA_SOPORTE_ID], [NOMBRE_AREA_SOPORTE], [REPONSABLE_ID] FROM [AREAS_SOPORTE]">
                                             </asp:SqlDataSource>
                                         </td>
