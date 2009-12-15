@@ -156,31 +156,21 @@
                                         <td align="left">
                                               <asp:DropDownList ID="DropDownList10" runat="server" AutoPostBack="True" 
                                                 DataSourceID="SqlDataSource2" DataTextField="NOMBRE_DEPTO" 
-                                                DataValueField="DEPTO_ID" >
-                                                <asp:ListItem Value="" Selected="True" Enabled="true">Todos</asp:ListItem>
-                                            </asp:DropDownList>                                            
-                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT [DEPTO_ID], [NOMBRE_DEPTO] FROM [DEPARTAMENTO]" 
-                                              >
-                                            </asp:SqlDataSource>
+                                                DataValueField="DEPTO_ID"   onselectedindexchanged="DropDownList10_SelectedIndexChanged"
+                                                 OnDataBound="DropDownList10_SelectedIndexChanged">
+                                            </asp:DropDownList>
+                                              <asp:CheckBox ID="CheckBox1" runat="server" Text="Todos" AutoPostBack="true" 
+                                                    OnCheckedChanged="CheckBox1_CheckedChanged" />                                                                                       
+                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" />
                                         </td>
                                         <td align="left">
-                                <asp:DropDownList ID="DropDownList9" runat="server"
+                                            <asp:DropDownList ID="DropDownList9" runat="server"
                                                 DataSourceID="SqlDataSource1" DataTextField="NOMBRE_AREA" AutoPostBack="True"
-                                                DataValueField="AREA_ID" >
-                                                <asp:ListItem Value="" Selected="True" Enabled="true">Todos</asp:ListItem>
-                                </asp:DropDownList>
-                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT [AREA_ID], [NOMBRE_AREA], [DEPTO_ID] FROM [AREA] WHERE ([DEPTO_ID] = ?)">
-                                                <SelectParameters>
-                                                    <asp:ControlParameter ControlID="DropDownList10" DefaultValue="" Name="DEPTO_ID" 
-                                                        PropertyName="SelectedValue" Type="Int32" />
-                                                </SelectParameters>
-                                            </asp:SqlDataSource>
+                                                DataValueField="AREA_ID" Enabled="true">
+                                            </asp:DropDownList>
+                                            <asp:CheckBox ID="CheckBox2" runat="server" Text="Todos" AutoPostBack="true" 
+                                                oncheckedchanged="CheckBox2_CheckedChanged" />    
+                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -228,10 +218,10 @@
                     <asp:GridView ID="GridListaNivelCero" runat="server" AllowPaging="True" 
                         AllowSorting="True" AutoGenerateColumns="False" DataKeyNames="CAMBIO_ID" 
                         DataSourceID="Nivel1QAHistDataSource" 
-                        EmptyDataText="Busque por campo o presione el boton Aceptar para ver todo el Historial" 
+                        EmptyDataText="Busque por campo y presione el boton Aceptar para ver el Historial" 
                         onselectedindexchanged="GridView1_SelectedIndexChanged1" CellPadding="4" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium" Width="880px" PageSize="30" ForeColor="#333333" 
-                                                GridLines="None">
+                                                Font-Size="Medium" Width="880px" ForeColor="#333333" 
+                                                PageSize="30" BorderColor="#E7E7FF">
                         <RowStyle BackColor="#EFF3FB" />
                         <Columns>                            
                             <asp:CommandField ShowSelectButton="True" />
@@ -271,8 +261,7 @@
                         </tr>
                         <tr>
                             <td align="center">
-                    <asp:SqlDataSource ID="Nivel1QAHistDataSource" runat="server" >
-                    </asp:SqlDataSource>
+                    <asp:SqlDataSource ID="Nivel1QAHistDataSource" runat="server" />
                             </td>
                         </tr>
                     </table>

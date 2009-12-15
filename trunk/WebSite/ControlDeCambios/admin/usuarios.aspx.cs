@@ -20,6 +20,7 @@ public partial class admin_usuarios : System.Web.UI.Page
             Response.Redirect("../index.aspx");
         }
         usuarioSesion.Text = Session["user"].ToString();
+        show_cambios();
 
         thisConnection = new SqlConnection(ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ToString());
         thisConnection.Open();
@@ -54,6 +55,9 @@ public partial class admin_usuarios : System.Web.UI.Page
     {
         Session["user"] = null;
         Session["perfil"] = null;
+        Session["correo"] = null;
+        Session["depto"] = null;
+        Session["userPrincipal"] = null; 
         thisConnection.Close();
         Response.Redirect("../index.aspx");
     }
@@ -480,4 +484,18 @@ public partial class admin_usuarios : System.Web.UI.Page
             nivel1QA();
         }
     }
+    protected void show_cambios()
+    {
+
+        SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+        SqlDataSource1.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+
+        SqlDataSource2.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+        SqlDataSource2.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+    }
+
 }

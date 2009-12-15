@@ -35,7 +35,7 @@ public partial class cambios : System.Web.UI.Page
 
         if (thisReader.Read())
         {
-            folio = (int)thisReader["Last"]+1;
+            folio = ((int) thisReader["Last"])+1;
             Label22.Text = folio.ToString();
             Session["folio"] = folio;
             selectDeptos();
@@ -79,6 +79,9 @@ public partial class cambios : System.Web.UI.Page
     {
         Session["user"] = null;
         Session["perfil"] = null;
+        Session["correo"] = null;
+        Session["depto"] = null;
+        Session["userPrincipal"] = null;
         Response.Redirect("../index.aspx");
         thisConnection.Close();
 
@@ -164,7 +167,7 @@ public partial class cambios : System.Web.UI.Page
                     Button8.Visible = true;
                     Session["cambioAceptado"] = false;
 
-                    /*********    ENVIANDO EMAIL    *************
+                    /*********    ENVIANDO EMAIL    *************/
                                         
                         miManejador.nuevoCambio(miManejador.getMailUser(DropDownList4.SelectedValue));
 

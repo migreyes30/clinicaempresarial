@@ -213,8 +213,7 @@
                             <td align="center">
                                 <br />
                                 
-                                <asp:SqlDataSource ID="SqlDataSource1" runat="server"></asp:SqlDataSource>
-                                <table style="width:700px;">
+                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" />                                <table style="width:700px;">
                                     <tr>
                                         <td align="left" bgcolor="#F4F2E8" class="style4" height="25">
                                             <asp:Label ID="Label8" runat="server" Text="Departamento" Font-Bold="True" 

@@ -217,9 +217,11 @@
                                                 Font-Size="Medium" Text="Departamento"></asp:Label>
                                         </td>
                                         <td class="style5" align="left" valign="top">
-                                            <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" 
+                                            <asp:DropDownList ID="DropDownList4" runat="server" AutoPostBack="True" 
                                                 DataSourceID="SqlDataSource1" DataTextField="NOMBRE_DEPTO" 
-                                                DataValueField="DEPTO_ID">
+                                                DataValueField="DEPTO_ID" 
+                                                onselectedindexchanged="DropDownList4_SelectedIndexChanged"
+                                                 OnDataBound="DropDownList4_SelectedIndexChanged" >
                                             </asp:DropDownList>
                                         </td>
                                         <td align="left">
@@ -231,10 +233,10 @@
                                                 Font-Size="Medium" Text="Area"></asp:Label>
                                         </td>
                                         <td class="style5" align="left" valign="top">
-                                            <asp:DropDownList ID="DropDownList2" runat="server" AutoPostBack="True" 
+                                <asp:DropDownList ID="DropDownList5" runat="server" AutoPostBack="True" 
                                                 DataSourceID="SqlDataSource2" DataTextField="NOMBRE_AREA" 
                                                 DataValueField="AREA_ID">
-                                            </asp:DropDownList>
+                                </asp:DropDownList>
                                         </td>
                                         <td align="left">
                                             &nbsp;</td>
@@ -249,20 +251,8 @@
                                                 Width="508px"></asp:TextBox>
                                         </td>
                                         <td align="left">
-                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT [DEPTO_ID], [NOMBRE_DEPTO] FROM [DEPARTAMENTO]">
-                                            </asp:SqlDataSource>
-                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT [NOMBRE_AREA], [AREA_ID] FROM [AREA] WHERE ([DEPTO_ID] = ?)">
-                                                <SelectParameters>
-                                                    <asp:ControlParameter ControlID="DropDownList1" Name="DEPTO_ID" 
-                                                        PropertyName="SelectedValue" Type="Int32" />
-                                                </SelectParameters>
-                                            </asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" />
+                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" />
                                         </td>
                                     </tr>
                                     <tr>

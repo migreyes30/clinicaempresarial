@@ -214,13 +214,11 @@
                                         <td class="style14" align="left">
                                           
                                             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
-                                                CellPadding="4" DataSourceID="SqlDataSource1" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium" ForeColor="#333333" GridLines="None">
+                                                DataSourceID="SqlDataSource1" CellPadding="4" Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" ForeColor="#333333" PageSize="30" BorderColor="#E7E7FF">
                                                 <RowStyle BackColor="#EFF3FB" />
                                                 <Columns>
                                                     <asp:BoundField DataField="COMENTARIOS" 
                                                         HeaderText="Comentarios Jefe de Departamento" SortExpression="COMENTARIOS">
-                                                    <HeaderStyle HorizontalAlign="Left" Width="900px" />
                                                     </asp:BoundField>
                                                 </Columns>
                                                 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -230,16 +228,7 @@
                                                 <EditRowStyle BackColor="#2461BF" />
                                                 <AlternatingRowStyle BackColor="White" />
                                             </asp:GridView>
-                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT [COMENTARIOS] FROM [NIVEL0] WHERE ([CAMBIO_ID] = ?)">
-                                                <SelectParameters>
-                                                    <asp:ControlParameter ControlID="Label25" Name="CAMBIO_ID" PropertyName="Text" 
-                                                        Type="Int32" />
-                                                </SelectParameters>
-                                            </asp:SqlDataSource>
-                                                                                      
+                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" /> 
                                         </tr>
                                     <tr>
                                         <td class="style14" align="left">
@@ -249,13 +238,11 @@
                                         <td class="style14" align="left">
                                           
                                             <asp:GridView ID="GridView2" runat="server" AutoGenerateColumns="False" 
-                                                CellPadding="4" DataSourceID="SqlDataSource2" Font-Names="Arial Narrow" 
-                                                Font-Size="Medium" ForeColor="#333333" GridLines="None">
+                                                DataSourceID="SqlDataSource2" CellPadding="4" Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" ForeColor="#333333" PageSize="30" BorderColor="#E7E7FF">
                                                 <RowStyle BackColor="#EFF3FB" />
                                                 <Columns>
                                                     <asp:BoundField DataField="COMENTARIOS" HeaderText="Comentarios QA" 
                                                         SortExpression="COMENTARIOS">
-                                                    <HeaderStyle HorizontalAlign="Left" Width="900px" />
                                                     </asp:BoundField>
                                                 </Columns>
                                                 <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -265,15 +252,7 @@
                                                 <EditRowStyle BackColor="#2461BF" />
                                                 <AlternatingRowStyle BackColor="White" />
                                             </asp:GridView>
-                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT [COMENTARIOS] FROM [NIVEL1_QA] WHERE ([CAMBIO_ID] = ?)">
-                                                <SelectParameters>
-                                                    <asp:ControlParameter ControlID="Label25" Name="CAMBIO_ID" PropertyName="Text" 
-                                                        Type="Int32" />
-                                                </SelectParameters>
-                                            </asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" />
                                                                                       
                                         </tr>
                                     <tr>
@@ -310,11 +289,7 @@
                                                 DataSourceID="SqlDataSource3" DataTextField="NOMBRE_AREA_SOPORTE" 
                                                 DataValueField="AREA_SOPORTE_ID" Font-Names="Arial Narrow">
                                             </asp:CheckBoxList>
-                                            <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT [AREA_SOPORTE_ID], [NOMBRE_AREA_SOPORTE] FROM [AREAS_SOPORTE]">
-                                            </asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="SqlDataSource3" runat="server" />
                                         </td>
                                     </tr>
                                     <tr>

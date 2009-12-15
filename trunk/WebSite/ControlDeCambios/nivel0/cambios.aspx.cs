@@ -107,7 +107,7 @@ public partial class cambios : System.Web.UI.Page
            Button8.Visible = false;
            Button3.Visible = true;
 
-           /*********    ENVIANDO EMAIL    *************
+           /*********    ENVIANDO EMAIL    *************/
            
            miManejador.nuevoCambio(miManejador.getMailHSE());
            miManejador.nuevoCambio(miManejador.getMailQA());
@@ -141,7 +141,7 @@ public partial class cambios : System.Web.UI.Page
             miManejador.rechazarNCero(TextBoxComentario.Text, Int32.Parse(Label25.Text));
             Label24.Text = "Se ha rechazado correctamente";
 
-            /************* Llamada a la funcion para enviar mail a Admin ****
+            /************* Llamada a la funcion para enviar mail a Admin ****/
 
             miManejador.rechazadoCambio(miManejador.getMailAdmin(),usuarioSesion.Text, Label25.Text);
 

@@ -109,15 +109,12 @@
                         DataSourceID="SqlDataSourceQA" 
                         EmptyDataText="No tienes cambios por aprobar" 
                         onselectedindexchanged="GridView1_SelectedIndexChanged" 
-                        AllowSorting="True" CellPadding="4" Font-Names="Arial Narrow" 
-                        Font-Size="Medium" Width="880px">
+                        AllowSorting="True" CellPadding="4" Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" ForeColor="#333333" PageSize="30" BorderColor="#E7E7FF">
                         <Columns>
                             <asp:CommandField ShowSelectButton="True" SelectText="Seleccionar" >
-                            <HeaderStyle BackColor="#F9F8F4" />
                             </asp:CommandField>
                             <asp:BoundField DataField="CAMBIO_ID" HeaderText="FOLIO" ReadOnly="True" 
                                 SortExpression="CAMBIO_ID" >
-                            <HeaderStyle BackColor="#F9F8F4" ForeColor="#0B479D" />
                             </asp:BoundField>
                             <asp:BoundField DataField="NOMBRE_CAMBIO" HeaderText="NOMBRE_CAMBIO" 
                                 SortExpression="NOMBRE_CAMBIO" />
@@ -129,8 +126,8 @@
                                 SortExpression="TIPO_CAMBIO" />
                             <asp:BoundField DataField="FECHA_ASIGNACION" HeaderText="FECHA_ASIGNACION" 
                                 SortExpression="FECHA_ASIGNACION" />
-                        </Columns>
-                        <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
+                           </Columns>                        
+                           <FooterStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
                         <PagerStyle BackColor="#2461BF" ForeColor="White" HorizontalAlign="Center" />
                         <SelectedRowStyle BackColor="#D1DDF1" Font-Bold="True" ForeColor="#333333" />
                         <HeaderStyle BackColor="#507CD1" Font-Bold="True" ForeColor="White" />
@@ -139,8 +136,7 @@
                     </asp:GridView>
                     <br />
                     <br />
-                    <asp:SqlDataSource ID="SqlDataSourceQA" runat="server">
-                    </asp:SqlDataSource>
+                    <asp:SqlDataSource ID="SqlDataSourceQA" runat="server" />
                     <br />
     
                     <br />

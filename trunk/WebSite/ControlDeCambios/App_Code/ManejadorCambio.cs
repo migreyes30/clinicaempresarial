@@ -369,7 +369,7 @@ public class ManejadorCambio
 
                         libera = false;
 
-                        /*********    ENVIANDO EMAIL    *************
+                        /*********    ENVIANDO EMAIL    *************/
                          
                         nuevoCambio(getMailNivel2(areaSopID.ToString()));                        
                                                   
@@ -449,7 +449,7 @@ public class ManejadorCambio
 
                         libera = false;
                         
-                        /*********    ENVIANDO EMAIL    *************
+                        /*********    ENVIANDO EMAIL    *************/
                          
                         nuevoCambio(getMailNivel2(areaSopID.ToString()));                        
                                                   

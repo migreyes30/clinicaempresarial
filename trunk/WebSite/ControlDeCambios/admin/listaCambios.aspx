@@ -270,9 +270,7 @@
                                                 <EditRowStyle BackColor="#2461BF" />
                                                 <AlternatingRowStyle BackColor="White" />
                                             </asp:GridView>
-                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
+                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server"
                                                 SelectCommand="SELECT     AREA.NOMBRE_AREA, NIVEL0.STATUS, NIVEL0.FECHA_APROBACION, NIVEL0.COMENTARIOS,
                           (SELECT     NOMBRE_USUARIO
                             FROM          USUARIO
@@ -331,8 +329,6 @@ WHERE     (NIVEL0.CAMBIO_ID = ?)">
                                                 <AlternatingRowStyle BackColor="White" />
                                             </asp:GridView>
                                             <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
                                                 SelectCommand="SELECT     NIVEL1_HSE.STATUS, NIVEL1_HSE.FECHA_APROBACION AS FECHA, NIVEL1_HSE.COMENTARIOS AS COMMENTS, AREA.NOMBRE_AREA,
                           (SELECT     NOMBRE_USUARIO
                             FROM          USUARIO
@@ -393,8 +389,6 @@ WHERE     (NIVEL1_HSE.CAMBIO_ID = ?)">
                                                 <AlternatingRowStyle BackColor="White" />
                                             </asp:GridView>
                                             <asp:SqlDataSource ID="SqlDataSource4" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
                                                 SelectCommand="SELECT     NIVEL1_QA.STATUS, NIVEL1_QA.FECHA_APROBACION AS FECHA, NIVEL1_QA.COMENTARIOS AS COMMENTS, AREA.NOMBRE_AREA,
                           (SELECT     NOMBRE_USUARIO
                             FROM          USUARIO
@@ -455,8 +449,6 @@ WHERE     (NIVEL1_QA.CAMBIO_ID = ?)">
                                                 <AlternatingRowStyle BackColor="White" />
                                             </asp:GridView>
                                             <asp:SqlDataSource ID="SqlDataSource5" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
                                                 SelectCommand="SELECT AREAS_SOPORTE.NOMBRE_AREA_SOPORTE, (SELECT NOMBRE_USUARIO FROM USUARIO WHERE USUARIO_ID = AREAS_SOPORTE.REPONSABLE_ID) AS USUARIO, NIVEL2.STATUS, NIVEL2.FECHA_APROBACION, NIVEL2.COMENTARIOS, NIVEL2.CAMBIO_ID FROM AREAS_SOPORTE INNER JOIN NIVEL2 ON AREAS_SOPORTE.AREA_SOPORTE_ID = NIVEL2.AREA_SOPORTE_ID WHERE (NIVEL2.CAMBIO_ID = ?)">
                                             
                                             <SelectParameters>

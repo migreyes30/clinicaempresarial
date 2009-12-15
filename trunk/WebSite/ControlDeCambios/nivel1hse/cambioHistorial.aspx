@@ -15,6 +15,11 @@
         {
             width: 592px;
         }
+        .style17
+        {
+            width: 592px;
+            height: 241px;
+        }
         </style>
 </head>
 <body>
@@ -118,7 +123,7 @@
                             <td>
                                 <table cellpadding="4" style="width:100%;">
                                     <tr>
-                                        <td class="style14" align="left">
+                                        <td class="style17" align="left">
                                                         <table cellpadding="4" cellspacing="4" width="650">
                                                             <tr>
                                                                 <td bgcolor="#F9F9F7">
@@ -209,8 +214,7 @@
                                     <tr>
                                         <td class="style14" bgcolor="White" align="center">
                                             <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
-                                                DataSourceID="SqlDataSource2" Font-Names="Arial Narrow" Font-Size="Medium" 
-                                                Width="880px" CellPadding="4" ForeColor="#333333" GridLines="None">
+                                                DataSourceID="SqlDataSource2" CellPadding="4" Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" ForeColor="#333333" PageSize="30" BorderColor="#E7E7FF">
                                                 <RowStyle BackColor="#EFF3FB" />
                                                 <Columns>
                                                     <asp:BoundField DataField="NOMBRE_AREA" HeaderText="ÁREA" 
@@ -242,22 +246,7 @@
                                                 <EditRowStyle BackColor="#2461BF" />
                                                 <AlternatingRowStyle BackColor="White" />
                                             </asp:GridView>
-                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT     AREA.NOMBRE_AREA, NIVEL0.STATUS, NIVEL0.FECHA_APROBACION, NIVEL0.COMENTARIOS,
-                          (SELECT     NOMBRE_USUARIO
-                            FROM          USUARIO
-                            WHERE      (USUARIO_ID = DEPARTAMENTO.RESPONSABLE_ID)) AS USUARIO
-FROM         AREA INNER JOIN
-                      NIVEL0 ON AREA.AREA_ID = NIVEL0.AREA_ID INNER JOIN
-                      DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID
-WHERE     (NIVEL0.CAMBIO_ID = ?)">
-                                                <SelectParameters>
-                                                    <asp:ControlParameter ControlID="Label25" Name="CAMBIO_ID" PropertyName="Text" 
-                                                        Type="Int32" />
-                                                </SelectParameters>
-                                            </asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -269,9 +258,7 @@ WHERE     (NIVEL0.CAMBIO_ID = ?)">
                                     <tr>
                                         <td class="style14" bgcolor="White" align="center">
                                             <asp:GridView ID="GridView2" runat="server" DataSourceID="SqlDataSource3" 
-                                                AutoGenerateColumns="False" Width="880px" CellPadding="4" 
-                                                Font-Names="Arial Narrow" Font-Size="Medium" ForeColor="#333333" 
-                                                GridLines="None">
+                                                AutoGenerateColumns="False" CellPadding="4" Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" ForeColor="#333333" PageSize="30" BorderColor="#E7E7FF">
                                                 <RowStyle BackColor="#EFF3FB" />
                                                 <Columns>
                                                     <asp:BoundField DataField="NOMBRE_AREA" HeaderText="ÁREA" 
@@ -302,24 +289,7 @@ WHERE     (NIVEL0.CAMBIO_ID = ?)">
                                                 <EditRowStyle BackColor="#2461BF" />
                                                 <AlternatingRowStyle BackColor="White" />
                                             </asp:GridView>
-                                            <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT     NIVEL1_HSE.STATUS, NIVEL1_HSE.FECHA_APROBACION AS FECHA, NIVEL1_HSE.COMENTARIOS AS COMMENTS, AREA.NOMBRE_AREA,
-                          (SELECT     NOMBRE_USUARIO
-                            FROM          USUARIO
-                            WHERE      (PERFIL_USUARIO = 'n1hse') and USUARIO.PRINCIPAL = 'true') AS USUARIO, NIVEL1_HSE.CAMBIO_ID
-FROM         NIVEL1_HSE INNER JOIN
-                      AREA ON NIVEL1_HSE.AREA_ID = AREA.AREA_ID INNER JOIN
-                      DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID
-WHERE     (NIVEL1_HSE.CAMBIO_ID = ?)">
-                                            
-                                            <SelectParameters>
-                                                    <asp:ControlParameter ControlID="Label25" Name="CAMBIO_ID" PropertyName="Text" 
-                                                        Type="Int32" />
-                                                </SelectParameters>
-                                            
-                                            </asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="SqlDataSource3" runat="server" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -331,9 +301,7 @@ WHERE     (NIVEL1_HSE.CAMBIO_ID = ?)">
                                     <tr>
                                         <td class="style14" bgcolor="White" align="center">
                                             <asp:GridView ID="GridView3" runat="server" DataSourceID="SqlDataSource4" 
-                                                AutoGenerateColumns="False" Width="880px" CellPadding="4" 
-                                                Font-Names="Arial Narrow" Font-Size="Medium" ForeColor="#333333" 
-                                                GridLines="None">
+                                                AutoGenerateColumns="False" CellPadding="4" Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" ForeColor="#333333" PageSize="30" BorderColor="#E7E7FF">
                                                 <RowStyle BackColor="#EFF3FB" />
                                                 <Columns>
                                                     <asp:BoundField DataField="NOMBRE_AREA" HeaderText="ÁREA" 
@@ -354,24 +322,7 @@ WHERE     (NIVEL1_HSE.CAMBIO_ID = ?)">
                                                 <EditRowStyle BackColor="#2461BF" />
                                                 <AlternatingRowStyle BackColor="White" />
                                             </asp:GridView>
-                                            <asp:SqlDataSource ID="SqlDataSource4" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT     NIVEL1_QA.STATUS, NIVEL1_QA.FECHA_APROBACION AS FECHA, NIVEL1_QA.COMENTARIOS AS COMMENTS, AREA.NOMBRE_AREA,
-                          (SELECT     NOMBRE_USUARIO
-                            FROM          USUARIO
-                            WHERE      (PERFIL_USUARIO = 'n1qa') and USUARIO.PRINCIPAL = 'true') AS USUARIO, NIVEL1_QA.CAMBIO_ID
-FROM         NIVEL1_QA INNER JOIN
-                      AREA ON NIVEL1_QA.AREA_ID = AREA.AREA_ID INNER JOIN
-                      DEPARTAMENTO ON AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID
-WHERE     (NIVEL1_QA.CAMBIO_ID = ?)">
-                                            
-                                            <SelectParameters>
-                                                    <asp:ControlParameter ControlID="Label25" Name="CAMBIO_ID" PropertyName="Text" 
-                                                        Type="Int32" />
-                                                </SelectParameters>
-                                            
-                                            </asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="SqlDataSource4" runat="server" />
                                         </td>
                                     </tr>
                                     <tr>
@@ -383,9 +334,7 @@ WHERE     (NIVEL1_QA.CAMBIO_ID = ?)">
                                     <tr>
                                         <td class="style14" bgcolor="White" align="center">
                                             <asp:GridView ID="GridView4" runat="server" DataSourceID="SqlDataSource5" 
-                                                AutoGenerateColumns="False" Width="880px" CellPadding="4" 
-                                                Font-Names="Arial Narrow" Font-Size="Medium" ForeColor="#333333" 
-                                                GridLines="None">
+                                                AutoGenerateColumns="False" CellPadding="4" Font-Names="Arial Narrow" Font-Size="Medium" Width="880px" ForeColor="#333333" PageSize="30" BorderColor="#E7E7FF">
                                                 <RowStyle BackColor="#EFF3FB" />
                                                 <Columns>
                                                     <asp:BoundField DataField="NOMBRE_AREA_SOPORTE" HeaderText="ÁREA" 
@@ -406,16 +355,7 @@ WHERE     (NIVEL1_QA.CAMBIO_ID = ?)">
                                                 <EditRowStyle BackColor="#2461BF" />
                                                 <AlternatingRowStyle BackColor="White" />
                                             </asp:GridView>
-                                            <asp:SqlDataSource ID="SqlDataSource5" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT AREAS_SOPORTE.NOMBRE_AREA_SOPORTE, (SELECT NOMBRE_USUARIO FROM USUARIO WHERE USUARIO_ID = AREAS_SOPORTE.REPONSABLE_ID) AS USUARIO, NIVEL2.STATUS, NIVEL2.FECHA_APROBACION, NIVEL2.COMENTARIOS, NIVEL2.CAMBIO_ID FROM AREAS_SOPORTE INNER JOIN NIVEL2 ON AREAS_SOPORTE.AREA_SOPORTE_ID = NIVEL2.AREA_SOPORTE_ID WHERE (NIVEL2.CAMBIO_ID = ?)">
-                                            
-                                            <SelectParameters>
-                                                    <asp:ControlParameter ControlID="Label25" Name="CAMBIO_ID" PropertyName="Text" 
-                                                        Type="Int32" />
-                                                </SelectParameters>                                            
-                                            </asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="SqlDataSource5" runat="server" />
                                         </td>
                                     </tr>
                                 </table>

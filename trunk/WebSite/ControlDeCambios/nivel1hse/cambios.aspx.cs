@@ -6,10 +6,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Configuration;
 
 public partial class cambios : System.Web.UI.Page
 {
-
     SqlConnection thisConnection;
     SqlCommand thisCommand;
     Int32 folio;
@@ -39,6 +39,11 @@ public partial class cambios : System.Web.UI.Page
             TextBox4.Text = datos[3];
             Label33.Text  = datos[4];
             TextBox5.Text = datos[5];
+
+            show_nivel_0();
+            show_nivel_1_QA();
+            show_areas_soporte();
+
         }
         catch (SqlException)
         {
@@ -51,6 +56,9 @@ public partial class cambios : System.Web.UI.Page
     {
         Session["user"] = null;
         Session["perfil"] = null;
+        Session["correo"] = null;
+        Session["depto"] = null;
+        Session["userPrincipal"] = null;
         Response.Redirect("../index.aspx");
         thisConnection.Close();
 
@@ -95,7 +103,6 @@ public partial class cambios : System.Web.UI.Page
 
         }catch(SqlException){
 
-            //Response.Redirect("cambios.aspx");
             Label24.Text = "Error con la base de datos";
 
         }
@@ -118,7 +125,7 @@ public partial class cambios : System.Web.UI.Page
             ManejadorCambio miManejador = new ManejadorCambio();
             miManejador.rechazarN1HSE(TextBoxComentario.Text, Int32.Parse(Label25.Text));
 
-            /************* Llamada a la funcion para enviar mail a Admin ****
+            /************* Llamada a la funcion para enviar mail a Admin ****/
 
             miManejador.rechazadoCambio(miManejador.getMailAdmin(),usuarioSesion.Text, Label25.Text);
 
@@ -148,4 +155,65 @@ public partial class cambios : System.Web.UI.Page
     {
         Response.Redirect("nivel1hse.aspx");
     }
+
+    public void show_nivel_0()
+    {
+
+        try
+        {
+
+            SqlDataSource1.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+            SqlDataSource1.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+            SqlDataSource1.SelectCommand = "SELECT [COMENTARIOS] FROM [NIVEL0] WHERE ([CAMBIO_ID] = " + Session["cambioID"].ToString() + ")";
+
+        }
+        catch (Exception)
+        {
+
+        }
+
+    }
+
+    public void show_nivel_1_QA()
+    {
+
+        try
+        {
+
+            SqlDataSource2.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+            SqlDataSource2.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+            SqlDataSource2.SelectCommand = "SELECT [COMENTARIOS] FROM [NIVEL1_QA] WHERE ([CAMBIO_ID] = " + Session["cambioID"].ToString() + ")";
+
+        }
+        catch (Exception)
+        {
+
+        }
+
+    }
+
+    public void show_areas_soporte()
+    {
+
+        try
+        {
+
+            SqlDataSource2.ConnectionString = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ConnectionString;
+
+            SqlDataSource2.ProviderName = ConfigurationManager.ConnectionStrings["ControlCambiosConnectionString1"].ProviderName;
+
+            SqlDataSource2.SelectCommand = "SELECT [AREA_SOPORTE_ID], [NOMBRE_AREA_SOPORTE] FROM [AREAS_SOPORTE]";
+
+        }
+        catch (Exception)
+        {
+
+        }
+
+    }
+
 }

@@ -200,26 +200,6 @@
                                                                 </td>
                                                             </tr>
                                                         </table>
-                                                        <br />
-                                            <br />
-                                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="select NOMBRE_CAMBIO, TIPO_CAMBIO, DEPARTAMENTO.NOMBRE_DEPTO, AREA.NOMBRE_AREA, NIVEL1_HSE.FECHA_ASIGNACION  
-from DEPARTAMENTO, CAMBIO, NIVEL1_HSE, AREA
- where CAMBIO.CAMBIO_ID = ? and CAMBIO.CAMBIO_ID = NIVEL1_HSE.CAMBIO_ID and AREA.AREA_ID = CAMBIO.AREA_ID and  AREA.DEPTO_ID = DEPARTAMENTO.DEPTO_ID;
- ">
-                                                <SelectParameters>
-                                                    <asp:ControlParameter ControlID="Label25" Name="CAMBIO_ID" 
-                                                        PropertyName="Text" Type="Int32" />
-                                                </SelectParameters>
-                        
-                                            </asp:SqlDataSource>
-                                            
-                                            <!--SelectParameters>
-                                                    <asp:ControlParameter ControlID="Label25" Name="AREA_ID" 
-                                                        PropertyName="Text" Type="Int32" />
-                                                </SelectParameters-->
                                             <br />
                                         </td>
 
@@ -270,15 +250,7 @@ from DEPARTAMENTO, CAMBIO, NIVEL1_HSE, AREA
                                                 <EditRowStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />
                                             </asp:FormView>
                                           
-                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                SelectCommand="SELECT [COMENTARIOS] FROM [NIVEL0] WHERE ([CAMBIO_ID] = ?)">
-                                                <SelectParameters>
-                                                    <asp:ControlParameter ControlID="Label25" Name="CAMBIO_ID" PropertyName="Text" 
-                                                        Type="Int32" />
-                                                </SelectParameters>
-                                            </asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="SqlDataSource2" runat="server" />
                                         </td>
 
                                     </tr>
@@ -327,16 +299,7 @@ from DEPARTAMENTO, CAMBIO, NIVEL1_HSE, AREA
                                                 <EditRowStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />
                                             </asp:FormView>
                                           
-                                            <asp:SqlDataSource ID="SqlDataSource4" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                
-                                                SelectCommand="SELECT [COMENTARIOS] FROM [NIVEL1_HSE] WHERE ([CAMBIO_ID] = ?)">
-                                                <SelectParameters>
-                                                    <asp:ControlParameter ControlID="Label25" Name="CAMBIO_ID" PropertyName="Text" 
-                                                        Type="Int32" />
-                                                </SelectParameters>
-                                            </asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="SqlDataSource4" runat="server" />
                                         </td>
 
                                     </tr>
@@ -385,16 +348,7 @@ from DEPARTAMENTO, CAMBIO, NIVEL1_HSE, AREA
                                                 <EditRowStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />
                                             </asp:FormView>
                                           
-                                            <asp:SqlDataSource ID="SqlDataSource5" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" 
-                                                
-                                                SelectCommand="SELECT [COMENTARIOS] FROM [NIVEL1_QA] WHERE ([CAMBIO_ID] = ?)">
-                                                <SelectParameters>
-                                                    <asp:ControlParameter ControlID="Label25" Name="CAMBIO_ID" PropertyName="Text" 
-                                                        Type="Int32" />
-                                                </SelectParameters>
-                                            </asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="SqlDataSource5" runat="server" />
                                         </td>
 
                                     </tr>
@@ -426,17 +380,7 @@ from DEPARTAMENTO, CAMBIO, NIVEL1_HSE, AREA
                                                 <SelectedRowStyle BackColor="#009999" Font-Bold="True" ForeColor="#CCFF99" />
                                                 <HeaderStyle BackColor="#003399" Font-Bold="True" ForeColor="#CCCCFF" />
                                             </asp:GridView>
-                                            <asp:SqlDataSource ID="SqlDataSource3" runat="server" 
-                                                ConnectionString="<%$ ConnectionStrings:ConnectionString1 %>" 
-                                                ProviderName="<%$ ConnectionStrings:ConnectionString1.ProviderName %>" SelectCommand="SELECT     AREAS_SOPORTE.NOMBRE_AREA_SOPORTE, NIVEL2.COMENTARIOS
-FROM         AREAS_SOPORTE INNER JOIN
-                      NIVEL2 ON AREAS_SOPORTE.AREA_SOPORTE_ID = NIVEL2.AREA_SOPORTE_ID
-WHERE     (NIVEL2.CAMBIO_ID = ?)">
-                                                <SelectParameters>
-                                                    <asp:ControlParameter ControlID="Label25" Name="CAMBIO_ID" PropertyName="Text" 
-                                                        Type="Int32" />
-                                                </SelectParameters>
-                                            </asp:SqlDataSource>
+                                            <asp:SqlDataSource ID="SqlDataSource3" runat="server" />
                                         </td>
 
                                     </tr>
